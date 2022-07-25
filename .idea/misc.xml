@@ -6,6 +6,8 @@
         <entry key="..\:/Users/assas/AndroidStudioProjects/SkyDelight/app/src/main/res/drawable-notnight/input_text_color.xml" value="0.1785" />
         <entry key="..\:/Users/assas/AndroidStudioProjects/SkyDelight/app/src/main/res/drawable-notnight/input_text_color_2.xml" value="0.1785" />
         <entry key="..\:/Users/assas/AndroidStudioProjects/SkyDelight/app/src/main/res/drawable/box_stroke_color.xml" value="0.1785" />
+        <entry key="..\:/Users/assas/AndroidStudioProjects/SkyDelight/app/src/main/res/drawable/ic_baseline_person_24.xml" value="0.2355" />
+        <entry key="..\:/Users/assas/AndroidStudioProjects/SkyDelight/app/src/main/res/drawable/ic_baseline_vpn_key_24.xml" value="0.2355" />
         <entry key="..\:/Users/assas/AndroidStudioProjects/SkyDelight/app/src/main/res/drawable/ic_launcher_background.xml" value="0.244" />
         <entry key="..\:/Users/assas/AndroidStudioProjects/SkyDelight/app/src/main/res/drawable/password_selector.xml" value="0.1785" />
         <entry key="..\:/Users/assas/AndroidStudioProjects/SkyDelight/app/src/main/res/drawable/text_input_selector.xml" value="0.1795" />
@@ -13,11 +15,11 @@
         <entry key="..\:/Users/assas/AndroidStudioProjects/SkyDelight/app/src/main/res/drawable/track_selector.xml" value="0.169" />
         <entry key="..\:/Users/assas/AndroidStudioProjects/SkyDelight/app/src/main/res/layout/activity_main.xml" value="0.22" />
         <entry key="..\:/Users/assas/AndroidStudioProjects/SkyDelight/app/src/main/res/layout/fragment_loading_screen.xml" value="0.25" />
-        <entry key="..\:/Users/assas/AndroidStudioProjects/SkyDelight/app/src/main/res/layout/fragment_login.xml" value="0.25" />
+        <entry key="..\:/Users/assas/AndroidStudioProjects/SkyDelight/app/src/main/res/layout/fragment_login.xml" value="0.33" />
         <entry key="..\:/Users/assas/AndroidStudioProjects/SkyDelight/app/src/main/res/layout/fragment_principal.xml" value="0.22192028985507245" />
-        <entry key="..\:/Users/assas/AndroidStudioProjects/SkyDelight/app/src/main/res/layout/fragment_recover_password.xml" value="0.25" />
-        <entry key="..\:/Users/assas/AndroidStudioProjects/SkyDelight/app/src/main/res/layout/fragment_register_first.xml" value="0.25" />
-        <entry key="..\:/Users/assas/AndroidStudioProjects/SkyDelight/app/src/main/res/layout/fragment_register_second.xml" value="0.10833333333333334" />
+        <entry key="..\:/Users/assas/AndroidStudioProjects/SkyDelight/app/src/main/res/layout/fragment_recover_password.xml" value="0.33" />
+        <entry key="..\:/Users/assas/AndroidStudioProjects/SkyDelight/app/src/main/res/layout/fragment_register_first.xml" value="0.33" />
+        <entry key="..\:/Users/assas/AndroidStudioProjects/SkyDelight/app/src/main/res/layout/fragment_register_second.xml" value="0.33" />
         <entry key="..\:/Users/assas/AndroidStudioProjects/SkyDelight/app/src/main/res/layout/fragment_start_screen.xml" value="0.25" />
         <entry key="..\:/Users/assas/AndroidStudioProjects/SkyDelight/app/src/main/res/layout/styles.xml" value="0.24739583333333334" />
         <entry key="..\:/Users/assas/AndroidStudioProjects/SkyDelight/app/src/main/res/mipmap-anydpi-v26/ic_launcher_skydelight.xml" value="0.1195" />

@@ -16,11 +16,11 @@
         android:gravity="center"
         android:text="@string/startScreen_welcome"
         android:textColor="?attr/text_color"
-        android:textSize="28sp"
+        android:textSize="@dimen/title_size"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/guideline_welcome_bottom"
-        app:layout_constraintEnd_toStartOf="@+id/guideline_login_right"
-        app:layout_constraintStart_toStartOf="@+id/guideline_login_left"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_register_right"
+        app:layout_constraintStart_toStartOf="@+id/guideline_register_left"
         app:layout_constraintTop_toTopOf="@+id/guideline_welcome_top" />
 
     <ImageView
@@ -28,8 +28,8 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:contentDescription="@string/app_name"
-        android:paddingLeft="@dimen/loadingScreen_icon_padding"
-        android:paddingRight="@dimen/loadingScreen_icon_padding"
+        android:paddingLeft="@dimen/icon_padding"
+        android:paddingRight="@dimen/icon_padding"
         android:src="?attr/loading_icon"
         app:layout_constraintBottom_toTopOf="@+id/guideline_relax_top"
         app:layout_constraintEnd_toEndOf="parent"
@@ -44,7 +44,7 @@
         android:gravity="center"
         android:text="@string/startScreen_relax"
         android:textColor="?attr/text_color"
-        android:textSize="@dimen/startScreen_text_size"
+        android:textSize="@dimen/text_size"
         app:layout_constraintBottom_toTopOf="@+id/guideline_relax_bottom"
         app:layout_constraintEnd_toStartOf="@+id/guideline_register_right"
         app:layout_constraintStart_toStartOf="@+id/guideline_register_left"
@@ -61,7 +61,7 @@
         android:text="@string/btn_login"
         android:textColor="?attr/btn_text_color_blue"
         android:state_enabled="true"
-        android:textSize="@dimen/startScreen_text_size"
+        android:textSize="@dimen/button_text_size"
         android:textStyle="bold"
         app:rippleColor="?attr/btn_text_color_blue"
         app:layout_constraintBottom_toTopOf="@+id/guideline_login_bottom"
@@ -79,7 +79,7 @@
         android:state_enabled="true"
         android:text="@string/startScreen_btn_register"
         android:textColor="?attr/btn_text_color_green"
-        android:textSize="@dimen/startScreen_text_size"
+        android:textSize="@dimen/button_text_size"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/guideline_register_bottom"
         app:layout_constraintEnd_toStartOf="@+id/guideline_register_right"
@@ -96,7 +96,7 @@
         android:gravity="center"
         android:text="@string/startScreen_recover_password"
         android:textColor="?attr/text_color"
-        android:textSize="@dimen/startScreen_recover_password"
+        android:textSize="@dimen/text_input_size"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/guideline_recover_bottom"
         app:layout_constraintEnd_toStartOf="@+id/guideline_register_right"
@@ -137,21 +137,21 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.65" />
+        app:layout_constraintGuide_percent="0.61" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline_login_bottom"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.73" />
+        app:layout_constraintGuide_percent="0.71" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline_register_top"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.75" />
+        app:layout_constraintGuide_percent="0.73" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline_register_bottom"

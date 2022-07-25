@@ -1,13 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- Loading Screen Dimensions -->
-    <dimen name="loadingScreen_icon_padding">25dp</dimen>
+    <!-- Paddings and Margins in DP's -->
+    <dimen name="icon_padding">25dp</dimen>
 
-    <!-- Start Screen Dimensions -->
-    <dimen name="startScreen_text_size">20sp</dimen>
-    <dimen name="startScreen_recover_password">17sp</dimen>
+    <!-- Elements Texts Sizes in SP's -->
+    <dimen name="title_size">30sp</dimen>
+    <dimen name="title_size_2">35sp</dimen>
+    <dimen name="button_text_size">20sp</dimen>
+    <dimen name="text_size">20sp</dimen>
+    <dimen name="text_input_size">17sp</dimen>
 
-    <!-- Login Screen Dimensions -->
-    <dimen name="loginScreen_text_size">20sp</dimen>
-    <dimen name="loginScreen_text_input">15sp</dimen>
+    <!-- Others -->
+    <!-- Register Screen Dimension -->
+    <dimen name="registerScreen_sex_group">15sp</dimen>
 </resources>
