@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph.xml"
+    app:startDestination="@id/register_first_fragment">
+
+    <fragment
+        android:id="@+id/start_screen_fragment"
+        android:name="com.example.skydelight.StartScreenFragment"
+        android:label="fragment_start_screen"
+        tools:layout="@layout/fragment_start_screen" >
+        <action
+            android:id="@+id/action_startScreen_to_login"
+            app:destination="@id/login_fragment" />
+        <action
+            android:id="@+id/action_startScreen_to_registerFirst"
+            app:destination="@id/register_first_fragment" />
+        <action
+            android:id="@+id/action_startScreen_to_recoverPassword"
+            app:destination="@id/recover_password_fragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/login_fragment"
+        android:name="com.example.skydelight.LoginFragment"
+        android:label="fragment_login"
+        tools:layout="@layout/fragment_login" >
+        <action
+            android:id="@+id/action_login_to_principal"
+            app:destination="@id/principal_fragment" />
+        <action
+            android:id="@+id/action_login_to_startScreen"
+            app:destination="@id/start_screen_fragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/principal_fragment"
+        android:name="com.example.skydelight.PrincipalFragment"
+        android:label="fragment_principal"
+        tools:layout="@layout/fragment_principal" >
+    </fragment>
+
+    <fragment
+        android:id="@+id/recover_password_fragment"
+        android:name="com.example.skydelight.RecoverPasswordFragment"
+        android:label="fragment_recover_password"
+        tools:layout="@layout/fragment_recover_password" >
+        <action
+            android:id="@+id/action_recoverPassword_to_startScreen"
+            app:destination="@id/start_screen_fragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/register_first_fragment"
+        android:name="com.example.skydelight.RegisterFirstFragment"
+        android:label="fragment_register_first"
+        tools:layout="@layout/fragment_register_first" >
+        <action
+            android:id="@+id/action_registerFirst_to_registerSecond"
+            app:destination="@id/register_second_fragment" />
+        <action
+            android:id="@+id/action_registerFirst_to_startScreen"
+            app:destination="@id/start_screen_fragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/register_second_fragment"
+        android:name="com.example.skydelight.RegisterSecondFragment"
+        android:label="fragment_register_second"
+        tools:layout="@layout/fragment_register_second" >
+        <action
+            android:id="@+id/action_registerSecond_to_principal"
+            app:destination="@id/principal_fragment" />
+        <action
+            android:id="@+id/action_registerSecond_to_registerFirst"
+            app:destination="@id/register_first_fragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/loading_screen_fragment"
+        android:name="com.example.skydelight.LoadingScreenFragment"
+        android:label="fragment_loading_screen"
+        tools:layout="@layout/fragment_loading_screen" >
+        <action
+            android:id="@+id/action_loadingScreen_to_startScreen"
+            app:destination="@id/start_screen_fragment" />
+    </fragment>
+</navigation>

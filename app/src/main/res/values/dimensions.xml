@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Loading Screen Dimensions -->
+    <dimen name="loadingScreen_icon_padding">25dp</dimen>
+
+    <!-- Start Screen Dimensions -->
+    <dimen name="startScreen_text_size">20sp</dimen>
+    <dimen name="startScreen_recover_password">17sp</dimen>
+
+    <!-- Login Screen Dimensions -->
+    <dimen name="loginScreen_text_size">20sp</dimen>
+    <dimen name="loginScreen_text_input">15sp</dimen>
+</resources>

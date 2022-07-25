@@ -1,0 +1,34 @@
+<resources>
+    <string name="app_name">SkyDelight</string>
+
+    <!-- General Strings -->
+    <string name="btn_login">Iniciar Sesión</string>
+
+    <!-- Start Screen Fragment Strings -->
+    <string name="startScreen_welcome">Bienvenido(a) a</string>
+    <string name="startScreen_relax">La Nueva Forma de Relajarse</string>
+    <string name="startScreen_btn_register">¿Sin Cuenta? ¡Crea Una!</string>
+    <string name="startScreen_recover_password">¿Olvidaste tu Contraseña?</string>
+
+    <!-- Login Screen Fragment Strings -->
+    <string name="loginScreen_title">¡Qué Bueno\nQue Volviste!</string>
+    <string name="loginScreen_email">Correo Electrónico:</string>
+    <string name="loginScreen_emailHint">ejemplo@hotmail.com</string>
+    <string name="loginScreen_password">Contraseña:</string>
+    <string name="loginScreen_passwordHint">AbC123#*</string>
+    <string name="loginScreen_remember">Mantener Sesión Iniciada</string>
+    <string name="loginScreen_btn_return">Regresar</string>
+
+    <!-- Recover Password Fragment Strings -->
+    <string name="recoverScreen_title">¡Descuida! ¡Te Tenemos Cubierto!</string>
+    <string name="recoverScreen_subtitle">Ingresa el Correo con\nel que te Registraste</string>
+    <string name="recoverScreen_btn_recover">Recuperar Contraseña</string>
+
+    <!-- Register First and Second Fragments Srings -->
+    <string name="registerScreen_title">Crea una Cuenta</string>
+    <string name="registerScreen_next">Siguiente</string>
+    <string name="registerScreen_name">Nombre Completo:</string>
+    <string name="registerScreen_birthday">Fecha de Nacimiento:</string>
+    <string name="registerScreen_sex">Sexo:</string>
+
+</resources>

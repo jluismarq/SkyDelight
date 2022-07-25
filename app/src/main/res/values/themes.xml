@@ -1,0 +1,36 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Theme.SkyDelight" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <!-- Primary color -->
+        <item name="colorPrimary">@color/lightblue2</item>
+        <item name="colorPrimaryVariant">@color/lightblue3</item>
+        <item name="colorOnPrimary">@color/black</item>
+
+        <!-- Secondary color -->
+        <item name="colorSecondary">@color/darkblue2</item>
+        <item name="colorSecondaryVariant">@color/darkblue3</item>
+        <item name="colorOnSecondary">@color/white</item>
+
+        <!-- Status bar color -->
+        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
+        <item name="android:navigationBarColor">?attr/colorPrimaryVariant</item>
+
+        <!-- Fragments Backgrounds -->
+        <item name="fragment_background">@color/ultralight</item>
+
+        <!-- Loading Screen DayNight Changing Elements -->
+        <item name="loading_icon">@drawable/skydelight_logo_day</item>
+
+        <!-- Start Screen DayNight Changing Elements -->
+        <item name="text_color">@color/dark</item>
+        <!-- Blue Button -->
+        <item name="btn_text_color_blue">@color/dark</item>
+        <item name="btn_background_blue">@color/light</item>
+        <!-- Green Button -->
+        <item name="btn_text_color_green">@color/green</item>
+        <item name="btn_background_green">@color/lightgreen</item>
+
+        <!-- Login Screen DayNight Changing Elements -->
+        <item name="text_color_hint">@color/lightblue3</item>
+    </style>
+</resources>

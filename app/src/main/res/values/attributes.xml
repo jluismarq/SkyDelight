@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <attr name="fragment_background" format="reference" />
+
+    <!-- Loading Screen DayNight Changing Elements -->
+    <attr name="loading_icon" format="reference" />
+
+    <!-- Start Screen DayNight Changing Elements -->
+    <attr name="text_color" format="reference" />
+    <!-- Blue Button -->
+    <attr name="btn_text_color_blue" format="reference" />
+    <attr name="btn_background_blue" format="reference" />
+    <!-- Green Button -->
+    <attr name="btn_text_color_green" format="reference" />
+    <attr name="btn_background_green" format="reference" />
+
+    <!-- Login Screen DayNight Changing Elements -->
+    <attr name="text_color_hint" format="reference" />
+</resources>
