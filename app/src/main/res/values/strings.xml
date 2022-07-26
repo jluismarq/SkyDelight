@@ -27,7 +27,7 @@
     <string name="recoverScreen_btn_recover">Recuperar Contraseña</string>
 
     <!-- Register First and Second Fragments Srings -->
-    <string name="registerScreen_title">Crea una Cuenta</string>
+    <string name="registerScreen_title">Creemos tu Cuenta</string>
     <string name="registerScreen_next">Siguiente</string>
     <string name="registerScreen_name">Nombre Completo:</string>
     <string name="registerScreen_nameHint">Nombre Paterno Materno</string>
@@ -35,5 +35,9 @@
     <string name="registerScreen_sex">Sexo:</string>
     <string name="registerScreen_male">Masculino</string>
     <string name="registerScreen_female">Femenino</string>
+    <string name="registerScreen_title_2">¡Ya Casi Terminamos!</string>
+    <string name="registerScreen_confirm_password">Confirmar Contraseña:</string>
+    <string name="registerScreen_btn_create">Crear Cuenta</string>
+    <string name="registerScreen_btn_previous">Pantalla Anterior</string>
 
 </resources>

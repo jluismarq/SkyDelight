@@ -126,6 +126,25 @@
         tools:ignore="TextContrastCheck" />
 
     <Button
+        android:id="@+id/btnLogin"
+        style="@style/Widget.Material3.Button.TonalButton"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:backgroundTint="?attr/btn_background_blue"
+        android:fontFamily="@font/comfortaa"
+        android:state_enabled="true"
+        android:text="@string/btn_login"
+        android:textColor="?attr/btn_text_color_blue"
+        android:textSize="@dimen/button_text_size"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/guideline_login_bottom"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_right"
+        app:layout_constraintStart_toStartOf="@+id/guideline_left"
+        app:layout_constraintTop_toTopOf="@+id/guideline_remember_bottom"
+        app:rippleColor="?attr/btn_text_color_blue"
+        tools:ignore="TextContrastCheck" />
+
+    <Button
         android:id="@+id/btnReturn"
         style="@style/Widget.Material3.Button.TonalButton"
         android:layout_width="0dp"
@@ -141,25 +160,6 @@
         app:layout_constraintEnd_toStartOf="@+id/guideline_right"
         app:layout_constraintStart_toStartOf="@+id/guideline_left"
         app:layout_constraintTop_toTopOf="@+id/guideline_return_top"
-        app:rippleColor="?attr/btn_text_color_blue"
-        tools:ignore="TextContrastCheck" />
-
-    <Button
-        android:id="@+id/btnLogin"
-        style="@style/Widget.Material3.Button.TonalButton"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:backgroundTint="?attr/btn_background_blue"
-        android:fontFamily="@font/comfortaa"
-        android:state_enabled="true"
-        android:text="@string/btn_login"
-        android:textColor="?attr/btn_text_color_blue"
-        android:textSize="@dimen/button_text_size"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/guideline_login_top"
-        app:layout_constraintEnd_toStartOf="@+id/guideline_right"
-        app:layout_constraintStart_toStartOf="@+id/guideline_left"
-        app:layout_constraintTop_toTopOf="@+id/guideline_remember_bottom"
         app:rippleColor="?attr/btn_text_color_blue"
         tools:ignore="TextContrastCheck" />
 
@@ -227,7 +227,7 @@
         app:layout_constraintGuide_percent="0.73" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline_login_top"
+        android:id="@+id/guideline_login_bottom"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"

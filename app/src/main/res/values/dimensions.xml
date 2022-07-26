@@ -6,6 +6,7 @@
     <!-- Elements Texts Sizes in SP's -->
     <dimen name="title_size">30sp</dimen>
     <dimen name="title_size_2">35sp</dimen>
+    <dimen name="title_size_3">27sp</dimen>
     <dimen name="button_text_size">20sp</dimen>
     <dimen name="text_size">20sp</dimen>
     <dimen name="text_input_size">17sp</dimen>
