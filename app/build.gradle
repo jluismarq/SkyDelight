@@ -30,6 +30,10 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+    buildFeatures{
+        viewBinding true
+        dataBinding true
+    }
 }
 
 dependencies {
@@ -37,7 +41,7 @@ dependencies {
 
     // Groovy Navigation dependencies
     // https://developer.android.com/guide/navigation/navigation-getting-started#groovy
-    def nav_version = "2.5.0"
+    def nav_version = "2.5.1"
 
     // Java language implementation
     implementation "androidx.navigation:navigation-fragment:$nav_version"
