@@ -38,6 +38,7 @@ android {
 
 dependencies {
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    //implementation 'com.squareup.okhttp3:okhttp:3.10.0'
 
     // Groovy Navigation dependencies
     // https://developer.android.com/guide/navigation/navigation-getting-started#groovy

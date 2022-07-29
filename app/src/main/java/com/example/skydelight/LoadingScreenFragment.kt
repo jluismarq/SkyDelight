@@ -20,6 +20,8 @@ class LoadingScreenFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // TODO("Personalize loading screen")
+        // TODO("Use transitions between fragments")
         // Changing to the start fragment after a delay
         Handler(Looper.getMainLooper()).postDelayed({
             findNavController().navigate(R.id.action_loadingScreen_to_startScreen) }, 2000)

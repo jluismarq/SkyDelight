@@ -6,6 +6,46 @@
         <item name="android:textColorPrimary">?attr/text_color</item>
         <item name="android:colorControlNormal">?attr/text_color_hint</item>
         <item name="android:minDate">12/31/1995</item>
-        <item name="android:maxDate">01/01/2005</item>
+        <item name="android:maxDate">12/31/2005</item>
+    </style>
+
+    <!-- Principal Style Called from Themes.xml -->
+    <style name="MaterialAlertDialog.App" parent="MaterialAlertDialog.MaterialComponents">
+        <item name="shapeAppearance">@style/ShapeAppearance.App.MediumComponent</item>
+        <item name="shapeAppearanceOverlay">@null</item>
+    </style>
+
+    <!-- Color of Dialog Title -->
+    <style name="MaterialAlertDialog.App.Title.Text" parent="MaterialAlertDialog.MaterialComponents.Title.Panel">
+        <item name="android:textColor">?attr/text_color</item>
+        <item name="fontFamily">@font/comfortaa</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:textSize">@dimen/button_text_size</item>
+    </style>
+
+    <!-- Color of Dialog Title -->
+    <style name="MaterialAlertDialog.MaterialComponents.Body.Text." parent="TextAppearance.MaterialComponents.Body2">
+        <item name="android:textColor">?attr/text_color_hint</item>
+        <item name="fontFamily">@font/comfortaa</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textSize">@dimen/text_input_size</item>
+    </style>
+
+    <!-- Color of Dialog Buttons -->
+    <style name="Widget.App.Button" parent="Widget.MaterialComponents.Button.TextButton.Dialog">
+        <item name="backgroundTint">?attr/btn_background_green</item>
+        <item name="android:textColor">?attr/btn_text_color_green</item>
+        <item name="fontFamily">@font/comfortaa</item>
+        <item name="android:textStyle">bold</item>
+        <!-- Eliminating Conversion to UpperCase -->
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textSize">@dimen/button_text_size</item>
+    </style>
+
+    <!-- Dialog Form -->
+    <style name="ShapeAppearance.App.MediumComponent" parent="ShapeAppearance.MaterialComponents.MediumComponent">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">8dp</item>
     </style>
 </resources>
