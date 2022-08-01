@@ -16,7 +16,7 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import java.util.*
 
 private const val NAME_PARAM = "name"
-private const val BIRTHDAY_PARAM = "birthday"
+private const val AGE_PARAM = "age"
 private const val SEX_PARAM = "sex"
 
 class RegisterFirstFragment : Fragment() {
@@ -44,7 +44,7 @@ class RegisterFirstFragment : Fragment() {
         binding.btnNext.setOnClickListener {
             val name = binding.editTxtName.text.toString()
             val sexId = binding.radioGroupSex.checkedRadioButtonId
-            val birthday = binding.numberPickerAge.value
+            val age = binding.numberPickerAge.value
 
             // Showing alert dialog if email field is empty
             if(name.isEmpty()){
@@ -71,7 +71,7 @@ class RegisterFirstFragment : Fragment() {
                 val sex = binding.radioGroupSex.findViewById<RadioButton>(sexId).text.toString()
 
                 // Setting parameters for the next fragment
-                val bundle = bundleOf(NAME_PARAM to name, SEX_PARAM to sex, BIRTHDAY_PARAM to birthday)
+                val bundle = bundleOf(NAME_PARAM to name, SEX_PARAM to sex, AGE_PARAM to age)
 
                 // Starting next fragment
                 findNavController().navigate(R.id.action_registerFirst_to_registerSecond, bundle)

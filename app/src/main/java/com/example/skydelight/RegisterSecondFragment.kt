@@ -12,25 +12,44 @@ import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import com.example.skydelight.databinding.FragmentRegisterSecondBinding
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import okhttp3.*
+import java.io.IOException
+import android.util.Log
+import android.content.pm.ApplicationInfo
+import android.content.pm.PackageManager
 
 private const val NAME_PARAM = "name"
-private const val BIRTHDAY_PARAM = "birthday"
+private const val AGE_PARAM = "age"
 private const val SEX_PARAM = "sex"
 
 class RegisterSecondFragment : Fragment() {
     // Binding variable to use elements in the xml layout
     private lateinit var binding: FragmentRegisterSecondBinding
+
+    // Variables to receive data from other fragments
     private var name: String? = null
-    private var birthday: String? = null
+    private var age: String? = null
     private var sex: String? = null
 
-    // Getting parameters
+    // Function to be instantiated by other fragments
+    companion object {
+        fun newInstance(name: String, age: String, sex: String) =
+            RegisterSecondFragment().apply {
+                arguments = Bundle().apply {
+                    putString(NAME_PARAM, name)
+                    putString(AGE_PARAM, age)
+                    putString(SEX_PARAM, sex)
+                }
+            }
+    }
+
+    // Getting data from other fragments
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         arguments?.let {
             name = it.getString(NAME_PARAM)
-            birthday = it.getString(BIRTHDAY_PARAM)
+            age = it.getString(AGE_PARAM)
             sex = it.getString(SEX_PARAM)
         }
     }
@@ -104,26 +123,47 @@ class RegisterSecondFragment : Fragment() {
                     dialog.dismiss()
                 }, 5000)
             }
-            // Connection to the api and sending the password to the email
-            else {
-                // TODO("Connection to the Api to create account")
-                Toast.makeText(findNavController().context, "Aceptado", Toast.LENGTH_LONG).show()
-            }
+            // Connection to the api and creation of the new user
+            else { createUser(email, password, name.toString(), sex.toString(), age.toString()) }
         }
 
         // Returning to the start screen fragment
         binding.btnReturn.setOnClickListener {findNavController().navigate(R.id.action_registerSecond_to_registerFirst)}
     }
 
-    //Function to receive data from another fragments
-    companion object {
-        fun newInstance(name: String, birthday: String, sex: String) =
-            RegisterSecondFragment().apply {
-                arguments = Bundle().apply {
-                    putString(NAME_PARAM, name)
-                    putString(BIRTHDAY_PARAM, birthday)
-                    putString(SEX_PARAM, sex)
-                }
-            }
+    // Function to connect with the api
+    private val client = OkHttpClient()
+    fun createUser(email: String, password: String, name: String, sex: String, age: String) {
+        // TODO("Change getApplicationInfo because is deprecated")
+        val info: ApplicationInfo = findNavController().context.packageManager.getApplicationInfo(findNavController().context.packageName, PackageManager.GET_META_DATA)
+
+        // Arguments to Post Request
+        val formBody: RequestBody = FormBody.Builder()
+            .add("email", email)
+            .add("password", password)
+            .add("name", name)
+            .add("sex", sex)
+            .add("edad", age)
+            .build()
+
+        // Making http request
+        val request = Request.Builder()
+            .url("https://apiskydelight.herokuapp.com/usuarios/crearusuario/")
+            .post(formBody)
+            .header("KEY-CLIENT", info.metaData.getString("com.google.android.geo.API_KEY").toString())
+            .build()
+
+        // Getting response
+        val response : Response = client.newCall(request).execute()
+
+        // Changing to principal fragment if it's successful
+        if (response.isSuccessful){
+            // TODO("Create Third Register Screen with Explanation")
+            Log.d("OKHTTP3-CODE", response.code().toString())
+            Log.d("OKHTTP3-BODY", response.body()!!.string())
+        } else {
+            // TODO("Print dialog with explanation to the user")
+            Log.d("OKHTTP3-ERROR", response.toString())
+        }
     }
 }
