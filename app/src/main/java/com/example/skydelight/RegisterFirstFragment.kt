@@ -36,10 +36,15 @@ class RegisterFirstFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // Changing Values of Number Picker
+        binding.numberPickerAge.minValue = 18
+        binding.numberPickerAge.maxValue = 25
+        binding.numberPickerAge.value = 20
+
         binding.btnNext.setOnClickListener {
             val name = binding.editTxtName.text.toString()
             val sexId = binding.radioGroupSex.checkedRadioButtonId
-            val birthday = "${binding.datePicker.year} - ${binding.datePicker.month} - ${binding.datePicker.dayOfMonth}"
+            val birthday = binding.numberPickerAge.value
 
             // Showing alert dialog if email field is empty
             if(name.isEmpty()){

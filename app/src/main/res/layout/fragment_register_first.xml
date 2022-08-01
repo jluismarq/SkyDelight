@@ -28,7 +28,7 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:fontFamily="@font/comfortaa"
-        android:gravity="center_vertical|start"
+        android:gravity="center"
         android:text="@string/registerScreen_name"
         android:textColor="?attr/text_color"
         android:textSize="@dimen/text_size"
@@ -51,7 +51,7 @@
         app:layout_constraintBottom_toTopOf="@+id/guideline_name_field_bottom"
         app:layout_constraintEnd_toStartOf="@+id/guideline_right"
         app:layout_constraintStart_toStartOf="@+id/guideline_left"
-        app:layout_constraintTop_toTopOf="@+id/guideline_name_bottom" >
+        app:layout_constraintTop_toTopOf="@+id/guideline_name_field_top" >
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/editTxtName"
@@ -70,28 +70,23 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:fontFamily="@font/comfortaa"
-        android:gravity="center_vertical|start"
+        android:gravity="center"
         android:text="@string/registerScreen_birthday"
         android:textColor="?attr/text_color"
         android:textSize="@dimen/text_size"
-        app:layout_constraintBottom_toTopOf="@+id/guideline_sex_top"
-        app:layout_constraintEnd_toStartOf="@+id/guideline_date_picker_left"
+        app:layout_constraintBottom_toTopOf="@+id/guideline_birthday_bottom"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_number_picker_left"
         app:layout_constraintStart_toStartOf="@+id/guideline_left"
         app:layout_constraintTop_toTopOf="@+id/guideline_birthday_top" />
 
-    <DatePicker
-        android:id="@+id/datePicker"
-        android:theme="@style/datePickerStyle"
+    <NumberPicker
+        android:id="@+id/numberPickerAge"
+        android:theme="@style/numberPickerStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:calendarViewShown="false"
-        android:datePickerMode="spinner"
-        android:spinnersShown="true"
-        android:scaleX=".75"
-        android:scaleY=".75"
-        app:layout_constraintBottom_toTopOf="@+id/guideline_sex_top"
-        app:layout_constraintEnd_toStartOf="@+id/guideline_right"
-        app:layout_constraintStart_toStartOf="@+id/guideline_date_picker_left"
+        app:layout_constraintBottom_toTopOf="@+id/guideline_birthday_bottom"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_number_picker_right"
+        app:layout_constraintStart_toStartOf="@+id/guideline_number_picker_left"
         app:layout_constraintTop_toTopOf="@+id/guideline_birthday_top" />
 
     <TextView
@@ -99,24 +94,27 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:fontFamily="@font/comfortaa"
-        android:gravity="center_vertical|start"
+        android:gravity="center"
         android:text="@string/registerScreen_sex"
         android:textColor="?attr/text_color"
         android:textSize="@dimen/text_size"
-        app:layout_constraintBottom_toTopOf="@+id/guideline_sex_bottom"
-        app:layout_constraintEnd_toStartOf="@+id/guideline_sex_left"
-        app:layout_constraintStart_toStartOf="@+id/guideline_left"
-        app:layout_constraintTop_toTopOf="@+id/guideline_sex_top" />
+        app:layout_constraintBottom_toTopOf="@+id/guideline_sex"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_right"
+        app:layout_constraintStart_toStartOf="@+id/guideline_number_picker_right"
+        app:layout_constraintTop_toTopOf="@+id/guideline_birthday_top" />
 
     <RadioGroup
         android:id="@+id/radioGroupSex"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toTopOf="@+id/guideline_sex_bottom"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:paddingTop="@dimen/registerScreen_sex_padding"
+        android:paddingBottom="@dimen/registerScreen_sex_padding"
+        app:layout_constraintBottom_toTopOf="@+id/guideline_birthday_bottom"
         app:layout_constraintEnd_toStartOf="@+id/guideline_right"
-        app:layout_constraintStart_toStartOf="@+id/guideline_sex_left"
-        app:layout_constraintTop_toTopOf="@+id/guideline_sex_top" >
+        app:layout_constraintStart_toStartOf="@+id/guideline_number_picker_right"
+        app:layout_constraintTop_toTopOf="@+id/guideline_sex" >
 
         <RadioButton
             android:id="@+id/btnMale"
@@ -212,28 +210,35 @@
         app:layout_constraintGuide_percent="0.27" />
 
     <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_name_field_top"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.31" />
+
+    <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline_name_field_bottom"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.37" />
+        app:layout_constraintGuide_percent="0.41" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline_birthday_top"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.39" />
+        app:layout_constraintGuide_percent="0.45" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline_sex_top"
+        android:id="@+id/guideline_sex"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.58" />
+        app:layout_constraintGuide_percent="0.52" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline_sex_bottom"
+        android:id="@+id/guideline_birthday_bottom"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -275,18 +280,18 @@
         app:layout_constraintGuide_percent="0.1" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline_sex_left"
+        android:id="@+id/guideline_number_picker_left"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.28" />
+        app:layout_constraintGuide_percent="0.3" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline_date_picker_left"
+        android:id="@+id/guideline_number_picker_right"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.5" />
+        app:layout_constraintGuide_percent="0.55" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline_right"
