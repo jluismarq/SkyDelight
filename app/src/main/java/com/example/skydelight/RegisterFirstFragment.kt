@@ -8,12 +8,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.RadioButton
-import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.navigation.fragment.findNavController
 import com.example.skydelight.databinding.FragmentRegisterFirstBinding
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import java.util.*
 
 private const val NAME_PARAM = "name"
 private const val AGE_PARAM = "age"
@@ -24,7 +22,7 @@ class RegisterFirstFragment : Fragment() {
     private lateinit var binding: FragmentRegisterFirstBinding
 
     // Creating the fragment view
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         // Inflate the layout for this fragment
         binding = FragmentRegisterFirstBinding.inflate(inflater, container, false)
         return binding.root

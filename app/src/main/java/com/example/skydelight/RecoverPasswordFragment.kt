@@ -33,30 +33,33 @@ class RecoverPasswordFragment : Fragment() {
         binding.btnRecover.setOnClickListener {
             val email = binding.editTxtEmail.text.toString()
 
-            // Showing alert dialog if email field is empty
-            if(email.isEmpty()){
-                val dialog = MaterialAlertDialogBuilder(findNavController().context)
-                    .setTitle("¡Error! ¡Campo Vacío!")
-                    .setMessage("¡Ups! ¡Parece que olvidaste colocar tu correo!")
-                    //.setNegativeButton("¡Entendido!"){ dialog, which -> dialog.dismiss() }
-                    .show()
-                Handler(Looper.getMainLooper()).postDelayed({
-                    dialog.dismiss()
-                }, 5000)
-            }
-            // Showing alert dialog if email field is not an email
-            else if(Patterns.EMAIL_ADDRESS.matcher(email).matches()){
-                // TODO("Connection to the Api to send password")
-                Toast.makeText(findNavController().context, "Aceptado", Toast.LENGTH_LONG).show()
-            } else {
-                val dialog = MaterialAlertDialogBuilder(findNavController().context)
-                    .setTitle("¡Error! ¡Correo Inválido!")
-                    .setMessage("¡Ups! ¡Parece que no ingresaste un correo electrónico!")
-                    //.setNegativeButton("¡Entendido!"){ dialog, which -> dialog.dismiss() }
-                    .show()
-                Handler(Looper.getMainLooper()).postDelayed({
-                    dialog.dismiss()
-                }, 5000)
+            when {
+                // Showing alert dialog if email field is empty
+                email.isEmpty() -> {
+                    val dialog = MaterialAlertDialogBuilder(findNavController().context)
+                        .setTitle("¡Error! ¡Campo Vacío!")
+                        .setMessage("¡Ups! ¡Parece que olvidaste colocar tu correo!")
+                        //.setNegativeButton("¡Entendido!"){ dialog, which -> dialog.dismiss() }
+                        .show()
+                    Handler(Looper.getMainLooper()).postDelayed({
+                        dialog.dismiss()
+                    }, 5000)
+                }
+                // Navigating to next fragment if email is correct
+                Patterns.EMAIL_ADDRESS.matcher(email).matches() -> {
+                    // TODO("Connection to the Api to send password")
+                    Toast.makeText(findNavController().context, "Aceptado", Toast.LENGTH_LONG).show()
+                }
+                // Showing alert dialog if email field is not an email
+                else -> {
+                    val dialog = MaterialAlertDialogBuilder(findNavController().context)
+                        .setTitle("¡Error! ¡Correo Inválido!")
+                        .setMessage("¡Ups! ¡Parece que no ingresaste un correo electrónico!")
+                        .show()
+                    Handler(Looper.getMainLooper()).postDelayed({
+                        dialog.dismiss()
+                    }, 5000)
+                }
             }
         }
 

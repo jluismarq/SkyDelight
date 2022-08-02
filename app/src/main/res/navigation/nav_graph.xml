@@ -5,6 +5,8 @@
     android:id="@+id/nav_graph.xml"
     app:startDestination="@id/loading_screen_fragment">
 
+    <!-- TODO("Clean Back Stack when changing to principal fragment") -->
+
     <fragment
         android:id="@+id/start_screen_fragment"
         android:name="com.example.skydelight.StartScreenFragment"

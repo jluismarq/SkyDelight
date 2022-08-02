@@ -8,12 +8,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import com.example.skydelight.databinding.FragmentRegisterSecondBinding
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import okhttp3.*
-import java.io.IOException
 import android.util.Log
 import android.content.pm.ApplicationInfo
 import android.content.pm.PackageManager
@@ -31,18 +29,6 @@ class RegisterSecondFragment : Fragment() {
     private var age: String? = null
     private var sex: String? = null
 
-    // Function to be instantiated by other fragments
-    companion object {
-        fun newInstance(name: String, age: String, sex: String) =
-            RegisterSecondFragment().apply {
-                arguments = Bundle().apply {
-                    putString(NAME_PARAM, name)
-                    putString(AGE_PARAM, age)
-                    putString(SEX_PARAM, sex)
-                }
-            }
-    }
-
     // Getting data from other fragments
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -55,7 +41,7 @@ class RegisterSecondFragment : Fragment() {
     }
 
     // Creating the fragment view
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         // Inflate the layout for this fragment
         binding = FragmentRegisterSecondBinding.inflate(inflater, container, false)
         return binding.root
@@ -133,8 +119,8 @@ class RegisterSecondFragment : Fragment() {
     }
 
     // Function to connect with the api
-    private val client = OkHttpClient()
-    fun createUser(email: String, password: String, name: String, sex: String, age: String) {
+    @Suppress("DEPRECATION")
+    private fun createUser(email: String, password: String, name: String, sex: String, age: String) {
         // TODO("Change getApplicationInfo because is deprecated")
         val info: ApplicationInfo = findNavController().context.packageManager.getApplicationInfo(findNavController().context.packageName, PackageManager.GET_META_DATA)
 
@@ -154,8 +140,8 @@ class RegisterSecondFragment : Fragment() {
             .header("KEY-CLIENT", info.metaData.getString("com.google.android.geo.API_KEY").toString())
             .build()
 
-        // Getting response
-        val response : Response = client.newCall(request).execute()
+        // Creating instance for http client and getting response
+        val response : Response = OkHttpClient().newCall(request).execute()
 
         // Changing to principal fragment if it's successful
         if (response.isSuccessful){
