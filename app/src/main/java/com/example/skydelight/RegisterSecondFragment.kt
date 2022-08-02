@@ -127,6 +127,7 @@ class RegisterSecondFragment : Fragment() {
             else { createUser(email, password, name.toString(), sex.toString(), age.toString()) }
         }
 
+        // TODO("Send the data received to the previous fragment")
         // Returning to the start screen fragment
         binding.btnReturn.setOnClickListener {findNavController().navigate(R.id.action_registerSecond_to_registerFirst)}
     }

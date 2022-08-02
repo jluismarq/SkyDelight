@@ -12,13 +12,25 @@
         tools:layout="@layout/fragment_start_screen" >
         <action
             android:id="@+id/action_startScreen_to_login"
-            app:destination="@id/login_fragment" />
+            app:destination="@id/login_fragment"
+            app:enterAnim="@anim/slide_from_right"
+            app:exitAnim="@anim/slide_exit_to_left"
+            app:popEnterAnim="@anim/slide_from_left"
+            app:popExitAnim="@anim/slide_exit_to_right" />
         <action
             android:id="@+id/action_startScreen_to_registerFirst"
-            app:destination="@id/register_first_fragment" />
+            app:destination="@id/register_first_fragment"
+            app:enterAnim="@anim/slide_from_right"
+            app:exitAnim="@anim/slide_exit_to_left"
+            app:popEnterAnim="@anim/slide_from_left"
+            app:popExitAnim="@anim/slide_exit_to_right" />
         <action
             android:id="@+id/action_startScreen_to_recoverPassword"
-            app:destination="@id/recover_password_fragment" />
+            app:destination="@id/recover_password_fragment"
+            app:enterAnim="@anim/slide_from_right"
+            app:exitAnim="@anim/slide_exit_to_left"
+            app:popEnterAnim="@anim/slide_from_left"
+            app:popExitAnim="@anim/slide_exit_to_right" />
     </fragment>
 
     <fragment
@@ -28,10 +40,18 @@
         tools:layout="@layout/fragment_login" >
         <action
             android:id="@+id/action_login_to_principal"
-            app:destination="@id/principal_fragment" />
+            app:destination="@id/principal_fragment"
+            app:enterAnim="@anim/slide_from_right"
+            app:exitAnim="@anim/slide_exit_to_left"
+            app:popEnterAnim="@anim/slide_from_left"
+            app:popExitAnim="@anim/slide_exit_to_right" />
         <action
             android:id="@+id/action_login_to_startScreen"
-            app:destination="@id/start_screen_fragment" />
+            app:destination="@id/start_screen_fragment"
+            app:enterAnim="@anim/slide_from_left"
+            app:exitAnim="@anim/slide_exit_to_right"
+            app:popEnterAnim="@anim/slide_from_right"
+            app:popExitAnim="@anim/slide_exit_to_left" />
     </fragment>
 
     <fragment
@@ -48,7 +68,11 @@
         tools:layout="@layout/fragment_recover_password" >
         <action
             android:id="@+id/action_recoverPassword_to_startScreen"
-            app:destination="@id/start_screen_fragment" />
+            app:destination="@id/start_screen_fragment"
+            app:enterAnim="@anim/slide_from_left"
+            app:exitAnim="@anim/slide_exit_to_right"
+            app:popEnterAnim="@anim/slide_from_right"
+            app:popExitAnim="@anim/slide_exit_to_left" />
     </fragment>
 
     <fragment
@@ -58,10 +82,18 @@
         tools:layout="@layout/fragment_register_first" >
         <action
             android:id="@+id/action_registerFirst_to_registerSecond"
-            app:destination="@id/register_second_fragment" />
+            app:destination="@id/register_second_fragment"
+            app:enterAnim="@anim/slide_from_right"
+            app:exitAnim="@anim/slide_exit_to_left"
+            app:popEnterAnim="@anim/slide_from_left"
+            app:popExitAnim="@anim/slide_exit_to_right" />
         <action
             android:id="@+id/action_registerFirst_to_startScreen"
-            app:destination="@id/start_screen_fragment" />
+            app:destination="@id/start_screen_fragment"
+            app:enterAnim="@anim/slide_from_left"
+            app:exitAnim="@anim/slide_exit_to_right"
+            app:popEnterAnim="@anim/slide_from_right"
+            app:popExitAnim="@anim/slide_exit_to_left" />
     </fragment>
 
     <fragment
@@ -71,10 +103,18 @@
         tools:layout="@layout/fragment_register_second" >
         <action
             android:id="@+id/action_registerSecond_to_principal"
-            app:destination="@id/principal_fragment" />
+            app:destination="@id/principal_fragment"
+            app:enterAnim="@anim/slide_from_right"
+            app:exitAnim="@anim/slide_exit_to_left"
+            app:popEnterAnim="@anim/slide_from_left"
+            app:popExitAnim="@anim/slide_exit_to_right" />
         <action
             android:id="@+id/action_registerSecond_to_registerFirst"
-            app:destination="@id/register_first_fragment" />
+            app:destination="@id/register_first_fragment"
+            app:enterAnim="@anim/slide_from_left"
+            app:exitAnim="@anim/slide_exit_to_right"
+            app:popEnterAnim="@anim/slide_from_right"
+            app:popExitAnim="@anim/slide_exit_to_left" />
     </fragment>
 
     <fragment
@@ -84,6 +124,12 @@
         tools:layout="@layout/fragment_loading_screen" >
         <action
             android:id="@+id/action_loadingScreen_to_startScreen"
-            app:destination="@id/start_screen_fragment" />
+            app:destination="@id/start_screen_fragment"
+            app:enterAnim="@anim/slide_from_right"
+            app:exitAnim="@anim/slide_exit_to_left"
+            app:popEnterAnim="@anim/slide_from_right"
+            app:popExitAnim="@anim/slide_exit_to_left"
+            app:popUpTo="@+id/loading_screen_fragment"
+            app:popUpToInclusive="true" />
     </fragment>
 </navigation>

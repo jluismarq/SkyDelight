@@ -73,6 +73,8 @@ class LoginFragment : Fragment() {
         }
 
         // Returning to the start screen fragment
-        binding.btnReturn.setOnClickListener {findNavController().navigate(R.id.action_login_to_startScreen)}
+        binding.btnReturn.setOnClickListener {
+            findNavController().navigate(R.id.action_login_to_startScreen)
+            findNavController().popBackStack(R.id.login_fragment, true) }
     }
 }

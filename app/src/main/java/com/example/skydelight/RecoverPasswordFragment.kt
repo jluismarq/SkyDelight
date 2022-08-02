@@ -60,8 +60,9 @@ class RecoverPasswordFragment : Fragment() {
             }
         }
 
-        // TODO("Clean Back Stack at navigating to start screen")
         // Returning to the start screen fragment
-        binding.btnReturn.setOnClickListener {findNavController().navigate(R.id.action_recoverPassword_to_startScreen)}
+        binding.btnReturn.setOnClickListener {
+            findNavController().navigate(R.id.action_recoverPassword_to_startScreen)
+            findNavController().popBackStack(R.id.recover_password_fragment, true) }
     }
 }

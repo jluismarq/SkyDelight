@@ -79,6 +79,8 @@ class RegisterFirstFragment : Fragment() {
         }
 
         // Returning to the start screen fragment
-        binding.btnReturn.setOnClickListener {findNavController().navigate(R.id.action_registerFirst_to_startScreen)}
+        binding.btnReturn.setOnClickListener {
+            findNavController().navigate(R.id.action_registerFirst_to_startScreen)
+            findNavController().popBackStack(R.id.register_first_fragment, true) }
     }
 }
