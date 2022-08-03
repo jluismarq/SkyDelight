@@ -15,6 +15,7 @@ import okhttp3.*
 import android.util.Log
 import android.content.pm.ApplicationInfo
 import android.content.pm.PackageManager
+import java.io.IOException
 
 private const val NAME_PARAM = "name"
 private const val AGE_PARAM = "age"
@@ -122,7 +123,14 @@ class RegisterSecondFragment : Fragment() {
     @Suppress("DEPRECATION")
     private fun createUser(email: String, password: String, name: String, sex: String, age: String) {
         // TODO("Change getApplicationInfo because is deprecated")
-        val info: ApplicationInfo = findNavController().context.packageManager.getApplicationInfo(findNavController().context.packageName, PackageManager.GET_META_DATA)
+        val info: ApplicationInfo = findNavController().context.packageManager
+            .getApplicationInfo(findNavController().context.packageName, PackageManager.GET_META_DATA)
+
+        Log.d("OKHTTP3-EMAIL", email)
+        Log.d("OKHTTP3-PASSWORD", password)
+        Log.d("OKHTTP3-NAME", name)
+        Log.d("OKHTTP3-SEX", sex)
+        Log.d("OKHTTP3-AGE", age)
 
         // Arguments to Post Request
         val formBody: RequestBody = FormBody.Builder()
@@ -140,17 +148,21 @@ class RegisterSecondFragment : Fragment() {
             .header("KEY-CLIENT", info.metaData.getString("com.google.android.geo.API_KEY").toString())
             .build()
 
-        // Creating instance for http client and getting response
-        val response : Response = OkHttpClient().newCall(request).execute()
+        // TODO("Make http waiting dialog")
 
-        // Changing to principal fragment if it's successful
-        if (response.isSuccessful){
-            // TODO("Create Third Register Screen with Explanation")
-            Log.d("OKHTTP3-CODE", response.code().toString())
-            Log.d("OKHTTP3-BODY", response.body()!!.string())
-        } else {
-            // TODO("Print dialog with explanation to the user")
-            Log.d("OKHTTP3-ERROR", response.toString())
-        }
+        // Making HTTP request and getting response
+        OkHttpClient().newCall(request).enqueue(object : Callback {
+            // Changing to principal fragment if it's successful
+            override fun onResponse(call: Call, response: Response){
+                // TODO("Create Third Register Screen with Explanation")
+                Log.d("OKHTTP3-CODE", response.code().toString())
+                Log.d("OKHTTP3-BODY", response.body()?.string().toString())
+            }
+            // Print dialog if it's error
+            override fun onFailure(call: Call, e: IOException){
+                // TODO("Print dialog with explanation to the user")
+                Log.d("OKHTTP3-ERROR", e.toString())
+            }
+        })
     }
 }

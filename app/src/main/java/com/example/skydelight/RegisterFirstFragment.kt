@@ -3,6 +3,7 @@ package com.example.skydelight
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -42,7 +43,7 @@ class RegisterFirstFragment : Fragment() {
         binding.btnNext.setOnClickListener {
             val name = binding.editTxtName.text.toString()
             val sexId = binding.radioGroupSex.checkedRadioButtonId
-            val age = binding.numberPickerAge.value
+            val age = binding.numberPickerAge.value.toString()
 
             // Showing alert dialog if email field is empty
             if(name.isEmpty()){
