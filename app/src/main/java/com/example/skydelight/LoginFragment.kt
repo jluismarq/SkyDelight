@@ -67,6 +67,7 @@ class LoginFragment : Fragment() {
             }
             // Connection to the api and sending the password to the email
             else {
+                // TODO("How to stay logged in")
                 // TODO("Connection to the Api to verify account and login")
                 Toast.makeText(findNavController().context, "Aceptado", Toast.LENGTH_LONG).show()
             }

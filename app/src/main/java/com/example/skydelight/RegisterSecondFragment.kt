@@ -148,12 +148,14 @@ class RegisterSecondFragment : Fragment() {
             .header("KEY-CLIENT", info.metaData.getString("com.google.android.geo.API_KEY").toString())
             .build()
 
+        // TODO("Ask for internet permission")
         // TODO("Make http waiting dialog")
 
         // Making HTTP request and getting response
         OkHttpClient().newCall(request).enqueue(object : Callback {
             // Changing to principal fragment if it's successful
             override fun onResponse(call: Call, response: Response){
+                // TODO("Connection to the Api to create account")
                 // TODO("Create Third Register Screen with Explanation")
                 Log.d("OKHTTP3-CODE", response.code().toString())
                 Log.d("OKHTTP3-BODY", response.body()?.string().toString())

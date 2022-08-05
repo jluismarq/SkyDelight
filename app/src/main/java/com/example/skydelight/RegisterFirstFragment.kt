@@ -79,6 +79,7 @@ class RegisterFirstFragment : Fragment() {
 
         // Returning to the start screen fragment
         binding.btnReturn.setOnClickListener {
+            // TODO("Clean Back Stack to all the fragments")
             findNavController().navigate(R.id.action_registerFirst_to_startScreen)
             findNavController().popBackStack(R.id.register_first_fragment, true) }
     }
