@@ -44,7 +44,9 @@
             app:enterAnim="@anim/slide_from_right"
             app:exitAnim="@anim/slide_exit_to_left"
             app:popEnterAnim="@anim/slide_from_left"
-            app:popExitAnim="@anim/slide_exit_to_right" />
+            app:popExitAnim="@anim/slide_exit_to_right"
+            app:popUpTo="@+id/start_screen_fragment"
+            app:popUpToInclusive="true" />
         <action
             android:id="@+id/action_login_to_startScreen"
             app:destination="@id/start_screen_fragment"
@@ -102,12 +104,14 @@
         android:label="fragment_register_second"
         tools:layout="@layout/fragment_register_second" >
         <action
-            android:id="@+id/action_registerSecond_to_principal"
-            app:destination="@id/principal_fragment"
+            android:id="@+id/action_registerSecond_to_registerThird"
+            app:destination="@id/register_third_fragment"
             app:enterAnim="@anim/slide_from_right"
             app:exitAnim="@anim/slide_exit_to_left"
             app:popEnterAnim="@anim/slide_from_left"
-            app:popExitAnim="@anim/slide_exit_to_right" />
+            app:popExitAnim="@anim/slide_exit_to_right"
+            app:popUpTo="@+id/start_screen_fragment"
+            app:popUpToInclusive="true" />
         <action
             android:id="@+id/action_registerSecond_to_registerFirst"
             app:destination="@id/register_first_fragment"
@@ -130,6 +134,22 @@
             app:popEnterAnim="@anim/slide_from_right"
             app:popExitAnim="@anim/slide_exit_to_left"
             app:popUpTo="@+id/loading_screen_fragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/register_third_fragment"
+        android:name="com.example.skydelight.RegisterThirdFragment"
+        android:label="fragment_register_third"
+        tools:layout="@layout/fragment_register_third" >
+        <action
+            android:id="@+id/action_registerThird_to_principal"
+            app:destination="@id/principal_fragment"
+            app:enterAnim="@anim/slide_from_right"
+            app:exitAnim="@anim/slide_exit_to_left"
+            app:popEnterAnim="@anim/slide_from_left"
+            app:popExitAnim="@anim/slide_exit_to_right"
+            app:popUpTo="@+id/register_third_fragment"
             app:popUpToInclusive="true" />
     </fragment>
 </navigation>

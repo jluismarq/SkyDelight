@@ -39,4 +39,14 @@
     <string name="registerScreen_confirm_password">Confirmar Contraseña:</string>
     <string name="registerScreen_btn_create">Crear Cuenta</string>
 
+    <!-- Register Third Fragments Srings -->
+    <string name="registerScreen_title_3">Es Importante que Sepas lo Siguiente:</string>
+    <string name="registerScreen_explanation_1">SkyDelight es un sistema para prevención del estrés académico</string>
+    <string name="registerScreen_explanation_2">Se recomienda que sigas las sugerencias de la pantalla de inicio</string>
+    <string name="registerScreen_explanation_3">Da seguimiento a tu estrés con la sección test y el sitio web</string>
+    <string name="registerScreen_explanation_4">Diviértete usando realidad aumentada en el apartado de juegos</string>
+    <string name="registerScreen_explanation_5">Este sistema no reemplaza ni sustituye asistencia profesional</string>
+    <string name="registerScreen_explanation_6">Tus respuestas son analizadas para brindarte una mejor experiencia</string>
+    <string name="registerScreen_btn_understand">¡Entendido!</string>
+
 </resources>

@@ -90,6 +90,26 @@ class RegisterSecondFragment : Fragment() {
                     dialog.dismiss()
                 }, 5000)
             }
+            // Showing alert dialog if password has less than 8 characters
+            else if(password.length < 8){
+                val dialog = MaterialAlertDialogBuilder(findNavController().context)
+                    .setTitle("¡Error! ¡Contraseña Insegura!")
+                    .setMessage("¡Ups! ¡Parece que tu contraseña es demasiado reducida!")
+                    .show()
+                Handler(Looper.getMainLooper()).postDelayed({
+                    dialog.dismiss()
+                }, 5000)
+            }
+            // Showing alert dialog if password has blank spaces
+            else if(password.contains(" ")){
+                val dialog = MaterialAlertDialogBuilder(findNavController().context)
+                    .setTitle("¡Error! ¡Contraseña Errónea!")
+                    .setMessage("¡Ups! ¡Parece que tu contraseña contiene espacios en blanco!")
+                    .show()
+                Handler(Looper.getMainLooper()).postDelayed({
+                    dialog.dismiss()
+                }, 5000)
+            }
             // Showing alert dialog if confirm password field is empty
             else if(confirmedPassword.isEmpty()){
                 val dialog = MaterialAlertDialogBuilder(findNavController().context)
@@ -100,7 +120,7 @@ class RegisterSecondFragment : Fragment() {
                     dialog.dismiss()
                 }, 5000)
             }
-            // Showing alert dialog if confirm password field is empty
+            // Showing alert dialog if password and confirmedPassword don't match
             else if(password != confirmedPassword){
                 val dialog = MaterialAlertDialogBuilder(findNavController().context)
                     .setTitle("¡Error! ¡Contraseñas Distintas!")
@@ -111,7 +131,8 @@ class RegisterSecondFragment : Fragment() {
                 }, 5000)
             }
             // Connection to the api and creation of the new user
-            else { createUser(email, password, name.toString(), sex.toString(), age.toString()) }
+            //else { createUser(email, password, name.toString(), sex.toString(), age.toString()) }
+            else { findNavController().navigate(R.id.action_registerSecond_to_registerThird) }
         }
 
         // TODO("Send the data received to the previous fragment")
@@ -125,12 +146,6 @@ class RegisterSecondFragment : Fragment() {
         // TODO("Change getApplicationInfo because is deprecated")
         val info: ApplicationInfo = findNavController().context.packageManager
             .getApplicationInfo(findNavController().context.packageName, PackageManager.GET_META_DATA)
-
-        Log.d("OKHTTP3-EMAIL", email)
-        Log.d("OKHTTP3-PASSWORD", password)
-        Log.d("OKHTTP3-NAME", name)
-        Log.d("OKHTTP3-SEX", sex)
-        Log.d("OKHTTP3-AGE", age)
 
         // Arguments to Post Request
         val formBody: RequestBody = FormBody.Builder()
@@ -156,7 +171,7 @@ class RegisterSecondFragment : Fragment() {
             // Changing to principal fragment if it's successful
             override fun onResponse(call: Call, response: Response){
                 // TODO("Connection to the Api to create account")
-                // TODO("Create Third Register Screen with Explanation")
+                // TODO("Execute Third Register Screen with Explanation")
                 Log.d("OKHTTP3-CODE", response.code().toString())
                 Log.d("OKHTTP3-BODY", response.body()?.string().toString())
             }

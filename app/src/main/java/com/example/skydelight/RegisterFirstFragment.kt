@@ -13,6 +13,7 @@ import androidx.core.os.bundleOf
 import androidx.navigation.fragment.findNavController
 import com.example.skydelight.databinding.FragmentRegisterFirstBinding
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import java.util.regex.Pattern
 
 private const val NAME_PARAM = "name"
 private const val AGE_PARAM = "age"
@@ -45,11 +46,21 @@ class RegisterFirstFragment : Fragment() {
             val sexId = binding.radioGroupSex.checkedRadioButtonId
             val age = binding.numberPickerAge.value.toString()
 
-            // Showing alert dialog if email field is empty
+            // Showing alert dialog if name field is empty
             if(name.isEmpty()){
                 val dialog = MaterialAlertDialogBuilder(findNavController().context)
                     .setTitle("¡Error! ¡Campo Vacío!")
                     .setMessage("¡Ups! ¡Parece que olvidaste colocar tu nombre!")
+                    .show()
+                Handler(Looper.getMainLooper()).postDelayed({
+                    dialog.dismiss()
+                }, 5000)
+            }
+            // Showing alert dialog if name contains numbers or special characters
+            else if(!Pattern.matches("[a-zA-ZñÑ áéíóúÁÉÍÓÚ]+", name)){
+                val dialog = MaterialAlertDialogBuilder(findNavController().context)
+                    .setTitle("¡Error! ¡Nombre Inválido!")
+                    .setMessage("¡Ups! ¡Parece que colocaste números o carácteres especiales en tu nombre!")
                     .show()
                 Handler(Looper.getMainLooper()).postDelayed({
                     dialog.dismiss()
@@ -81,6 +92,7 @@ class RegisterFirstFragment : Fragment() {
         binding.btnReturn.setOnClickListener {
             // TODO("Clean Back Stack to all the fragments")
             findNavController().navigate(R.id.action_registerFirst_to_startScreen)
-            findNavController().popBackStack(R.id.register_first_fragment, true) }
+            findNavController().popBackStack(R.id.register_first_fragment, true)
+        }
     }
 }
