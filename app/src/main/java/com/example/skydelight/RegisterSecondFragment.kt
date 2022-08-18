@@ -1,20 +1,21 @@
 package com.example.skydelight
 
+import android.content.pm.ApplicationInfo
+import android.content.pm.PackageManager
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import android.util.Patterns
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.skydelight.databinding.FragmentRegisterSecondBinding
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import okhttp3.*
-import android.util.Log
-import android.content.pm.ApplicationInfo
-import android.content.pm.PackageManager
 import java.io.IOException
 
 private const val NAME_PARAM = "name"
@@ -131,13 +132,17 @@ class RegisterSecondFragment : Fragment() {
                 }, 5000)
             }
             // Connection to the api and creation of the new user
-            //else { createUser(email, password, name.toString(), sex.toString(), age.toString()) }
-            else { findNavController().navigate(R.id.action_registerSecond_to_registerThird) }
+            else { createUser(email, password, name.toString(), sex.toString(), age.toString()) }
         }
 
-        // TODO("Send the data received to the previous fragment")
-        // Returning to the start screen fragment
-        binding.btnReturn.setOnClickListener {findNavController().navigate(R.id.action_registerSecond_to_registerFirst)}
+        // Returning to the register first fragment
+        binding.btnReturn.setOnClickListener {
+            // Setting parameters for the next fragment
+            val bundle = bundleOf(NAME_PARAM to name, SEX_PARAM to sex, AGE_PARAM to age)
+
+            // Starting previous fragment
+            findNavController().navigate(R.id.action_registerSecond_to_registerFirst, bundle)
+        }
     }
 
     // Function to connect with the api
@@ -163,22 +168,68 @@ class RegisterSecondFragment : Fragment() {
             .header("KEY-CLIENT", info.metaData.getString("com.google.android.geo.API_KEY").toString())
             .build()
 
-        // TODO("Ask for internet permission")
-        // TODO("Make http waiting dialog")
+        // Showing loading dialog
+        val customDialog = CustomLoadingDialog(findNavController().context)
+        customDialog.show()
 
         // Making HTTP request and getting response
         OkHttpClient().newCall(request).enqueue(object : Callback {
             // Changing to principal fragment if it's successful
             override fun onResponse(call: Call, response: Response){
-                // TODO("Connection to the Api to create account")
-                // TODO("Execute Third Register Screen with Explanation")
+                // Closing loading dialog
+                customDialog.dismiss()
+
+                // Printing api answer
                 Log.d("OKHTTP3-CODE", response.code().toString())
                 Log.d("OKHTTP3-BODY", response.body()?.string().toString())
+
+                // Code 201 = account created
+                if(response.code() == 201) {
+                    activity?.runOnUiThread {
+                        val dialog = MaterialAlertDialogBuilder(findNavController().context)
+                            .setTitle("¡Felicidades!")
+                            .setMessage("¡Tu cuenta ha sido creada exitosamente!")
+                            .show()
+
+                        // Closing message and changing to third register fragment
+                        Handler(Looper.getMainLooper()).postDelayed({
+                            dialog.dismiss()
+                            findNavController().navigate(R.id.action_registerSecond_to_registerThird)
+                        }, 5000)
+                    }
+                }
+                // Code 400 = account already exists
+                else if(response.code() == 400) {
+                    activity?.runOnUiThread {
+                        val dialog = MaterialAlertDialogBuilder(findNavController().context)
+                            .setTitle("¡Error! ¡Cuenta Existente!")
+                            .setMessage("¡Ya existe una cuenta con ese correo!")
+                            .show()
+
+                        // Closing message
+                        Handler(Looper.getMainLooper()).postDelayed({ dialog.dismiss() }, 5000)
+                    }
+                }
             }
+
             // Print dialog if it's error
             override fun onFailure(call: Call, e: IOException){
-                // TODO("Print dialog with explanation to the user")
+                // Closing loading dialog
+                customDialog.dismiss()
+
+                // Printing api answer
                 Log.d("OKHTTP3-ERROR", e.toString())
+
+                // Showing message to the user
+                activity?.runOnUiThread {
+                    val dialog = MaterialAlertDialogBuilder(findNavController().context)
+                        .setTitle("¡Error! ¡No se ha Creado la Cuenta!")
+                        .setMessage(e.toString())
+                        .show()
+
+                    // Closing message
+                    Handler(Looper.getMainLooper()).postDelayed({ dialog.dismiss() }, 5000)
+                }
             }
         })
     }

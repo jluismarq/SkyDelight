@@ -39,6 +39,9 @@
     <string name="registerScreen_confirm_password">Confirmar Contraseña:</string>
     <string name="registerScreen_btn_create">Crear Cuenta</string>
 
+    <!-- Custom Loading Dialog Strings -->
+    <string name="loadingDialog_creating">Creando Cuenta...</string>
+
     <!-- Register Third Fragments Srings -->
     <string name="registerScreen_title_3">Es Importante que Sepas lo Siguiente:</string>
     <string name="registerScreen_explanation_1">SkyDelight es un sistema para prevención del estrés académico</string>

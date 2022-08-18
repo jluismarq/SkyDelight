@@ -3,7 +3,6 @@ package com.example.skydelight
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -23,6 +22,22 @@ class RegisterFirstFragment : Fragment() {
     // Binding variable to use elements in the xml layout
     private lateinit var binding: FragmentRegisterFirstBinding
 
+    // Variables to receive data from other fragments
+    private var name: String? = null
+    private var age: String? = null
+    private var sex: String? = null
+
+    // Getting data from other fragments
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        arguments?.let {
+            name = it.getString(NAME_PARAM)
+            age = it.getString(AGE_PARAM)
+            sex = it.getString(SEX_PARAM)
+        }
+    }
+
     // Creating the fragment view
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         // Inflate the layout for this fragment
@@ -36,18 +51,33 @@ class RegisterFirstFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // Changing Values of Number Picker
+        // Changing Default Values of Age Number Picker
         binding.numberPickerAge.minValue = 18
         binding.numberPickerAge.maxValue = 25
         binding.numberPickerAge.value = 20
 
+        // Setting values if user comes from register second fragment
+        if(!name.isNullOrEmpty() || !age.isNullOrEmpty() || !sex.isNullOrEmpty()) {
+            binding.editTxtName.setText(name)
+            binding.numberPickerAge.value = age!!.toInt()
+
+            if (binding.btnMale.text.toString() == sex)
+                binding.btnMale.isChecked = true
+            else
+                binding.btnFemale.isChecked = true
+        }
+
         binding.btnNext.setOnClickListener {
-            val name = binding.editTxtName.text.toString()
+            // Getting sex option selected
             val sexId = binding.radioGroupSex.checkedRadioButtonId
-            val age = binding.numberPickerAge.value.toString()
+
+            // Getting user answers
+            name = binding.editTxtName.text.toString()
+            age = binding.numberPickerAge.value.toString()
+            sex = binding.radioGroupSex.findViewById<RadioButton>(sexId).text.toString()
 
             // Showing alert dialog if name field is empty
-            if(name.isEmpty()){
+            if(name.isNullOrEmpty()){
                 val dialog = MaterialAlertDialogBuilder(findNavController().context)
                     .setTitle("¡Error! ¡Campo Vacío!")
                     .setMessage("¡Ups! ¡Parece que olvidaste colocar tu nombre!")
@@ -57,7 +87,7 @@ class RegisterFirstFragment : Fragment() {
                 }, 5000)
             }
             // Showing alert dialog if name contains numbers or special characters
-            else if(!Pattern.matches("[a-zA-ZñÑ áéíóúÁÉÍÓÚ]+", name)){
+            else if(!Pattern.matches("[a-zA-ZñÑ áéíóúÁÉÍÓÚ]+", name.toString())){
                 val dialog = MaterialAlertDialogBuilder(findNavController().context)
                     .setTitle("¡Error! ¡Nombre Inválido!")
                     .setMessage("¡Ups! ¡Parece que colocaste números o carácteres especiales en tu nombre!")
@@ -78,8 +108,6 @@ class RegisterFirstFragment : Fragment() {
             }
             // Sending variables to the next register fragment
             else {
-                val sex = binding.radioGroupSex.findViewById<RadioButton>(sexId).text.toString()
-
                 // Setting parameters for the next fragment
                 val bundle = bundleOf(NAME_PARAM to name, SEX_PARAM to sex, AGE_PARAM to age)
 
@@ -90,7 +118,6 @@ class RegisterFirstFragment : Fragment() {
 
         // Returning to the start screen fragment
         binding.btnReturn.setOnClickListener {
-            // TODO("Clean Back Stack to all the fragments")
             findNavController().navigate(R.id.action_registerFirst_to_startScreen)
             findNavController().popBackStack(R.id.register_first_fragment, true)
         }
