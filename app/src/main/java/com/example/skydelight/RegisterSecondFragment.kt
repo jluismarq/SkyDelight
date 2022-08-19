@@ -1,7 +1,5 @@
 package com.example.skydelight
 
-import android.content.pm.ApplicationInfo
-import android.content.pm.PackageManager
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -146,11 +144,11 @@ class RegisterSecondFragment : Fragment() {
     }
 
     // Function to connect with the api
-    @Suppress("DEPRECATION")
     private fun createUser(email: String, password: String, name: String, sex: String, age: String) {
-        // TODO("Change getApplicationInfo because is deprecated")
+        /* Alternative to get api key
         val info: ApplicationInfo = findNavController().context.packageManager
             .getApplicationInfo(findNavController().context.packageName, PackageManager.GET_META_DATA)
+        info.metaData.getString("com.google.android.geo.API_KEY").toString()*/
 
         // Arguments to Post Request
         val formBody: RequestBody = FormBody.Builder()
@@ -165,11 +163,11 @@ class RegisterSecondFragment : Fragment() {
         val request = Request.Builder()
             .url("https://apiskydelight.herokuapp.com/usuarios/crearusuario/")
             .post(formBody)
-            .header("KEY-CLIENT", info.metaData.getString("com.google.android.geo.API_KEY").toString())
+            .header("KEY-CLIENT", BuildConfig.API_KEY)
             .build()
 
         // Showing loading dialog
-        val customDialog = CustomLoadingDialog(findNavController().context)
+        val customDialog = CustomLoadingDialog(findNavController().context, getString(R.string.loadingDialog_creating))
         customDialog.show()
 
         // Making HTTP request and getting response
@@ -223,7 +221,7 @@ class RegisterSecondFragment : Fragment() {
                 // Showing message to the user
                 activity?.runOnUiThread {
                     val dialog = MaterialAlertDialogBuilder(findNavController().context)
-                        .setTitle("¡Error! ¡No se ha Creado la Cuenta!")
+                        .setTitle("¡Ups! ¡Hubo un Problema de Conexión!")
                         .setMessage(e.toString())
                         .show()
 

@@ -11,16 +11,16 @@
         android:roundIcon="@mipmap/ic_launcher_skydelight_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.SkyDelight">
-        <meta-data
+        <!-- Alternative to get api key
+            <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="${API_KEY}" />
+            android:value="${API_KEY}" />-->
         <activity
             android:name=".MainActivity"
             android:screenOrientation="portrait"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

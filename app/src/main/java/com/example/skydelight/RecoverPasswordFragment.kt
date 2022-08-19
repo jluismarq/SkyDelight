@@ -47,7 +47,6 @@ class RecoverPasswordFragment : Fragment() {
                 }
                 // Navigating to next fragment if email is correct
                 Patterns.EMAIL_ADDRESS.matcher(email).matches() -> {
-                    // TODO("How to send the new password to the email")
                     // TODO("Connection to the Api to send password")
                     Toast.makeText(findNavController().context, "Aceptado", Toast.LENGTH_LONG).show()
                 }

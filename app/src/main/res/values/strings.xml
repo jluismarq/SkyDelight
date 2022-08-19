@@ -41,6 +41,7 @@
 
     <!-- Custom Loading Dialog Strings -->
     <string name="loadingDialog_creating">Creando Cuenta...</string>
+    <string name="loadingdialog_login">Iniciando Sesión...</string>
 
     <!-- Register Third Fragments Srings -->
     <string name="registerScreen_title_3">Es Importante que Sepas lo Siguiente:</string>
