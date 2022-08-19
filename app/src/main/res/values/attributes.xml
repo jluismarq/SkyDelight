@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- SkyDelight Icon -->
+    <!-- SkyDelight Icons -->
     <attr name="loading_icon" format="reference" />
+    <attr name="loading_icon_2" format="reference" />
 
     <!-- Background Color -->
     <attr name="fragment_background" format="reference" />

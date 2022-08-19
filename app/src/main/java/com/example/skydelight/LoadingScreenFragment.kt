@@ -3,11 +3,16 @@ package com.example.skydelight
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
+import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import pl.bclogic.pulsator4droid.library.PulsatorLayout
+import kotlin.random.Random
 
 class LoadingScreenFragment : Fragment() {
     // Creating the fragment view
@@ -20,10 +25,17 @@ class LoadingScreenFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // TODO("Personalize loading screen")
+        // initialise pulsator
+        view.findViewById<PulsatorLayout>(R.id.pulsator).start()
+
+        // Start heart beat pulse
+        val pulse = AnimationUtils.loadAnimation(findNavController().context, R.anim.pulse)
+        view.findViewById<ImageView>(R.id.imgHeartLogo).startAnimation(pulse)
+
         // TODO("Investigate explode animation between fragments")
-        // Changing to the start fragment after a delay
+        // Changing to the start fragment after random time delay
         Handler(Looper.getMainLooper()).postDelayed({
-            findNavController().navigate(R.id.action_loadingScreen_to_startScreen) }, 2000)
+            findNavController().navigate(R.id.action_loadingScreen_to_startScreen) },
+            (2500..7500).shuffled().last().toLong())
     }
 }

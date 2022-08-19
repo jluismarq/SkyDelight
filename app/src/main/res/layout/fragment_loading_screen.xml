@@ -8,18 +8,98 @@
     android:background="?attr/fragment_background"
     tools:context=".LoadingScreenFragment">
 
+    <pl.bclogic.pulsator4droid.library.PulsatorLayout
+        android:id="@+id/pulsator"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:pulse_color="#F89CBB"
+        app:pulse_count="2"
+        app:pulse_duration="2000"
+        app:pulse_interpolator="Linear"
+        app:pulse_repeat="0"
+        app:pulse_startFromScratch="false"
+        app:layout_constraintBottom_toTopOf="@+id/guideline_pulsator_bottom"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_pulsator_right"
+        app:layout_constraintStart_toStartOf="@+id/guideline_pulsator_left"
+        app:layout_constraintTop_toTopOf="@+id/guideline_pulsator_top" />
+
     <ImageView
-        android:id="@+id/logoDay"
+        android:id="@+id/imgHeartLogo"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:contentDescription="@string/app_name"
+        android:src="@drawable/skydelight_heart"
+        app:layout_constraintBottom_toTopOf="@+id/guideline_heart_bottom"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_heart_right"
+        app:layout_constraintStart_toStartOf="@+id/guideline_heart_left"
+        app:layout_constraintTop_toTopOf="@+id/guideline_heart_top" />
+
+    <ImageView
+        android:id="@+id/imgLogo"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:contentDescription="@string/app_name"
         android:padding="@dimen/icon_padding"
-        android:src="?attr/loading_icon"
+        android:src="?attr/loading_icon_2"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_heart_top"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.425" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_heart_bottom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.535" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_heart_left"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.48" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_heart_right"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.68" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_pulsator_top"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.125" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_pulsator_bottom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.835" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_pulsator_left"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.18" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_pulsator_right"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.98" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

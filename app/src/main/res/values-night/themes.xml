@@ -17,6 +17,7 @@
 
         <!-- SkyDelight Icon -->
         <item name="loading_icon">@drawable/skydelight_logo_night</item>
+        <item name="loading_icon_2">@drawable/skydelight_logo_night_2</item>
 
         <!-- Background Color -->
         <item name="fragment_background">@color/ultradark</item>

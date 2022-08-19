@@ -40,6 +40,7 @@ android {
 dependencies {
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation 'com.squareup.okhttp3:okhttp:3.10.0'
+    implementation "pl.bclogic:pulsator4droid:1.0.3"
 
     // Groovy Navigation dependencies
     // https://developer.android.com/guide/navigation/navigation-getting-started#groovy
@@ -64,7 +65,7 @@ dependencies {
 
     // Default project dependencies
     implementation 'androidx.core:core-ktx:1.8.0'
-    implementation 'androidx.appcompat:appcompat:1.4.2'
+    implementation 'androidx.appcompat:appcompat:1.5.0'
     implementation 'com.google.android.material:material:1.6.1'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     testImplementation 'junit:junit:4.13.2'
