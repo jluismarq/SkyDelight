@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import com.example.skydelight.databinding.FragmentRegisterThirdBinding
-import com.example.skydelight.databinding.FragmentStartScreenBinding
 
 class RegisterThirdFragment : Fragment() {
 

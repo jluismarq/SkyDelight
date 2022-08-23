@@ -3,15 +3,17 @@ package com.example.skydelight
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import android.util.Patterns
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import com.example.skydelight.databinding.FragmentRecoverPasswordBinding
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import okhttp3.*
+import java.io.IOException
 
 class RecoverPasswordFragment : Fragment() {
     // Binding variable to use elements in the xml layout
@@ -45,13 +47,8 @@ class RecoverPasswordFragment : Fragment() {
                         dialog.dismiss()
                     }, 5000)
                 }
-                // Navigating to next fragment if email is correct
-                Patterns.EMAIL_ADDRESS.matcher(email).matches() -> {
-                    // TODO("Connection to the Api to send password")
-                    Toast.makeText(findNavController().context, "Aceptado", Toast.LENGTH_LONG).show()
-                }
                 // Showing alert dialog if email field is not an email
-                else -> {
+                !Patterns.EMAIL_ADDRESS.matcher(email).matches() -> {
                     val dialog = MaterialAlertDialogBuilder(findNavController().context)
                         .setTitle("¡Error! ¡Correo Inválido!")
                         .setMessage("¡Ups! ¡Parece que no ingresaste un correo electrónico!")
@@ -60,6 +57,20 @@ class RecoverPasswordFragment : Fragment() {
                         dialog.dismiss()
                     }, 5000)
                 }
+                // Showing alert dialog if email has more than 50 characters
+                email.length > 50 -> {
+                    val dialog = MaterialAlertDialogBuilder(findNavController().context)
+                        .setTitle("¡Error! ¡Correo Inválido!")
+                        .setMessage("¡Ups! ¡Parece el correo que ingresaste es demasiado largo!")
+                        .show()
+                    Handler(Looper.getMainLooper()).postDelayed({
+                        dialog.dismiss()
+                    }, 5000)
+                }
+                // Navigating to next fragment if email is correct
+                // TODO("Finish connection to the Api to send password")
+                else ->
+                    recoverPassword(email)
             }
         }
 
@@ -67,5 +78,67 @@ class RecoverPasswordFragment : Fragment() {
         binding.btnReturn.setOnClickListener {
             findNavController().navigate(R.id.action_recoverPassword_to_startScreen)
             findNavController().popBackStack(R.id.recover_password_fragment, true) }
+    }
+
+    // Function to connect with the api
+    private fun recoverPassword(email: String) {
+        // Making http request
+        val request = Request.Builder()
+            .url("https://apiskydelight.herokuapp.com/usuarios/recuperar-contraseña/")
+            .post(FormBody.Builder().add("email", email).build())
+            .header("KEY-CLIENT", BuildConfig.API_KEY)
+            .build()
+
+        // Showing loading dialog
+        val customDialog = CustomLoadingDialog(findNavController().context, getString(R.string.loadingDialog_recover))
+        customDialog.show()
+
+        // Making HTTP request and getting response
+        OkHttpClient().newCall(request).enqueue(object : Callback {
+            // Changing to principal fragment if it's successful
+            override fun onResponse(call: Call, response: Response){
+                // Closing loading dialog
+                customDialog.dismiss()
+
+                // Printing api answer
+                Log.d("OKHTTP3-CODE", response.code().toString())
+                Log.d("OKHTTP3-BODY", response.body()?.string().toString())
+
+                // Code 200 = account verified
+                if(response.code() == 200)
+                    activity?.runOnUiThread { findNavController().navigate(R.id.action_recoverPassword_to_startScreen) }
+                // Code 401 = account doesn't exist
+                else if(response.code() == 401)
+                    activity?.runOnUiThread {
+                        val dialog = MaterialAlertDialogBuilder(findNavController().context)
+                            .setTitle("¡Error! ¡Correo Inválido!")
+                            .setMessage("¡El correo que ingresaste no pertenece a ninguna cuenta!")
+                            .show()
+
+                        // Closing message
+                        Handler(Looper.getMainLooper()).postDelayed({ dialog.dismiss() }, 5000)
+                    }
+            }
+
+            // Print dialog if it's error
+            override fun onFailure(call: Call, e: IOException){
+                // Closing loading dialog
+                customDialog.dismiss()
+
+                // Printing api answer
+                Log.d("OKHTTP3-ERROR", e.toString())
+
+                // Showing message to the user
+                activity?.runOnUiThread {
+                    val dialog = MaterialAlertDialogBuilder(findNavController().context)
+                        .setTitle("¡Ups! ¡Hubo un Problema de Conexión!")
+                        .setMessage(e.toString())
+                        .show()
+
+                    // Closing message
+                    Handler(Looper.getMainLooper()).postDelayed({ dialog.dismiss() }, 5000)
+                }
+            }
+        })
     }
 }

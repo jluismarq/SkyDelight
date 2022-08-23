@@ -96,6 +96,16 @@ class RegisterFirstFragment : Fragment() {
                     dialog.dismiss()
                 }, 5000)
             }
+            // Showing alert dialog if name has more than 50 characters
+            else if(name.toString().length > 50){
+                val dialog = MaterialAlertDialogBuilder(findNavController().context)
+                    .setTitle("¡Error! ¡Nombre Inválido!")
+                    .setMessage("¡Ups! ¡Parece el nombre que ingresaste es demasiado largo!")
+                    .show()
+                Handler(Looper.getMainLooper()).postDelayed({
+                    dialog.dismiss()
+                }, 5000)
+            }
             // Showing alert dialog if user didn't choose a sex
             else if(sexId == -1){
                 val dialog = MaterialAlertDialogBuilder(findNavController().context)

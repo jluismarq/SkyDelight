@@ -3,7 +3,6 @@ package com.example.skydelight
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,7 +11,8 @@ import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import pl.bclogic.pulsator4droid.library.PulsatorLayout
-import kotlin.random.Random
+import java.io.File
+import java.io.FileWriter
 
 class LoadingScreenFragment : Fragment() {
     // Creating the fragment view
@@ -32,10 +32,13 @@ class LoadingScreenFragment : Fragment() {
         val pulse = AnimationUtils.loadAnimation(findNavController().context, R.anim.pulse)
         view.findViewById<ImageView>(R.id.imgHeartLogo).startAnimation(pulse)
 
-        // TODO("Investigate explode animation between fragments")
         // Changing to the start fragment after random time delay
         Handler(Looper.getMainLooper()).postDelayed({
-            findNavController().navigate(R.id.action_loadingScreen_to_startScreen) },
-            (2500..7500).shuffled().last().toLong())
+            // Clearing file if it has content
+            if(File(activity?.getExternalFilesDir(null), "usr_session.txt").exists())
+                findNavController().navigate(R.id.action_loadingScreen_to_principal)
+            else
+                findNavController().navigate(R.id.action_loadingScreen_to_startScreen)
+        }, (2500..7500).shuffled().last().toLong())
     }
 }

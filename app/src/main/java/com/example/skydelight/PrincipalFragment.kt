@@ -11,6 +11,7 @@ private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 
 /**
+ * TODO("Make principal screens")
  * A simple [Fragment] subclass.
  * Use the [PrincipalFragment.newInstance] factory method to
  * create an instance of this fragment.

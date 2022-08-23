@@ -135,6 +135,15 @@
             app:popExitAnim="@anim/slide_exit_to_left"
             app:popUpTo="@+id/loading_screen_fragment"
             app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_loadingScreen_to_principal"
+            app:destination="@id/principal_fragment"
+            app:enterAnim="@anim/slide_from_right"
+            app:exitAnim="@anim/slide_exit_to_left"
+            app:popEnterAnim="@anim/slide_from_right"
+            app:popExitAnim="@anim/slide_exit_to_left"
+            app:popUpTo="@+id/loading_screen_fragment"
+            app:popUpToInclusive="true" />
     </fragment>
 
     <fragment

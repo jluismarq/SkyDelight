@@ -14,6 +14,9 @@ import androidx.navigation.fragment.findNavController
 import com.example.skydelight.databinding.FragmentRegisterSecondBinding
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import okhttp3.*
+import org.json.JSONObject
+import java.io.File
+import java.io.FileWriter
 import java.io.IOException
 
 private const val NAME_PARAM = "name"
@@ -79,6 +82,16 @@ class RegisterSecondFragment : Fragment() {
                     dialog.dismiss()
                 }, 5000)
             }
+            // Showing alert dialog if email has more than 50 characters
+            else if(email.length > 50){
+                val dialog = MaterialAlertDialogBuilder(findNavController().context)
+                    .setTitle("¡Error! ¡Correo Inválido!")
+                    .setMessage("¡Ups! ¡Parece el correo que ingresaste es demasiado largo!")
+                    .show()
+                Handler(Looper.getMainLooper()).postDelayed({
+                    dialog.dismiss()
+                }, 5000)
+            }
             // Showing alert dialog if password field is empty
             else if(password.isEmpty()){
                 val dialog = MaterialAlertDialogBuilder(findNavController().context)
@@ -109,6 +122,16 @@ class RegisterSecondFragment : Fragment() {
                     dialog.dismiss()
                 }, 5000)
             }
+            // Showing alert dialog if password has more than 50 characters
+            else if(password.length > 50){
+                val dialog = MaterialAlertDialogBuilder(findNavController().context)
+                    .setTitle("¡Error! ¡Contraseña Errónea!")
+                    .setMessage("¡Ups! ¡Parece que tu contraseña es demasiado larga!")
+                    .show()
+                Handler(Looper.getMainLooper()).postDelayed({
+                    dialog.dismiss()
+                }, 5000)
+            }
             // Showing alert dialog if confirm password field is empty
             else if(confirmedPassword.isEmpty()){
                 val dialog = MaterialAlertDialogBuilder(findNavController().context)
@@ -130,7 +153,8 @@ class RegisterSecondFragment : Fragment() {
                 }, 5000)
             }
             // Connection to the api and creation of the new user
-            else { createUser(email, password, name.toString(), sex.toString(), age.toString()) }
+            else
+                createUser(email, password, name.toString(), sex.toString(), age.toString())
         }
 
         // Returning to the register first fragment
@@ -151,7 +175,7 @@ class RegisterSecondFragment : Fragment() {
         info.metaData.getString("com.google.android.geo.API_KEY").toString()*/
 
         // Arguments to Post Request
-        val formBody: RequestBody = FormBody.Builder()
+        var formBody: RequestBody = FormBody.Builder()
             .add("email", email)
             .add("password", password)
             .add("name", name)
@@ -160,7 +184,7 @@ class RegisterSecondFragment : Fragment() {
             .build()
 
         // Making http request
-        val request = Request.Builder()
+        var request = Request.Builder()
             .url("https://apiskydelight.herokuapp.com/usuarios/crearusuario/")
             .post(formBody)
             .header("KEY-CLIENT", BuildConfig.API_KEY)
@@ -183,21 +207,75 @@ class RegisterSecondFragment : Fragment() {
 
                 // Code 201 = account created
                 if(response.code() == 201) {
-                    activity?.runOnUiThread {
-                        val dialog = MaterialAlertDialogBuilder(findNavController().context)
-                            .setTitle("¡Felicidades!")
-                            .setMessage("¡Tu cuenta ha sido creada exitosamente!")
-                            .show()
+                    // Arguments to Post Request
+                    formBody = FormBody.Builder()
+                        .add("email", email)
+                        .add("password", password)
+                        .build()
 
-                        // Closing message and changing to third register fragment
-                        Handler(Looper.getMainLooper()).postDelayed({
-                            dialog.dismiss()
-                            findNavController().navigate(R.id.action_registerSecond_to_registerThird)
-                        }, 5000)
-                    }
+                    // Making http request
+                    request = Request.Builder()
+                        .url("https://apiskydelight.herokuapp.com/usuarios/token/obtener/")
+                        .post(formBody)
+                        .header("KEY-CLIENT", BuildConfig.API_KEY)
+                        .build()
+
+                    // Making HTTP request and getting response
+                    OkHttpClient().newCall(request).enqueue(object : Callback {
+                        // Changing to principal fragment if it's successful
+                        override fun onResponse(call: Call, response: Response){
+                            // Changing http body to json
+                            val json = JSONObject(response.body()?.string().toString())
+
+                            // Creating txt local file
+                            val file = File(activity?.getExternalFilesDir(null), "usr_session.txt")
+                            val filewr = FileWriter(file)
+
+                            // Clearing file if it has content
+                            if(file.exists())
+                                filewr.write("")
+
+                            // Saving http response in txt file
+                            filewr.use {
+                                it.append(json.getString("user")+"\n")
+                                it.append(json.getString("name")+"\n")
+                                it.append(json.getString("sex")+"\n")
+                                it.append(json.getInt("age").toString()+"\n")
+                                it.append(json.getString("refresh")+"\n")
+                                it.append(json.getString("access"))
+                            }
+
+                            activity?.runOnUiThread {
+                                val dialog = MaterialAlertDialogBuilder(findNavController().context)
+                                    .setTitle("¡Felicidades!")
+                                    .setMessage("¡Tu cuenta ha sido creada exitosamente!")
+                                    .show()
+
+                                // Closing message and changing to third register fragment
+                                Handler(Looper.getMainLooper()).postDelayed({
+                                    dialog.dismiss()
+                                    findNavController().navigate(R.id.action_registerSecond_to_registerThird)
+                                }, 5000)
+                            }
+                        }
+
+                        // Print dialog if it's error
+                        override fun onFailure(call: Call, e: IOException){
+                            // Showing message to the user
+                            activity?.runOnUiThread {
+                                val dialog = MaterialAlertDialogBuilder(findNavController().context)
+                                    .setTitle("¡Ups! ¡Hubo un Problema de Conexión!")
+                                    .setMessage(e.toString())
+                                    .show()
+
+                                // Closing message
+                                Handler(Looper.getMainLooper()).postDelayed({ dialog.dismiss() }, 5000)
+                            }
+                        }
+                    })
                 }
                 // Code 400 = account already exists
-                else if(response.code() == 400) {
+                else if(response.code() == 400)
                     activity?.runOnUiThread {
                         val dialog = MaterialAlertDialogBuilder(findNavController().context)
                             .setTitle("¡Error! ¡Cuenta Existente!")
@@ -207,7 +285,6 @@ class RegisterSecondFragment : Fragment() {
                         // Closing message
                         Handler(Looper.getMainLooper()).postDelayed({ dialog.dismiss() }, 5000)
                     }
-                }
             }
 
             // Print dialog if it's error
