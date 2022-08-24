@@ -68,7 +68,6 @@ class RecoverPasswordFragment : Fragment() {
                     }, 5000)
                 }
                 // Navigating to next fragment if email is correct
-                // TODO("Finish connection to the Api to send password")
                 else ->
                     recoverPassword(email)
             }
@@ -105,10 +104,22 @@ class RecoverPasswordFragment : Fragment() {
                 Log.d("OKHTTP3-BODY", response.body()?.string().toString())
 
                 // Code 200 = account verified
-                if(response.code() == 200)
-                    activity?.runOnUiThread { findNavController().navigate(R.id.action_recoverPassword_to_startScreen) }
+                if(response.code() == 200) {
+                    activity?.runOnUiThread {
+                        val dialog = MaterialAlertDialogBuilder(findNavController().context)
+                            .setTitle("¡Recuperación Exitosa!")
+                            .setMessage("¡Se te ha enviado un correo para restaurar tu contraseña!")
+                            .show()
+
+                        // Closing message and changing to third register fragment
+                        Handler(Looper.getMainLooper()).postDelayed({
+                            dialog.dismiss()
+                            findNavController().navigate(R.id.action_recoverPassword_to_startScreen)
+                        }, 5000)
+                    }
+                }
                 // Code 401 = account doesn't exist
-                else if(response.code() == 401)
+                else if(response.code() == 404)
                     activity?.runOnUiThread {
                         val dialog = MaterialAlertDialogBuilder(findNavController().context)
                             .setTitle("¡Error! ¡Correo Inválido!")

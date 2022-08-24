@@ -40,9 +40,9 @@
     <string name="registerScreen_btn_create">Crear Cuenta</string>
 
     <!-- Custom Loading Dialog Strings -->
-    <string name="loadingDialog_creating">Creando Cuenta...</string>
-    <string name="loadingDialog_login">Iniciando Sesión...</string>
-    <string name="loadingDialog_recover">Enviando Contraseña...</string>
+    <string name="loadingDialog_creating">Creando Cuenta…</string>
+    <string name="loadingDialog_login">Iniciando Sesión…</string>
+    <string name="loadingDialog_recover">Enviando Contraseña…</string>
 
     <!-- Register Third Fragments Srings -->
     <string name="registerScreen_title_3">Es Importante que Sepas lo Siguiente:</string>
@@ -53,5 +53,13 @@
     <string name="registerScreen_explanation_5">Este sistema no reemplaza ni sustituye asistencia profesional</string>
     <string name="registerScreen_explanation_6">Tus respuestas son analizadas para brindarte una mejor experiencia</string>
     <string name="registerScreen_btn_understand">¡Entendido!</string>
+
+    <!-- Bottom Navigation Bar Srings -->
+    <string name="navBar_home">Inicio</string>
+    <string name="navBar_test">Test</string>
+    <string name="navBar_games">Juegos</string>
+    <string name="navBar_profile">Perfil</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

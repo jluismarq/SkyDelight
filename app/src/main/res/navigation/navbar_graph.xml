@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navbar_graph.xml"
+    app:startDestination="@id/navbar_home_fragment">
+
+    <fragment
+        android:id="@+id/navbar_home_fragment"
+        android:name="com.example.skydelight.NavBarHomeFragment"
+        android:label="fragment_principal"
+        tools:layout="@layout/fragment_navbar_home" >
+        <action
+            android:id="@+id/action_navBarHome_to_navBarTest"
+            app:destination="@id/navbar_test_fragment"
+            app:enterAnim="@anim/slide_from_right"
+            app:exitAnim="@anim/slide_exit_to_left"
+            app:popEnterAnim="@anim/slide_from_left"
+            app:popExitAnim="@anim/slide_exit_to_right"
+            app:popUpTo="@+id/navbar_home_fragment"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_navBarHome_to_navBarGames"
+            app:destination="@id/navbar_games_fragment"
+            app:enterAnim="@anim/slide_from_right"
+            app:exitAnim="@anim/slide_exit_to_left"
+            app:popEnterAnim="@anim/slide_from_left"
+            app:popExitAnim="@anim/slide_exit_to_right"
+            app:popUpTo="@+id/navbar_home_fragment"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_navBarHome_to_navBarProfile"
+            app:destination="@id/navbar_profile_fragment"
+            app:enterAnim="@anim/slide_from_right"
+            app:exitAnim="@anim/slide_exit_to_left"
+            app:popEnterAnim="@anim/slide_from_left"
+            app:popExitAnim="@anim/slide_exit_to_right"
+            app:popUpTo="@+id/navbar_home_fragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navbar_test_fragment"
+        android:name="com.example.skydelight.NavBarTestFragment"
+        android:label="fragment_navbar_test"
+        tools:layout="@layout/fragment_navbar_test">
+        <action
+            android:id="@+id/action_navBarTest_to_navBarGames"
+            app:destination="@id/navbar_games_fragment"
+            app:enterAnim="@anim/slide_from_right"
+            app:exitAnim="@anim/slide_exit_to_left"
+            app:popEnterAnim="@anim/slide_from_left"
+            app:popExitAnim="@anim/slide_exit_to_right"
+            app:popUpTo="@+id/navbar_test_fragment"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_navBarTest_to_navBarProfile"
+            app:destination="@id/navbar_profile_fragment"
+            app:enterAnim="@anim/slide_from_right"
+            app:exitAnim="@anim/slide_exit_to_left"
+            app:popEnterAnim="@anim/slide_from_left"
+            app:popExitAnim="@anim/slide_exit_to_right"
+            app:popUpTo="@+id/navbar_test_fragment"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_navBarTest_to_navBarHome"
+            app:destination="@id/navbar_home_fragment"
+            app:enterAnim="@anim/slide_from_left"
+            app:exitAnim="@anim/slide_exit_to_right"
+            app:popEnterAnim="@anim/slide_from_right"
+            app:popExitAnim="@anim/slide_exit_to_left"
+            app:popUpTo="@+id/navbar_test_fragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navbar_games_fragment"
+        android:name="com.example.skydelight.NavBarGamesFragment"
+        android:label="fragment_navbar_games"
+        tools:layout="@layout/fragment_navbar_games">
+        <action
+            android:id="@+id/action_navBarGames_to_navBarProfile"
+            app:destination="@id/navbar_profile_fragment"
+            app:enterAnim="@anim/slide_from_right"
+            app:exitAnim="@anim/slide_exit_to_left"
+            app:popEnterAnim="@anim/slide_from_left"
+            app:popExitAnim="@anim/slide_exit_to_right"
+            app:popUpTo="@+id/navbar_games_fragment"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_navBarGames_to_navBarTest"
+            app:destination="@id/navbar_test_fragment"
+            app:enterAnim="@anim/slide_from_left"
+            app:exitAnim="@anim/slide_exit_to_right"
+            app:popEnterAnim="@anim/slide_from_right"
+            app:popExitAnim="@anim/slide_exit_to_left"
+            app:popUpTo="@+id/navbar_games_fragment"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_navBarGames_to_navBarHome"
+            app:destination="@id/navbar_home_fragment"
+            app:enterAnim="@anim/slide_from_left"
+            app:exitAnim="@anim/slide_exit_to_right"
+            app:popEnterAnim="@anim/slide_from_right"
+            app:popExitAnim="@anim/slide_exit_to_left"
+            app:popUpTo="@+id/navbar_games_fragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navbar_profile_fragment"
+        android:name="com.example.skydelight.NavBarProfileFragment"
+        android:label="fragment_navbar_profile"
+        tools:layout="@layout/fragment_navbar_profile">
+        <action
+            android:id="@+id/action_navBarProfile_to_navBarGames"
+            app:destination="@id/navbar_games_fragment"
+            app:enterAnim="@anim/slide_from_left"
+            app:exitAnim="@anim/slide_exit_to_right"
+            app:popEnterAnim="@anim/slide_from_right"
+            app:popExitAnim="@anim/slide_exit_to_left"
+            app:popUpTo="@+id/navbar_profile_fragment"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_navBarProfile_to_navBarTest"
+            app:destination="@id/navbar_test_fragment"
+            app:enterAnim="@anim/slide_from_left"
+            app:exitAnim="@anim/slide_exit_to_right"
+            app:popEnterAnim="@anim/slide_from_right"
+            app:popExitAnim="@anim/slide_exit_to_left"
+            app:popUpTo="@+id/navbar_profile_fragment"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_navBarProfile_to_navBarHome"
+            app:destination="@id/navbar_home_fragment"
+            app:enterAnim="@anim/slide_from_left"
+            app:exitAnim="@anim/slide_exit_to_right"
+            app:popEnterAnim="@anim/slide_from_right"
+            app:popExitAnim="@anim/slide_exit_to_left"
+            app:popUpTo="@+id/navbar_profile_fragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+
+</navigation>

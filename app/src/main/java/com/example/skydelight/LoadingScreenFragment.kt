@@ -36,7 +36,7 @@ class LoadingScreenFragment : Fragment() {
         Handler(Looper.getMainLooper()).postDelayed({
             // Clearing file if it has content
             if(File(activity?.getExternalFilesDir(null), "usr_session.txt").exists())
-                findNavController().navigate(R.id.action_loadingScreen_to_principal)
+                findNavController().navigate(R.id.action_loadingScreen_to_navBar)
             else
                 findNavController().navigate(R.id.action_loadingScreen_to_startScreen)
         }, (2500..7500).shuffled().last().toLong())

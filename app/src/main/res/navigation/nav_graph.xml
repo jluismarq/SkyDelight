@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph.xml"
-    app:startDestination="@id/loading_screen_fragment">
+    app:startDestination="@id/navbar_fragment">
 
     <fragment
         android:id="@+id/start_screen_fragment"
@@ -39,8 +39,8 @@
         android:label="fragment_login"
         tools:layout="@layout/fragment_login" >
         <action
-            android:id="@+id/action_login_to_principal"
-            app:destination="@id/principal_fragment"
+            android:id="@+id/action_login_to_navBar"
+            app:destination="@id/navbar_fragment"
             app:enterAnim="@anim/slide_from_right"
             app:exitAnim="@anim/slide_exit_to_left"
             app:popEnterAnim="@anim/slide_from_left"
@@ -54,13 +54,6 @@
             app:exitAnim="@anim/slide_exit_to_right"
             app:popEnterAnim="@anim/slide_from_right"
             app:popExitAnim="@anim/slide_exit_to_left" />
-    </fragment>
-
-    <fragment
-        android:id="@+id/principal_fragment"
-        android:name="com.example.skydelight.PrincipalFragment"
-        android:label="fragment_principal"
-        tools:layout="@layout/fragment_principal" >
     </fragment>
 
     <fragment
@@ -136,8 +129,8 @@
             app:popUpTo="@+id/loading_screen_fragment"
             app:popUpToInclusive="true" />
         <action
-            android:id="@+id/action_loadingScreen_to_principal"
-            app:destination="@id/principal_fragment"
+            android:id="@+id/action_loadingScreen_to_navBar"
+            app:destination="@id/navbar_fragment"
             app:enterAnim="@anim/slide_from_right"
             app:exitAnim="@anim/slide_exit_to_left"
             app:popEnterAnim="@anim/slide_from_right"
@@ -152,8 +145,8 @@
         android:label="fragment_register_third"
         tools:layout="@layout/fragment_register_third" >
         <action
-            android:id="@+id/action_registerThird_to_principal"
-            app:destination="@id/principal_fragment"
+            android:id="@+id/action_registerThird_to_navBar"
+            app:destination="@id/navbar_fragment"
             app:enterAnim="@anim/slide_from_right"
             app:exitAnim="@anim/slide_exit_to_left"
             app:popEnterAnim="@anim/slide_from_left"
@@ -161,4 +154,10 @@
             app:popUpTo="@+id/register_third_fragment"
             app:popUpToInclusive="true" />
     </fragment>
+
+    <fragment
+        android:id="@+id/navbar_fragment"
+        android:name="com.example.skydelight.NavBarFragment"
+        android:label="fragment_navbar"
+        tools:layout="@layout/fragment_navbar" />
 </navigation>

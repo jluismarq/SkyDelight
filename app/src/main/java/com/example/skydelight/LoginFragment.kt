@@ -34,7 +34,7 @@ class LoginFragment : Fragment() {
     // After the view is created we can do things
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        // TODO("Cancel file creation if user deactivates keep session option")
+
         binding.btnLogin.setOnClickListener {
             val email = binding.editTxtEmail.text.toString()
             val password = binding.editTxtPassword.text.toString()
@@ -154,29 +154,32 @@ class LoginFragment : Fragment() {
 
                 // Code 200 = account verified
                 if(response.code() == 200) {
-                    // Changing http body to json
-                    val json = JSONObject(responseString)
+                    // If remember session button is checked
+                    if(binding.rememberSession.isChecked) {
+                        // Changing http body to json
+                        val json = JSONObject(responseString)
 
-                    // Creating txt local file
-                    val file = File(activity?.getExternalFilesDir(null), "usr_session.txt")
-                    val filewr = FileWriter(file)
+                        // Creating txt local file
+                        val file = File(activity?.getExternalFilesDir(null), "usr_session.txt")
+                        val filewr = FileWriter(file)
 
-                    // Clearing file if it has content
-                    if(file.exists())
-                        filewr.write("")
+                        // Clearing file if it has content
+                        if (file.exists())
+                            filewr.write("")
 
-                    // Saving http response in txt file
-                    filewr.use {
-                        it.append(json.getString("user")+"\n")
-                        it.append(json.getString("name")+"\n")
-                        it.append(json.getString("sex")+"\n")
-                        it.append(json.getInt("age").toString()+"\n")
-                        it.append(json.getString("refresh")+"\n")
-                        it.append(json.getString("access"))
+                        // Saving http response in txt file
+                        filewr.use {
+                            it.append(json.getString("user") + "\n")
+                            it.append(json.getString("name") + "\n")
+                            it.append(json.getString("sex") + "\n")
+                            it.append(json.getInt("age").toString() + "\n")
+                            it.append(json.getString("refresh") + "\n")
+                            it.append(json.getString("access"))
+                        }
                     }
 
                     // Changing to the principal fragment
-                    activity?.runOnUiThread { findNavController().navigate(R.id.action_login_to_principal) }
+                    activity?.runOnUiThread { findNavController().navigate(R.id.action_login_to_navBar) }
                 }
                 // Code 401 = account doesn't exist
                 else if(response.code() == 401)

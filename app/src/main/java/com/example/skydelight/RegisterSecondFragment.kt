@@ -247,8 +247,8 @@ class RegisterSecondFragment : Fragment() {
 
                             activity?.runOnUiThread {
                                 val dialog = MaterialAlertDialogBuilder(findNavController().context)
-                                    .setTitle("¡Felicidades!")
-                                    .setMessage("¡Tu cuenta ha sido creada exitosamente!")
+                                    .setTitle("¡Registro Exitoso!")
+                                    .setMessage("¡Tu cuenta ha sido creada correctamente!")
                                     .show()
 
                                 // Closing message and changing to third register fragment
