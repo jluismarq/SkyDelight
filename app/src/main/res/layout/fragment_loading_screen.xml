@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="?attr/fragment_background"
-    tools:context=".LoadingScreenFragment">
+    tools:context=".initial.LoadingScreenFragment">
 
     <pl.bclogic.pulsator4droid.library.PulsatorLayout
         android:id="@+id/pulsator"

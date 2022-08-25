@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="?attr/fragment_background"
-    tools:context=".NavBarTestFragment">
+    tools:context=".navbar.TestFragment">
 
     <TextView
         android:id="@+id/textView"

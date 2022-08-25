@@ -1,4 +1,4 @@
-package com.example.skydelight
+package com.example.skydelight.initial
 
 import android.os.Bundle
 import android.os.Handler
@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import android.widget.RadioButton
 import androidx.core.os.bundleOf
 import androidx.navigation.fragment.findNavController
+import com.example.skydelight.R
 import com.example.skydelight.databinding.FragmentRegisterFirstBinding
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import java.util.regex.Pattern
@@ -74,7 +75,7 @@ class RegisterFirstFragment : Fragment() {
             // Getting user answers
             name = binding.editTxtName.text.toString()
             age = binding.numberPickerAge.value.toString()
-            sex = binding.radioGroupSex.findViewById<RadioButton>(sexId).text.toString()
+            sex = binding.radioGroupSex.findViewById<RadioButton>(sexId)?.text.toString()
 
             // Showing alert dialog if name field is empty
             if(name.isNullOrEmpty()){

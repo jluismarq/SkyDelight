@@ -1,9 +1,10 @@
-package com.example.skydelight
+package com.example.skydelight.custom
 
 import android.content.Context
 import android.view.LayoutInflater
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
+import com.example.skydelight.R
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 class CustomLoadingDialog(myContext: Context, text: String) {

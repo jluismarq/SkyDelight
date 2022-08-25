@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/start_screen_fragment"
-        android:name="com.example.skydelight.StartScreenFragment"
+        android:name="com.example.skydelight.initial.StartScreenFragment"
         android:label="fragment_start_screen"
         tools:layout="@layout/fragment_start_screen" >
         <action
@@ -35,7 +35,7 @@
 
     <fragment
         android:id="@+id/login_fragment"
-        android:name="com.example.skydelight.LoginFragment"
+        android:name="com.example.skydelight.initial.LoginFragment"
         android:label="fragment_login"
         tools:layout="@layout/fragment_login" >
         <action
@@ -58,7 +58,7 @@
 
     <fragment
         android:id="@+id/recover_password_fragment"
-        android:name="com.example.skydelight.RecoverPasswordFragment"
+        android:name="com.example.skydelight.initial.RecoverPasswordFragment"
         android:label="fragment_recover_password"
         tools:layout="@layout/fragment_recover_password" >
         <action
@@ -72,7 +72,7 @@
 
     <fragment
         android:id="@+id/register_first_fragment"
-        android:name="com.example.skydelight.RegisterFirstFragment"
+        android:name="com.example.skydelight.initial.RegisterFirstFragment"
         android:label="fragment_register_first"
         tools:layout="@layout/fragment_register_first" >
         <action
@@ -93,7 +93,7 @@
 
     <fragment
         android:id="@+id/register_second_fragment"
-        android:name="com.example.skydelight.RegisterSecondFragment"
+        android:name="com.example.skydelight.initial.RegisterSecondFragment"
         android:label="fragment_register_second"
         tools:layout="@layout/fragment_register_second" >
         <action
@@ -116,7 +116,7 @@
 
     <fragment
         android:id="@+id/loading_screen_fragment"
-        android:name="com.example.skydelight.LoadingScreenFragment"
+        android:name="com.example.skydelight.initial.LoadingScreenFragment"
         android:label="fragment_loading_screen"
         tools:layout="@layout/fragment_loading_screen" >
         <action
@@ -141,7 +141,7 @@
 
     <fragment
         android:id="@+id/register_third_fragment"
-        android:name="com.example.skydelight.RegisterThirdFragment"
+        android:name="com.example.skydelight.initial.RegisterThirdFragment"
         android:label="fragment_register_third"
         tools:layout="@layout/fragment_register_third" >
         <action
@@ -157,7 +157,7 @@
 
     <fragment
         android:id="@+id/navbar_fragment"
-        android:name="com.example.skydelight.NavBarFragment"
+        android:name="com.example.skydelight.navbar.NavBarFragment"
         android:label="fragment_navbar"
         tools:layout="@layout/fragment_navbar" />
 </navigation>

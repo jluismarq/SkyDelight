@@ -1,4 +1,4 @@
-package com.example.skydelight
+package com.example.skydelight.initial
 
 import android.os.Bundle
 import android.os.Handler
@@ -11,8 +11,16 @@ import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import androidx.room.Room
+import com.example.skydelight.BuildConfig
+import com.example.skydelight.R
+import com.example.skydelight.custom.AppDatabase
+import com.example.skydelight.custom.CustomLoadingDialog
+import com.example.skydelight.custom.User
 import com.example.skydelight.databinding.FragmentRegisterSecondBinding
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import kotlinx.coroutines.MainScope
+import kotlinx.coroutines.launch
 import okhttp3.*
 import org.json.JSONObject
 import java.io.File
@@ -164,6 +172,7 @@ class RegisterSecondFragment : Fragment() {
 
             // Starting previous fragment
             findNavController().navigate(R.id.action_registerSecond_to_registerFirst, bundle)
+            findNavController().popBackStack(R.id.register_second_fragment, true)
         }
     }
 
@@ -227,35 +236,36 @@ class RegisterSecondFragment : Fragment() {
                             // Changing http body to json
                             val json = JSONObject(response.body()?.string().toString())
 
-                            // Creating txt local file
-                            val file = File(activity?.getExternalFilesDir(null), "usr_session.txt")
-                            val filewr = FileWriter(file)
+                            // Launching room database connection
+                            MainScope().launch {
+                                // Creating connection to database
+                                val userDao =
+                                    Room.databaseBuilder(findNavController().context, AppDatabase::class.java, "user")
+                                        .build().userDao()
 
-                            // Clearing file if it has content
-                            if(file.exists())
-                                filewr.write("")
+                                // If user exists, we have to delete it
+                                val user = userDao.getUser()
+                                if(user.isNotEmpty())
+                                    userDao.deleteUser(user[0])
 
-                            // Saving http response in txt file
-                            filewr.use {
-                                it.append(json.getString("user")+"\n")
-                                it.append(json.getString("name")+"\n")
-                                it.append(json.getString("sex")+"\n")
-                                it.append(json.getInt("age").toString()+"\n")
-                                it.append(json.getString("refresh")+"\n")
-                                it.append(json.getString("access"))
-                            }
+                                // Adding the new user to the database
+                                userDao.insertUser(User(json.getString("user"), json.getString("name"),
+                                    json.getString("sex"), json.getInt("age"), json.getString("refresh"),
+                                    json.getString("access")))
 
-                            activity?.runOnUiThread {
-                                val dialog = MaterialAlertDialogBuilder(findNavController().context)
-                                    .setTitle("¡Registro Exitoso!")
-                                    .setMessage("¡Tu cuenta ha sido creada correctamente!")
-                                    .show()
+                                // Success dialog for the user
+                                activity?.runOnUiThread {
+                                    val dialog = MaterialAlertDialogBuilder(findNavController().context)
+                                        .setTitle("¡Registro Exitoso!")
+                                        .setMessage("¡Tu cuenta ha sido creada correctamente!")
+                                        .show()
 
-                                // Closing message and changing to third register fragment
-                                Handler(Looper.getMainLooper()).postDelayed({
-                                    dialog.dismiss()
-                                    findNavController().navigate(R.id.action_registerSecond_to_registerThird)
-                                }, 5000)
+                                    // Closing message and changing to third register fragment
+                                    Handler(Looper.getMainLooper()).postDelayed({
+                                        dialog.dismiss()
+                                        findNavController().navigate(R.id.action_registerSecond_to_registerThird)
+                                    }, 5000)
+                                }
                             }
                         }
 

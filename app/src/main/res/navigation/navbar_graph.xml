@@ -8,7 +8,7 @@
 
     <fragment
         android:id="@+id/navbar_home_fragment"
-        android:name="com.example.skydelight.NavBarHomeFragment"
+        android:name="com.example.skydelight.navbar.HomeFragment"
         android:label="fragment_principal"
         tools:layout="@layout/fragment_navbar_home" >
         <action
@@ -42,7 +42,7 @@
 
     <fragment
         android:id="@+id/navbar_test_fragment"
-        android:name="com.example.skydelight.NavBarTestFragment"
+        android:name="com.example.skydelight.navbar.TestFragment"
         android:label="fragment_navbar_test"
         tools:layout="@layout/fragment_navbar_test">
         <action
@@ -76,7 +76,7 @@
 
     <fragment
         android:id="@+id/navbar_games_fragment"
-        android:name="com.example.skydelight.NavBarGamesFragment"
+        android:name="com.example.skydelight.navbar.GamesFragment"
         android:label="fragment_navbar_games"
         tools:layout="@layout/fragment_navbar_games">
         <action
@@ -110,7 +110,7 @@
 
     <fragment
         android:id="@+id/navbar_profile_fragment"
-        android:name="com.example.skydelight.NavBarProfileFragment"
+        android:name="com.example.skydelight.navbar.ProfileFragment"
         android:label="fragment_navbar_profile"
         tools:layout="@layout/fragment_navbar_profile">
         <action

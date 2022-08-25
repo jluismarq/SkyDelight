@@ -1,4 +1,4 @@
-package com.example.skydelight
+package com.example.skydelight.initial
 
 import android.os.Bundle
 import android.os.Handler
@@ -10,9 +10,14 @@ import android.view.animation.AnimationUtils
 import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import androidx.room.Room
+import com.example.skydelight.R
+import com.example.skydelight.custom.AppDatabase
+import com.example.skydelight.custom.User
+import kotlinx.coroutines.MainScope
+import kotlinx.coroutines.launch
 import pl.bclogic.pulsator4droid.library.PulsatorLayout
 import java.io.File
-import java.io.FileWriter
 
 class LoadingScreenFragment : Fragment() {
     // Creating the fragment view
@@ -34,11 +39,18 @@ class LoadingScreenFragment : Fragment() {
 
         // Changing to the start fragment after random time delay
         Handler(Looper.getMainLooper()).postDelayed({
-            // Clearing file if it has content
-            if(File(activity?.getExternalFilesDir(null), "usr_session.txt").exists())
-                findNavController().navigate(R.id.action_loadingScreen_to_navBar)
-            else
-                findNavController().navigate(R.id.action_loadingScreen_to_startScreen)
+            // Launching room database connection
+            MainScope().launch {
+                // Creating connection to database
+                val userDao = Room.databaseBuilder(findNavController().context, AppDatabase::class.java, "user").build().userDao()
+
+                // If user exists, changing to principal fragments
+                if(userDao.getUser().isNotEmpty())
+                    findNavController().navigate(R.id.action_loadingScreen_to_navBar)
+                // Else changing to initial fragments
+                else
+                    findNavController().navigate(R.id.action_loadingScreen_to_startScreen)
+            }
         }, (2500..7500).shuffled().last().toLong())
     }
 }

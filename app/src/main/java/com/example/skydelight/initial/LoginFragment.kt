@@ -1,4 +1,4 @@
-package com.example.skydelight
+package com.example.skydelight.initial
 
 import android.os.Bundle
 import android.os.Handler
@@ -10,8 +10,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
+import androidx.room.Room
+import com.example.skydelight.BuildConfig
+import com.example.skydelight.R
+import com.example.skydelight.custom.AppDatabase
+import com.example.skydelight.custom.CustomLoadingDialog
+import com.example.skydelight.custom.User
 import com.example.skydelight.databinding.FragmentLoginBinding
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import kotlinx.coroutines.MainScope
+import kotlinx.coroutines.launch
 import okhttp3.*
 import org.json.JSONObject
 import java.io.File
@@ -159,22 +167,24 @@ class LoginFragment : Fragment() {
                         // Changing http body to json
                         val json = JSONObject(responseString)
 
-                        // Creating txt local file
-                        val file = File(activity?.getExternalFilesDir(null), "usr_session.txt")
-                        val filewr = FileWriter(file)
+                        // Launching room database connection
+                        MainScope().launch {
+                            // Creating connection to database
+                            val userDao =
+                                Room.databaseBuilder(findNavController().context, AppDatabase::class.java, "user")
+                                    .build().userDao()
 
-                        // Clearing file if it has content
-                        if (file.exists())
-                            filewr.write("")
+                            // If user exists, we have to delete it
+                            val user = userDao.getUser()
+                            if(user.isNotEmpty())
+                                userDao.deleteUser(user[0])
 
-                        // Saving http response in txt file
-                        filewr.use {
-                            it.append(json.getString("user") + "\n")
-                            it.append(json.getString("name") + "\n")
-                            it.append(json.getString("sex") + "\n")
-                            it.append(json.getInt("age").toString() + "\n")
-                            it.append(json.getString("refresh") + "\n")
-                            it.append(json.getString("access"))
+                            // Adding the new user to the database
+                            userDao.insertUser(
+                                User(json.getString("user"), json.getString("name"),
+                                json.getString("sex"), json.getInt("age"), json.getString("refresh"),
+                                json.getString("access"))
+                            )
                         }
                     }
 
