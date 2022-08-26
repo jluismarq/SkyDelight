@@ -5,10 +5,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.navigation.fragment.findNavController
 import com.example.skydelight.databinding.FragmentNavbarTestBinding
 
-// TODO("Screen design")
 // TODO("Add test fragment")
 // TODO("Verify that fragment keeps alive when changing section, if not, create db class to save test type, answers and last question")
 // TODO("Connection to the api to create test and save answers when user finishes")

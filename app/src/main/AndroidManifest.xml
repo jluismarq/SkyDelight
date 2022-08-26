@@ -3,14 +3,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.skydelight" >
 
-    <uses-permission android:name="android.permission.INTERNET" /> <!-- TODO("Ask for permissions") -->
-    <uses-permission
+    <uses-permission android:name="android.permission.INTERNET" />
+    <!--<uses-permission
         android:name="android.permission.MANAGE_EXTERNAL_STORAGE"
         tools:ignore="ScopedStorage" />
     <uses-permission
         android:name="android.permission.WRITE_EXTERNAL_STORAGE"
         android:maxSdkVersion="28" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />-->
 
     <application
         android:allowBackup="true"
@@ -19,9 +19,6 @@
         android:roundIcon="@mipmap/ic_launcher_skydelight_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.SkyDelight" >
-        <activity
-            android:name=".NavBarActivity"
-            android:exported="false" />
         <!--
          Alternative to get api key
             <meta-data

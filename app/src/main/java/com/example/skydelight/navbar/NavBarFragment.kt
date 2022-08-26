@@ -1,12 +1,17 @@
 package com.example.skydelight.navbar
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.skydelight.databinding.FragmentNavbarBinding
+import androidx.fragment.app.Fragment
+import androidx.navigation.Navigation
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.fragment.findNavController
+import com.example.skydelight.MainActivity
 import com.example.skydelight.R
+import com.example.skydelight.databinding.FragmentNavbarBinding
 
 // TODO("Personalize nav bottom bar with material design")
 class NavBarFragment : Fragment() {
@@ -44,7 +49,7 @@ class NavBarFragment : Fragment() {
                             R.anim.slide_from_left, R.anim.slide_exit_to_right,
                             R.anim.slide_from_right, R.anim.slide_exit_to_left
                         )
-                        transaction.replace(binding.navHostFragment.id, HomeFragment()).commit()
+                        transaction.replace(binding.navbarHostFragment.id, HomeFragment()).commit()
                         itemId = R.id.nav_home
                     }
                     true
@@ -58,7 +63,7 @@ class NavBarFragment : Fragment() {
                                 R.anim.slide_from_right, R.anim.slide_exit_to_left,
                                 R.anim.slide_from_left, R.anim.slide_exit_to_right
                             )
-                            transaction.replace(binding.navHostFragment.id, TestFragment()).commit()
+                            transaction.replace(binding.navbarHostFragment.id, TestFragment()).commit()
                             itemId = R.id.nav_test
                         }
                         // Fragment enters from left
@@ -67,7 +72,7 @@ class NavBarFragment : Fragment() {
                                 R.anim.slide_from_left, R.anim.slide_exit_to_right,
                                 R.anim.slide_from_right, R.anim.slide_exit_to_left
                             )
-                            transaction.replace(binding.navHostFragment.id, TestFragment()).commit()
+                            transaction.replace(binding.navbarHostFragment.id, TestFragment()).commit()
                             itemId = R.id.nav_test
                         }
                         // Fragment enters from left
@@ -76,7 +81,7 @@ class NavBarFragment : Fragment() {
                                 R.anim.slide_from_left, R.anim.slide_exit_to_right,
                                 R.anim.slide_from_right, R.anim.slide_exit_to_left
                             )
-                            transaction.replace(binding.navHostFragment.id, TestFragment()).commit()
+                            transaction.replace(binding.navbarHostFragment.id, TestFragment()).commit()
                             itemId = R.id.nav_test
                         }
                     }
@@ -91,7 +96,7 @@ class NavBarFragment : Fragment() {
                                 R.anim.slide_from_right, R.anim.slide_exit_to_left,
                                 R.anim.slide_from_left, R.anim.slide_exit_to_right
                             )
-                            transaction.replace(binding.navHostFragment.id, GamesFragment()).commit()
+                            transaction.replace(binding.navbarHostFragment.id, GamesFragment()).commit()
                             itemId = R.id.nav_games
                         }
                         // Fragment enters from right
@@ -100,7 +105,7 @@ class NavBarFragment : Fragment() {
                                 R.anim.slide_from_right, R.anim.slide_exit_to_left,
                                 R.anim.slide_from_left, R.anim.slide_exit_to_right
                             )
-                            transaction.replace(binding.navHostFragment.id, GamesFragment()).commit()
+                            transaction.replace(binding.navbarHostFragment.id, GamesFragment()).commit()
                             itemId = R.id.nav_games
                         }
                         // Fragment enters from left
@@ -109,7 +114,7 @@ class NavBarFragment : Fragment() {
                                 R.anim.slide_from_left, R.anim.slide_exit_to_right,
                                 R.anim.slide_from_right, R.anim.slide_exit_to_left
                             )
-                            transaction.replace(binding.navHostFragment.id, GamesFragment()).commit()
+                            transaction.replace(binding.navbarHostFragment.id, GamesFragment()).commit()
                             itemId = R.id.nav_games
                         }
                     }
@@ -123,7 +128,7 @@ class NavBarFragment : Fragment() {
                             R.anim.slide_from_right, R.anim.slide_exit_to_left,
                             R.anim.slide_from_left, R.anim.slide_exit_to_right
                         )
-                        transaction.replace(binding.navHostFragment.id, ProfileFragment()).commit()
+                        transaction.replace(binding.navbarHostFragment.id, ProfileFragment()).commit()
                         itemId = R.id.nav_profile
                     }
                     true

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/nav_home"
         android:icon="@drawable/ic_baseline_home_24"
@@ -14,6 +15,8 @@
         android:title="@string/navBar_games" />
     <item
         android:id="@+id/nav_profile"
-        android:icon="@drawable/ic_baseline_person_24"
-        android:title="@string/navBar_profile" />
+        android:icon="@drawable/anim_settings"
+        android:title="@string/navBar_profile"
+        app:showAsAction="always" />
 </menu>
+<!-- TODO("Make icon animations") https://medium.com/@naththeprince/delightful-animations-in-android-d6e9c62a23d3 -->

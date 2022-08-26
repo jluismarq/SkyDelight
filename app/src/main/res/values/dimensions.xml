@@ -1,18 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- Paddings and Margins in DP's -->
+    <!-- Paddings, Margins and Other in DP's -->
     <dimen name="icon_padding">25dp</dimen>
+    <dimen name="button_padding">20dp</dimen>
+    <dimen name="registerScreen_sex_padding">10dp</dimen>
+    <dimen name="corner_radius">20dp</dimen>
 
     <!-- Elements Texts Sizes in SP's -->
     <dimen name="title_size">30sp</dimen>
     <dimen name="title_size_2">35sp</dimen>
     <dimen name="title_size_3">27sp</dimen>
+    <dimen name="title_size_4">25sp</dimen>
     <dimen name="button_text_size">20sp</dimen>
+    <dimen name="button_text_size_2">17sp</dimen>
     <dimen name="text_size">20sp</dimen>
     <dimen name="text_input_size">17sp</dimen>
-
-    <!-- Others -->
-    <!-- Register Screen Dimension -->
     <dimen name="registerScreen_sex_group">15sp</dimen>
-    <dimen name="registerScreen_sex_padding">10dp</dimen>
 </resources>

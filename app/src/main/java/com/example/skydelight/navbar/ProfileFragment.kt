@@ -5,12 +5,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.navigation.fragment.findNavController
 import com.example.skydelight.databinding.FragmentNavbarProfileBinding
 
 // TODO("Screen design")
 // TODO("Connection to local room db to get user info")
 // TODO("Connection to local room db to close session")
+// TODO("Connection to the api to update user profile")
 // TODO("Connection to the api to update password")
 // TODO("Connection to the api to delete user profile")
 class ProfileFragment : Fragment() {

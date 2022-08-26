@@ -5,10 +5,19 @@
       <map>
         <entry key="..\:/Users/assas/AndroidStudioProjects/SkyDelight/app/src/main/res/drawable-notnight/input_text_color.xml" value="0.1785" />
         <entry key="..\:/Users/assas/AndroidStudioProjects/SkyDelight/app/src/main/res/drawable-notnight/input_text_color_2.xml" value="0.1785" />
+        <entry key="..\:/Users/assas/AndroidStudioProjects/SkyDelight/app/src/main/res/drawable/avd_anim_settings.xml" value="0.239" />
         <entry key="..\:/Users/assas/AndroidStudioProjects/SkyDelight/app/src/main/res/drawable/box_stroke_color.xml" value="0.1785" />
         <entry key="..\:/Users/assas/AndroidStudioProjects/SkyDelight/app/src/main/res/drawable/ic_baseline_person_24.xml" value="0.2355" />
         <entry key="..\:/Users/assas/AndroidStudioProjects/SkyDelight/app/src/main/res/drawable/ic_baseline_vpn_key_24.xml" value="0.2355" />
         <entry key="..\:/Users/assas/AndroidStudioProjects/SkyDelight/app/src/main/res/drawable/ic_launcher_background.xml" value="0.244" />
+        <entry key="..\:/Users/assas/AndroidStudioProjects/SkyDelight/app/src/main/res/drawable/linear_layout_border.xml" value="0.248" />
+        <entry key="..\:/Users/assas/AndroidStudioProjects/SkyDelight/app/src/main/res/drawable/linearlayout_blueborder.xml" value="0.248" />
+        <entry key="..\:/Users/assas/AndroidStudioProjects/SkyDelight/app/src/main/res/drawable/linearlayout_blueborder_pressed.xml" value="0.239" />
+        <entry key="..\:/Users/assas/AndroidStudioProjects/SkyDelight/app/src/main/res/drawable/linearlayout_bluepress.xml" value="0.248" />
+        <entry key="..\:/Users/assas/AndroidStudioProjects/SkyDelight/app/src/main/res/drawable/linearlayout_border.xml" value="0.248" />
+        <entry key="..\:/Users/assas/AndroidStudioProjects/SkyDelight/app/src/main/res/drawable/linearlayout_greenborder.xml" value="0.248" />
+        <entry key="..\:/Users/assas/AndroidStudioProjects/SkyDelight/app/src/main/res/drawable/linearlayout_greenborder_pressed.xml" value="0.239" />
+        <entry key="..\:/Users/assas/AndroidStudioProjects/SkyDelight/app/src/main/res/drawable/linearlayout_greenpress.xml" value="0.248" />
         <entry key="..\:/Users/assas/AndroidStudioProjects/SkyDelight/app/src/main/res/drawable/password_selector.xml" value="0.1785" />
         <entry key="..\:/Users/assas/AndroidStudioProjects/SkyDelight/app/src/main/res/drawable/text_input_selector.xml" value="0.1795" />
         <entry key="..\:/Users/assas/AndroidStudioProjects/SkyDelight/app/src/main/res/drawable/thumb_selector.xml" value="0.169" />

@@ -58,8 +58,23 @@
     <string name="navBar_home">Inicio</string>
     <string name="navBar_test">Test</string>
     <string name="navBar_games">Juegos</string>
-    <string name="navBar_profile">Perfil</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="navBar_profile">Configuración</string>
+
+    <!-- Home Navbar Fragment Strings -->
+    <string name="home_title">¡Qué Bueno que Volviste!</string>
+
+    <!-- Test Navbar Fragment Strings -->
+    <string name="test_title">Elige un Cuestionario:</string>
+    <string name="test_sisco">Inventario Sistémico Cognoscitivista (SISCO) SV-21</string>
+    <string name="test_svq">Test de Vulnerabilidad al Estrés (SVQ)</string>
+    <string name="test_pss">Escala de Estrés Percibido (PSS)</string>
+    <string name="test_cses">Escala de Autoeficacia para el Afrontamiento del Estrés (CSES)</string>
+    <string name="test_svs">Lista de Indicadores de Vulnerabilidad al Estrés (SVS)</string>
+
+    <!-- Games Navbar Fragment Strings -->
+    <string name="games_title">¡Hora de Relajarse!</string>
+
+    <!-- Profile Navbar Fragment Strings -->
+    <string name="profile_title">¿Necesitas un Cambio?</string>
 
 </resources>
