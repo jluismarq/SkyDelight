@@ -10,6 +10,15 @@
     <string name="password">Contraseña:</string>
     <string name="password_hint">AbC123#*</string>
     <string name="remember_session">Mantener Sesión Iniciada</string>
+    <string name="name">Nombre Completo:</string>
+    <string name="sex">Sexo:</string>
+    <string name="birthday">Edad:</string>
+
+    <!-- Custom Loading Dialog Strings -->
+    <string name="loadingDialog_creating">Creando Cuenta…</string>
+    <string name="loadingDialog_login">Iniciando Sesión…</string>
+    <string name="loadingDialog_recover">Enviando Contraseña…</string>
+    <string name="loadingDialog_loading">Cargando…</string>
 
     <!-- Other Strings -->
     <!-- Start Screen Fragment Strings -->
@@ -29,20 +38,12 @@
     <!-- Register First and Second Fragments Srings -->
     <string name="registerScreen_title">Creemos tu Cuenta</string>
     <string name="registerScreen_next">Siguiente</string>
-    <string name="registerScreen_name">Nombre Completo:</string>
     <string name="registerScreen_nameHint">Nombre Paterno Materno</string>
-    <string name="registerScreen_birthday">Edad:</string>
-    <string name="registerScreen_sex">Sexo:</string>
     <string name="registerScreen_male">Masculino</string>
     <string name="registerScreen_female">Femenino</string>
     <string name="registerScreen_title_2">¡Ya Casi Terminamos!</string>
     <string name="registerScreen_confirm_password">Confirmar Contraseña:</string>
     <string name="registerScreen_btn_create">Crear Cuenta</string>
-
-    <!-- Custom Loading Dialog Strings -->
-    <string name="loadingDialog_creating">Creando Cuenta…</string>
-    <string name="loadingDialog_login">Iniciando Sesión…</string>
-    <string name="loadingDialog_recover">Enviando Contraseña…</string>
 
     <!-- Register Third Fragments Srings -->
     <string name="registerScreen_title_3">Es Importante que Sepas lo Siguiente:</string>
@@ -64,7 +65,7 @@
     <string name="home_title">¡Qué Bueno que Volviste!</string>
 
     <!-- Test Navbar Fragment Strings -->
-    <string name="test_title">Elige un Cuestionario:</string>
+    <string name="test_title">Elige un Cuestionario</string>
     <string name="test_sisco">Inventario Sistémico Cognoscitivista (SISCO) SV-21</string>
     <string name="test_svq">Test de Vulnerabilidad al Estrés (SVQ)</string>
     <string name="test_pss">Escala de Estrés Percibido (PSS)</string>
@@ -76,5 +77,8 @@
 
     <!-- Profile Navbar Fragment Strings -->
     <string name="profile_title">¿Necesitas un Cambio?</string>
+    <string name="profile_update_profile">Actualizar Información</string>
+    <string name="profile_change_password">Cambiar Contraseña</string>
+    <string name="profile_delete_account">Eliminar Cuenta</string>
 
 </resources>

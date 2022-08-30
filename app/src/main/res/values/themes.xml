@@ -34,6 +34,10 @@
         <item name="btn_text_color_green">@color/green</item>
         <item name="btn_background_green">@color/lightgreen</item>
 
+        <!-- Red Button -->
+        <item name="btn_text_color_red">@color/darkred</item>
+        <item name="btn_background_red">@color/lightred</item>
+
         <!-- Material Alert Dialog -->
         <item name="materialAlertDialogTheme">@style/ThemeOverlay.App.MaterialAlertDialog</item>
     </style>

@@ -13,7 +13,6 @@ import com.example.skydelight.MainActivity
 import com.example.skydelight.R
 import com.example.skydelight.databinding.FragmentNavbarBinding
 
-// TODO("Personalize nav bottom bar with material design")
 class NavBarFragment : Fragment() {
     // Binding variable to use elements in the xml layout
     private lateinit var binding : FragmentNavbarBinding

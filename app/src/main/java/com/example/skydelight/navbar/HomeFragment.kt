@@ -23,8 +23,6 @@ import okhttp3.*
 import org.json.JSONObject
 import java.io.IOException
 
-// TODO("Screen design")
-// TODO("Connection to the api to get advices")
 class HomeFragment : Fragment() {
 
     // Binding variable to use elements in the xml layout
@@ -44,32 +42,62 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         // Showing initial random advice
-        //showAdvice()
+        showAdvice()
     }
 
     // Function to connect with the api
-    /*private fun showAdvice() {
-        // Making http request
-        val request = Request.Builder()
-            .url("https://apiskydelight.herokuapp.com/api/consejo/")
-            .header("KEY-CLIENT", BuildConfig.API_KEY)
-            .build()
+    private fun showAdvice() {
+        // Launching room database connection
+        MainScope().launch {
+            // Creating connection to database
+            val userDao = Room.databaseBuilder(findNavController().context, AppDatabase::class.java, "user").build().userDao().getUser()[0]
 
-        // Making HTTP request and getting response
-        OkHttpClient().newCall(request).enqueue(object : Callback {
-            // Changing to principal fragment if it's successful
-            override fun onResponse(call: Call, response: Response){
-                // Printing api answer
-                val responseString = response.body()?.string().toString()
-                Log.d("OKHTTP3-CODE", response.code().toString())
-                Log.d("OKHTTP3-BODY", responseString)
-            }
+            // TODO("Change type of advice in each petition with a boolean flag")
+            // Arguments to Post Request
+            val formBody: RequestBody = FormBody.Builder()
+                .add("list_excluded", "[]")
+                .add("type_advice", "general")
+                .build()
 
-            // Print dialog if it's error
-            override fun onFailure(call: Call, e: IOException){
-                // Printing api answer
-                Log.d("OKHTTP3-ERROR", e.toString())
-            }
-        })
-    }*/
+            // TODO("Verify if token is valid, if not, change it")
+            // Making http request
+            val request = Request.Builder()
+                .url("https://apiskydelight.herokuapp.com/api/consejo")
+                .post(formBody)
+                .addHeader("Authorization", "Bearer " + userDao.token)
+                .addHeader("KEY-CLIENT", BuildConfig.API_KEY)
+                .build()
+
+            // Showing loading dialog
+            val customDialog = CustomLoadingDialog(findNavController().context, getString(R.string.loadingDialog_loading))
+            customDialog.show()
+
+            // Making HTTP request and getting response
+            OkHttpClient().newCall(request).enqueue(object : Callback {
+                // Changing to principal fragment if it's successful
+                override fun onResponse(call: Call, response: Response){
+                    // Closing loading dialog
+                    customDialog.dismiss()
+
+                    // Printing api answer
+                    val responseString = response.body()?.string().toString()
+                    Log.d("OKHTTP3-CODE", response.code().toString())
+                    Log.d("OKHTTP3-BODY", responseString)
+
+                    // Changing http body to json
+                    val json = JSONObject(responseString)
+                    binding.textView.text = json.getString("consejo")
+                }
+
+                // Print dialog if it's error
+                override fun onFailure(call: Call, e: IOException){
+                    // Closing loading dialog
+                    customDialog.dismiss()
+
+                    // Printing api answer
+                    Log.d("OKHTTP3-ERROR", e.toString())
+                }
+            })
+        }
+    }
 }

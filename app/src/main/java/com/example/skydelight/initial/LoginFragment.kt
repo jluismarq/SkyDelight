@@ -180,11 +180,9 @@ class LoginFragment : Fragment() {
                                 userDao.deleteUser(user[0])
 
                             // Adding the new user to the database
-                            userDao.insertUser(
-                                User(json.getString("user"), json.getString("name"),
-                                json.getString("sex"), json.getInt("age"), json.getString("refresh"),
-                                json.getString("access"))
-                            )
+                            userDao.insertUser(User(json.getString("user"), json.getString("name"),
+                                json.getString("sex"), json.getInt("age"), json.getString("access"),
+                                json.getString("refresh")))
                         }
                     }
 

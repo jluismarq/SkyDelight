@@ -29,7 +29,7 @@
         android:layout_height="0dp"
         android:fontFamily="@font/comfortaa"
         android:gravity="center"
-        android:text="@string/registerScreen_name"
+        android:text="@string/name"
         android:textColor="?attr/text_color"
         android:textSize="@dimen/text_size"
         app:layout_constraintBottom_toTopOf="@+id/guideline_name_bottom"
@@ -71,7 +71,7 @@
         android:layout_height="0dp"
         android:fontFamily="@font/comfortaa"
         android:gravity="center"
-        android:text="@string/registerScreen_birthday"
+        android:text="@string/birthday"
         android:textColor="?attr/text_color"
         android:textSize="@dimen/text_size"
         app:layout_constraintBottom_toTopOf="@+id/guideline_birthday_bottom"
@@ -95,7 +95,7 @@
         android:layout_height="0dp"
         android:fontFamily="@font/comfortaa"
         android:gravity="center"
-        android:text="@string/registerScreen_sex"
+        android:text="@string/sex"
         android:textColor="?attr/text_color"
         android:textSize="@dimen/text_size"
         app:layout_constraintBottom_toTopOf="@+id/guideline_sex"
@@ -157,8 +157,10 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/guideline_next_bottom"
         app:layout_constraintEnd_toStartOf="@+id/guideline_right"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="@+id/guideline_left"
         app:layout_constraintTop_toTopOf="@+id/guideline_next_top"
+        app:layout_constraintVertical_bias="0.0"
         app:rippleColor="?attr/btn_text_color_blue"
         tools:ignore="TextContrastCheck" />
 
@@ -178,7 +180,7 @@
         app:layout_constraintEnd_toStartOf="@+id/guideline_right"
         app:layout_constraintStart_toStartOf="@+id/guideline_left"
         app:layout_constraintTop_toTopOf="@+id/guideline_return_top"
-        app:rippleColor="?attr/btn_text_color_blue"
+        app:rippleColor="?attr/btn_text_color_green"
         tools:ignore="TextContrastCheck" />
 
     <androidx.constraintlayout.widget.Guideline

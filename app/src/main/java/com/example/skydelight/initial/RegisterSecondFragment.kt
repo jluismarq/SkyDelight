@@ -250,8 +250,8 @@ class RegisterSecondFragment : Fragment() {
 
                                 // Adding the new user to the database
                                 userDao.insertUser(User(json.getString("user"), json.getString("name"),
-                                    json.getString("sex"), json.getInt("age"), json.getString("refresh"),
-                                    json.getString("access")))
+                                    json.getString("sex"), json.getInt("age"), json.getString("access"),
+                                    json.getString("refresh")))
 
                                 // Success dialog for the user
                                 activity?.runOnUiThread {

@@ -5,13 +5,13 @@
 
     <!-- provide a different drawable for each state-->
     <item android:id="@+id/state_on"
-        android:drawable="@drawable/avd_anim_settings"
+        android:drawable="@drawable/avd_anim_home"
         android:state_checked="true"/>
     <item android:id="@+id/state_off"
-        android:drawable="@drawable/ic_settings"/>
+        android:drawable="@drawable/ic_home"/>
     <!-- specify transitions -->
     <transition
-        android:drawable="@drawable/avd_anim_settings"
+        android:drawable="@drawable/avd_anim_home"
         android:fromId="@id/state_off"
         android:toId="@id/state_on" />
 </animated-selector>

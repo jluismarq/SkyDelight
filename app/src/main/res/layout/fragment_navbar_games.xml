@@ -16,7 +16,7 @@
         android:text="@string/games_title"
         android:fontFamily="@font/comfortaa"
         android:gravity="center"
-        android:textColor="@color/ultralight"
+        android:textColor="?attr/colorPrimary"
         android:textSize="@dimen/title_size_4"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/guideline_top"

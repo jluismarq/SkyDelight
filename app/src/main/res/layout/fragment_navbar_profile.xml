@@ -16,7 +16,7 @@
         android:text="@string/profile_title"
         android:fontFamily="@font/comfortaa"
         android:gravity="center"
-        android:textColor="@color/ultralight"
+        android:textColor="?attr/colorPrimary"
         android:textSize="@dimen/title_size_4"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/guideline_top"
@@ -25,15 +25,173 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/navBar_profile"
-        android:textSize="50dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:id="@+id/txtEmail"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:text="@string/email"
+        android:fontFamily="@font/comfortaa"
+        android:gravity="center_vertical|start"
+        android:textColor="?attr/text_color"
+        android:textSize="@dimen/text_size"
+        app:layout_constraintBottom_toBottomOf="@id/guideline_email_bottom"
+        app:layout_constraintEnd_toEndOf="@+id/guideline_middle"
+        app:layout_constraintStart_toStartOf="@+id/guideline_left"
+        app:layout_constraintTop_toTopOf="@+id/guideline_email_top" />
+
+    <TextView
+        android:id="@+id/txtEmailUser"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:text="@string/loadingDialog_loading"
+        android:fontFamily="@font/comfortaa"
+        android:gravity="center_vertical|end"
+        android:textColor="?attr/text_color"
+        android:textSize="@dimen/text_size"
+        app:layout_constraintBottom_toBottomOf="@id/guideline_email_bottom"
+        app:layout_constraintEnd_toEndOf="@+id/guideline_right"
+        app:layout_constraintStart_toStartOf="@+id/guideline_middle"
+        app:layout_constraintTop_toTopOf="@+id/guideline_email_top" />
+
+    <TextView
+        android:id="@+id/txtName"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:text="@string/name"
+        android:fontFamily="@font/comfortaa"
+        android:gravity="center_vertical|start"
+        android:textColor="?attr/text_color"
+        android:textSize="@dimen/text_size"
+        app:layout_constraintBottom_toBottomOf="@id/guideline_name_bottom"
+        app:layout_constraintEnd_toEndOf="@+id/guideline_middle"
+        app:layout_constraintStart_toStartOf="@+id/guideline_left"
+        app:layout_constraintTop_toTopOf="@+id/guideline_name_top" />
+
+    <TextView
+        android:id="@+id/txtNameUser"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:text="@string/loadingDialog_loading"
+        android:fontFamily="@font/comfortaa"
+        android:gravity="center_vertical|end"
+        android:textColor="?attr/text_color"
+        android:textSize="@dimen/text_size"
+        app:layout_constraintBottom_toBottomOf="@id/guideline_name_bottom"
+        app:layout_constraintEnd_toEndOf="@+id/guideline_right"
+        app:layout_constraintStart_toStartOf="@+id/guideline_middle"
+        app:layout_constraintTop_toTopOf="@+id/guideline_name_top" />
+
+    <TextView
+        android:id="@+id/txtSex"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:text="@string/sex"
+        android:fontFamily="@font/comfortaa"
+        android:gravity="center_vertical|start"
+        android:textColor="?attr/text_color"
+        android:textSize="@dimen/text_size"
+        app:layout_constraintBottom_toBottomOf="@id/guideline_sex_bottom"
+        app:layout_constraintEnd_toEndOf="@+id/guideline_middle"
+        app:layout_constraintStart_toStartOf="@+id/guideline_left"
+        app:layout_constraintTop_toTopOf="@+id/guideline_sex_top" />
+
+    <TextView
+        android:id="@+id/txtSexUser"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:text="@string/loadingDialog_loading"
+        android:fontFamily="@font/comfortaa"
+        android:gravity="center_vertical|end"
+        android:textColor="?attr/text_color"
+        android:textSize="@dimen/text_size"
+        app:layout_constraintBottom_toBottomOf="@id/guideline_sex_bottom"
+        app:layout_constraintEnd_toEndOf="@+id/guideline_right"
+        app:layout_constraintStart_toStartOf="@+id/guideline_middle"
+        app:layout_constraintTop_toTopOf="@+id/guideline_sex_top" />
+
+    <TextView
+        android:id="@+id/txtAge"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:text="@string/birthday"
+        android:fontFamily="@font/comfortaa"
+        android:gravity="center_vertical|start"
+        android:textColor="?attr/text_color"
+        android:textSize="@dimen/text_size"
+        app:layout_constraintBottom_toBottomOf="@id/guideline_age_bottom"
+        app:layout_constraintEnd_toEndOf="@+id/guideline_middle"
+        app:layout_constraintStart_toStartOf="@+id/guideline_left"
+        app:layout_constraintTop_toTopOf="@+id/guideline_age_top" />
+
+    <TextView
+        android:id="@+id/txtAgeUser"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:text="@string/loadingDialog_loading"
+        android:fontFamily="@font/comfortaa"
+        android:gravity="center_vertical|end"
+        android:textColor="?attr/text_color"
+        android:textSize="@dimen/text_size"
+        app:layout_constraintBottom_toBottomOf="@id/guideline_age_bottom"
+        app:layout_constraintEnd_toEndOf="@+id/guideline_right"
+        app:layout_constraintStart_toStartOf="@+id/guideline_middle"
+        app:layout_constraintTop_toTopOf="@+id/guideline_age_top" />
+
+    <Button
+        android:id="@+id/btnUpdateAccount"
+        style="@style/Widget.Material3.Button.TonalButton"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:backgroundTint="?attr/btn_background_blue"
+        android:fontFamily="@font/comfortaa"
+        android:state_enabled="true"
+        android:text="@string/profile_update_profile"
+        android:textColor="?attr/btn_text_color_blue"
+        android:textSize="@dimen/button_text_size"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/guideline_update_account_bottom"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_right"
+        app:layout_constraintStart_toStartOf="@+id/guideline_left"
+        app:layout_constraintTop_toTopOf="@+id/guideline_update_account_top"
+        app:rippleColor="?attr/btn_text_color_blue"
+        tools:ignore="TextContrastCheck" />
+
+    <Button
+        android:id="@+id/btnChangePassword"
+        style="@style/Widget.Material3.Button.TonalButton"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:fontFamily="@font/comfortaa"
+        android:state_enabled="true"
+        android:text="@string/profile_change_password"
+        android:backgroundTint="?attr/btn_background_green"
+        android:textColor="?attr/btn_text_color_green"
+        android:textSize="@dimen/button_text_size"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/guideline_update_password_bottom"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_right"
+        app:layout_constraintStart_toStartOf="@+id/guideline_left"
+        app:layout_constraintTop_toTopOf="@+id/guideline_update_password_top"
+        app:rippleColor="?attr/btn_text_color_green"
+        tools:ignore="TextContrastCheck" />
+
+    <Button
+        android:id="@+id/btnDeleteAccount"
+        style="@style/Widget.Material3.Button.TonalButton"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:fontFamily="@font/comfortaa"
+        android:state_enabled="true"
+        android:text="@string/profile_delete_account"
+        android:backgroundTint="?attr/btn_background_red"
+        android:textColor="?attr/btn_text_color_red"
+        android:textSize="@dimen/button_text_size"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/guideline_delete_account_bottom"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_right"
+        app:layout_constraintStart_toStartOf="@+id/guideline_left"
+        app:layout_constraintTop_toTopOf="@+id/guideline_delete_account_top"
+        app:rippleColor="?attr/btn_text_color_red"
+        tools:ignore="TextContrastCheck" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline_top"
@@ -41,5 +199,124 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.1" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_email_top"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.13" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_email_bottom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.23" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_name_top"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.25" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_name_bottom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.35" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_sex_top"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.37" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_sex_bottom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.47" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_age_top"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.49" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_age_bottom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.59" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_update_account_top"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.63" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_update_account_bottom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.73" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_update_password_top"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.75" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_update_password_bottom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.85" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_delete_account_top"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.87" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_delete_account_bottom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.97" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_left"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.1" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_middle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.5" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_right"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.9" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

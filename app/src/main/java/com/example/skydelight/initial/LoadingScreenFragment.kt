@@ -41,6 +41,8 @@ class LoadingScreenFragment : Fragment() {
         Handler(Looper.getMainLooper()).postDelayed({
             // Launching room database connection
             MainScope().launch {
+                //Room.databaseBuilder(findNavController().context, AppDatabase::class.java, "user").build().userDao().deleteUsers()
+
                 // Creating connection to database
                 val userDao = Room.databaseBuilder(findNavController().context, AppDatabase::class.java, "user").build().userDao()
 

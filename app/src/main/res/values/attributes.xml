@@ -18,4 +18,8 @@
     <!-- Green Button -->
     <attr name="btn_text_color_green" format="reference" />
     <attr name="btn_background_green" format="reference" />
+
+    <!-- Red Button -->
+    <attr name="btn_text_color_red" format="reference" />
+    <attr name="btn_background_red" format="reference" />
 </resources>
