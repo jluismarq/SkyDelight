@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.widget.doOnTextChanged
 import androidx.navigation.fragment.findNavController
 import com.example.skydelight.BuildConfig
 import com.example.skydelight.R
@@ -35,44 +36,21 @@ class RecoverPasswordFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // Clearing errors when produced
+        binding.editTxtEmail.doOnTextChanged { _, _, _, _ -> if(binding.FieldEmail.error != null) binding.FieldEmail.error = null }
+
         binding.btnRecover.setOnClickListener {
             val email = binding.editTxtEmail.text.toString()
 
             when {
                 // Showing alert dialog if email field is empty
-                email.isEmpty() -> {
-                    val dialog = MaterialAlertDialogBuilder(findNavController().context)
-                        .setTitle("¡Error! ¡Campo Vacío!")
-                        .setMessage("¡Ups! ¡Parece que olvidaste colocar tu correo!")
-                        //.setNegativeButton("¡Entendido!"){ dialog, which -> dialog.dismiss() }
-                        .show()
-                    Handler(Looper.getMainLooper()).postDelayed({
-                        dialog.dismiss()
-                    }, 5000)
-                }
+                email.isEmpty() -> binding.FieldEmail.error = "Olvidaste colocar tu correo"
                 // Showing alert dialog if email field is not an email
-                !Patterns.EMAIL_ADDRESS.matcher(email).matches() -> {
-                    val dialog = MaterialAlertDialogBuilder(findNavController().context)
-                        .setTitle("¡Error! ¡Correo Inválido!")
-                        .setMessage("¡Ups! ¡Parece que no ingresaste un correo electrónico!")
-                        .show()
-                    Handler(Looper.getMainLooper()).postDelayed({
-                        dialog.dismiss()
-                    }, 5000)
-                }
+                !Patterns.EMAIL_ADDRESS.matcher(email).matches() -> binding.FieldEmail.error = "Formato de correo no válido"
                 // Showing alert dialog if email has more than 50 characters
-                email.length > 50 -> {
-                    val dialog = MaterialAlertDialogBuilder(findNavController().context)
-                        .setTitle("¡Error! ¡Correo Inválido!")
-                        .setMessage("¡Ups! ¡Parece el correo que ingresaste es demasiado largo!")
-                        .show()
-                    Handler(Looper.getMainLooper()).postDelayed({
-                        dialog.dismiss()
-                    }, 5000)
-                }
+                email.length > 50 -> binding.FieldEmail.error = "La longitud máxima es de 50 caracteres"
                 // Navigating to next fragment if email is correct
-                else ->
-                    recoverPassword(email)
+                else -> recoverPassword(email)
             }
         }
 

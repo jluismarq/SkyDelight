@@ -42,7 +42,7 @@
         android:id="@+id/FieldName"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:hint="@string/registerScreen_nameHint"
+        android:hint="@string/registerScreen_name_hint"
         android:textColorHint="?attr/text_color_hint"
         app:hintTextColor="?attr/text_color"
         app:boxStrokeColor="@color/text_input_stroke_color"
@@ -56,7 +56,7 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/editTxtName"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:fontFamily="@font/comfortaa"
             android:textColor="?attr/text_color"
             android:textSize="@dimen/text_input_size"
@@ -216,7 +216,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.31" />
+        app:layout_constraintGuide_percent="0.29" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline_name_field_bottom"

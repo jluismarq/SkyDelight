@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.RadioButton
 import androidx.core.os.bundleOf
+import androidx.core.widget.doOnTextChanged
 import androidx.navigation.fragment.findNavController
 import com.example.skydelight.R
 import com.example.skydelight.databinding.FragmentRegisterFirstBinding
@@ -68,6 +69,9 @@ class RegisterFirstFragment : Fragment() {
                 binding.btnFemale.isChecked = true
         }
 
+        // Clearing errors when produced
+        binding.editTxtName.doOnTextChanged { _, _, _, _ -> if(binding.FieldName.error != null) binding.FieldName.error = null }
+
         binding.btnNext.setOnClickListener {
             // Getting sex option selected
             val sexId = binding.radioGroupSex.checkedRadioButtonId
@@ -78,35 +82,14 @@ class RegisterFirstFragment : Fragment() {
             sex = binding.radioGroupSex.findViewById<RadioButton>(sexId)?.text.toString()
 
             // Showing alert dialog if name field is empty
-            if(name.isNullOrEmpty()){
-                val dialog = MaterialAlertDialogBuilder(findNavController().context)
-                    .setTitle("¡Error! ¡Campo Vacío!")
-                    .setMessage("¡Ups! ¡Parece que olvidaste colocar tu nombre!")
-                    .show()
-                Handler(Looper.getMainLooper()).postDelayed({
-                    dialog.dismiss()
-                }, 5000)
-            }
+            if(name.isNullOrEmpty())
+                binding.FieldName.error = "Olvidaste colocar tu nombre"
             // Showing alert dialog if name contains numbers or special characters
-            else if(!Pattern.matches("[a-zA-ZñÑ áéíóúÁÉÍÓÚ]+", name.toString())){
-                val dialog = MaterialAlertDialogBuilder(findNavController().context)
-                    .setTitle("¡Error! ¡Nombre Inválido!")
-                    .setMessage("¡Ups! ¡Parece que colocaste números o carácteres especiales en tu nombre!")
-                    .show()
-                Handler(Looper.getMainLooper()).postDelayed({
-                    dialog.dismiss()
-                }, 5000)
-            }
+            else if(!Pattern.matches("[a-zA-ZñÑ áéíóúÁÉÍÓÚ]+", name.toString()))
+                binding.FieldName.error = "No se permiten ese tipo de caracteres"
             // Showing alert dialog if name has more than 50 characters
-            else if(name.toString().length > 50){
-                val dialog = MaterialAlertDialogBuilder(findNavController().context)
-                    .setTitle("¡Error! ¡Nombre Inválido!")
-                    .setMessage("¡Ups! ¡Parece el nombre que ingresaste es demasiado largo!")
-                    .show()
-                Handler(Looper.getMainLooper()).postDelayed({
-                    dialog.dismiss()
-                }, 5000)
-            }
+            else if(name.toString().length > 50)
+                binding.FieldName.error = "La longitud máxima es de 50 caracteres"
             // Showing alert dialog if user didn't choose a sex
             else if(sexId == -1){
                 val dialog = MaterialAlertDialogBuilder(findNavController().context)

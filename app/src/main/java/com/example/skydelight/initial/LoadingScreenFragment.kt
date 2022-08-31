@@ -41,14 +41,20 @@ class LoadingScreenFragment : Fragment() {
         Handler(Looper.getMainLooper()).postDelayed({
             // Launching room database connection
             MainScope().launch {
-                //Room.databaseBuilder(findNavController().context, AppDatabase::class.java, "user").build().userDao().deleteUsers()
-
                 // Creating connection to database
-                val userDao = Room.databaseBuilder(findNavController().context, AppDatabase::class.java, "user").build().userDao()
+                val userDao = Room.databaseBuilder(findNavController().context, AppDatabase::class.java, "user")
+                    .fallbackToDestructiveMigration().build().userDao()
 
                 // If user exists, changing to principal fragments
                 if(userDao.getUser().isNotEmpty())
-                    findNavController().navigate(R.id.action_loadingScreen_to_navBar)
+                    // If session has to be open
+                    if(userDao.getUser()[0].session)
+                        findNavController().navigate(R.id.action_loadingScreen_to_navBar)
+                    // Else deleting user session
+                    else{
+                        userDao.deleteUsers()
+                        findNavController().navigate(R.id.action_loadingScreen_to_startScreen)
+                    }
                 // Else changing to initial fragments
                 else
                     findNavController().navigate(R.id.action_loadingScreen_to_startScreen)

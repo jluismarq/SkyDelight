@@ -9,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
+import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.room.Room
@@ -64,102 +65,44 @@ class RegisterSecondFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // Clearing errors when produced
+        binding.editTxtEmail.doOnTextChanged { _, _, _, _ -> if(binding.FieldEmail.error != null) binding.FieldEmail.error = null }
+        binding.editTxtPassword.doOnTextChanged { _, _, _, _ -> if(binding.FieldPassword.error != null) binding.FieldPassword.error = null }
+        binding.editTxtConfirmPassword.doOnTextChanged { _, _, _, _ ->
+            if(binding.FieldConfirmPassword.error != null) binding.FieldConfirmPassword.error = null }
+
         binding.btnCreateAccount.setOnClickListener{
             val email = binding.editTxtEmail.text.toString()
             val password = binding.editTxtPassword.text.toString()
             val confirmedPassword = binding.editTxtConfirmPassword.text.toString()
 
             // Showing alert dialog if email field is empty
-            if(email.isEmpty()){
-                val dialog = MaterialAlertDialogBuilder(findNavController().context)
-                    .setTitle("¡Error! ¡Campo Vacío!")
-                    .setMessage("¡Ups! ¡Parece que olvidaste colocar tu correo!")
-                    .show()
-                Handler(Looper.getMainLooper()).postDelayed({
-                    dialog.dismiss()
-                }, 5000)
-            }
+            if(email.isEmpty())
+                binding.FieldEmail.error = "Olvidaste colocar tu correo"
             // Showing alert dialog if email field is not an email
-            else if(!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
-                val dialog = MaterialAlertDialogBuilder(findNavController().context)
-                    .setTitle("¡Error! ¡Correo Inválido!")
-                    .setMessage("¡Ups! ¡Parece que no ingresaste un correo electrónico!")
-                    //.setNegativeButton("¡Entendido!"){ dialog, which -> dialog.dismiss() }
-                    .show()
-                Handler(Looper.getMainLooper()).postDelayed({
-                    dialog.dismiss()
-                }, 5000)
-            }
+            else if(!Patterns.EMAIL_ADDRESS.matcher(email).matches())
+                binding.FieldEmail.error = "Formato de correo no válido"
             // Showing alert dialog if email has more than 50 characters
-            else if(email.length > 50){
-                val dialog = MaterialAlertDialogBuilder(findNavController().context)
-                    .setTitle("¡Error! ¡Correo Inválido!")
-                    .setMessage("¡Ups! ¡Parece el correo que ingresaste es demasiado largo!")
-                    .show()
-                Handler(Looper.getMainLooper()).postDelayed({
-                    dialog.dismiss()
-                }, 5000)
-            }
+            else if(email.length > 50)
+                binding.FieldEmail.error = "La longitud máxima es de 50 caracteres"
             // Showing alert dialog if password field is empty
-            else if(password.isEmpty()){
-                val dialog = MaterialAlertDialogBuilder(findNavController().context)
-                    .setTitle("¡Error! ¡Campo Vacío!")
-                    .setMessage("¡Ups! ¡Parece que olvidaste colocar tu contraseña!")
-                    .show()
-                Handler(Looper.getMainLooper()).postDelayed({
-                    dialog.dismiss()
-                }, 5000)
-            }
+            else if(password.isEmpty())
+                binding.FieldPassword.error = "Olvidaste colocar tu contraseña"
             // Showing alert dialog if password has less than 8 characters
-            else if(password.length < 8){
-                val dialog = MaterialAlertDialogBuilder(findNavController().context)
-                    .setTitle("¡Error! ¡Contraseña Insegura!")
-                    .setMessage("¡Ups! ¡Parece que tu contraseña es demasiado reducida!")
-                    .show()
-                Handler(Looper.getMainLooper()).postDelayed({
-                    dialog.dismiss()
-                }, 5000)
-            }
+            else if(password.length < 8)
+                binding.FieldPassword.error = "La longitud mínima es de 8 caracteres"
             // Showing alert dialog if password has blank spaces
-            else if(password.contains(" ")){
-                val dialog = MaterialAlertDialogBuilder(findNavController().context)
-                    .setTitle("¡Error! ¡Contraseña Errónea!")
-                    .setMessage("¡Ups! ¡Parece que tu contraseña contiene espacios en blanco!")
-                    .show()
-                Handler(Looper.getMainLooper()).postDelayed({
-                    dialog.dismiss()
-                }, 5000)
-            }
+            else if(password.contains(" "))
+                binding.FieldPassword.error = "No se permiten espacios en blanco"
             // Showing alert dialog if password has more than 50 characters
-            else if(password.length > 50){
-                val dialog = MaterialAlertDialogBuilder(findNavController().context)
-                    .setTitle("¡Error! ¡Contraseña Errónea!")
-                    .setMessage("¡Ups! ¡Parece que tu contraseña es demasiado larga!")
-                    .show()
-                Handler(Looper.getMainLooper()).postDelayed({
-                    dialog.dismiss()
-                }, 5000)
-            }
+            else if(password.length > 50)
+                binding.FieldPassword.error = "La longitud máxima es de 50 caracteres"
             // Showing alert dialog if confirm password field is empty
-            else if(confirmedPassword.isEmpty()){
-                val dialog = MaterialAlertDialogBuilder(findNavController().context)
-                    .setTitle("¡Error! ¡Campo Vacío!")
-                    .setMessage("¡Ups! ¡Parece que olvidaste confirmar tu contraseña!")
-                    .show()
-                Handler(Looper.getMainLooper()).postDelayed({
-                    dialog.dismiss()
-                }, 5000)
-            }
+            else if(confirmedPassword.isEmpty())
+                binding.FieldConfirmPassword.error = "Olvidaste confirmar tu contraseña"
             // Showing alert dialog if password and confirmedPassword don't match
-            else if(password != confirmedPassword){
-                val dialog = MaterialAlertDialogBuilder(findNavController().context)
-                    .setTitle("¡Error! ¡Contraseñas Distintas!")
-                    .setMessage("¡Ups! ¡Parece que colocaste mal una de tus contraseñas!")
-                    .show()
-                Handler(Looper.getMainLooper()).postDelayed({
-                    dialog.dismiss()
-                }, 5000)
-            }
+            else if(password != confirmedPassword)
+                binding.FieldConfirmPassword.error = "Esta contraseña es distinta a la primera"
             // Connection to the api and creation of the new user
             else
                 createUser(email, password, name.toString(), sex.toString(), age.toString())
@@ -207,9 +150,6 @@ class RegisterSecondFragment : Fragment() {
         OkHttpClient().newCall(request).enqueue(object : Callback {
             // Changing to principal fragment if it's successful
             override fun onResponse(call: Call, response: Response){
-                // Closing loading dialog
-                customDialog.dismiss()
-
                 // Printing api answer
                 Log.d("OKHTTP3-CODE", response.code().toString())
                 Log.d("OKHTTP3-BODY", response.body()?.string().toString())
@@ -233,6 +173,9 @@ class RegisterSecondFragment : Fragment() {
                     OkHttpClient().newCall(request).enqueue(object : Callback {
                         // Changing to principal fragment if it's successful
                         override fun onResponse(call: Call, response: Response){
+                            // Closing loading dialog
+                            customDialog.dismiss()
+
                             // Changing http body to json
                             val json = JSONObject(response.body()?.string().toString())
 
@@ -241,7 +184,7 @@ class RegisterSecondFragment : Fragment() {
                                 // Creating connection to database
                                 val userDao =
                                     Room.databaseBuilder(findNavController().context, AppDatabase::class.java, "user")
-                                        .build().userDao()
+                                        .fallbackToDestructiveMigration().build().userDao()
 
                                 // If user exists, we have to delete it
                                 val user = userDao.getUser()
@@ -251,13 +194,14 @@ class RegisterSecondFragment : Fragment() {
                                 // Adding the new user to the database
                                 userDao.insertUser(User(json.getString("user"), json.getString("name"),
                                     json.getString("sex"), json.getInt("age"), json.getString("access"),
-                                    json.getString("refresh")))
+                                    json.getString("refresh"), true))
 
                                 // Success dialog for the user
                                 activity?.runOnUiThread {
                                     val dialog = MaterialAlertDialogBuilder(findNavController().context)
                                         .setTitle("¡Registro Exitoso!")
                                         .setMessage("¡Tu cuenta ha sido creada correctamente!")
+                                        .setCancelable(false)
                                         .show()
 
                                     // Closing message and changing to third register fragment

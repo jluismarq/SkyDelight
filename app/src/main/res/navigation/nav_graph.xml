@@ -159,5 +159,15 @@
         android:id="@+id/navbar_fragment"
         android:name="com.example.skydelight.navbar.NavBarFragment"
         android:label="fragment_navbar"
-        tools:layout="@layout/fragment_navbar" />
+        tools:layout="@layout/fragment_navbar" >
+        <action
+            android:id="@+id/action_navBar_to_startScreen"
+            app:destination="@id/start_screen_fragment"
+            app:enterAnim="@anim/slide_from_right"
+            app:exitAnim="@anim/slide_exit_to_left"
+            app:popEnterAnim="@anim/slide_from_left"
+            app:popExitAnim="@anim/slide_exit_to_right"
+            app:popUpTo="@+id/navbar_fragment"
+            app:popUpToInclusive="true" />
+    </fragment>
 </navigation>

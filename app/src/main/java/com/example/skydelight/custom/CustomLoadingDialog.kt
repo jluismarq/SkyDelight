@@ -21,6 +21,7 @@ class CustomLoadingDialog(myContext: Context, text: String) {
 
         // Creating and showing dialog
         dialog = MaterialAlertDialogBuilder(context).setView(view).create()
+        dialog.setCancelable(false)
         dialog.show()
     }
 

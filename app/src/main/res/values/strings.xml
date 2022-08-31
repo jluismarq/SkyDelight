@@ -19,6 +19,7 @@
     <string name="loadingDialog_login">Iniciando Sesión…</string>
     <string name="loadingDialog_recover">Enviando Contraseña…</string>
     <string name="loadingDialog_loading">Cargando…</string>
+    <string name="loadingDialog_error">¡Ups! ¡Parece que Hubo un Error!</string>
 
     <!-- Other Strings -->
     <!-- Start Screen Fragment Strings -->
@@ -38,7 +39,7 @@
     <!-- Register First and Second Fragments Srings -->
     <string name="registerScreen_title">Creemos tu Cuenta</string>
     <string name="registerScreen_next">Siguiente</string>
-    <string name="registerScreen_nameHint">Nombre Paterno Materno</string>
+    <string name="registerScreen_name_hint">Nombre Paterno Materno</string>
     <string name="registerScreen_male">Masculino</string>
     <string name="registerScreen_female">Femenino</string>
     <string name="registerScreen_title_2">¡Ya Casi Terminamos!</string>
@@ -80,5 +81,6 @@
     <string name="profile_update_profile">Actualizar Información</string>
     <string name="profile_change_password">Cambiar Contraseña</string>
     <string name="profile_delete_account">Eliminar Cuenta</string>
+    <string name="profile_btn_close_session">Cerrar Sesión</string>
 
 </resources>
