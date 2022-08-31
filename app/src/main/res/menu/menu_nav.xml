@@ -19,4 +19,3 @@
         android:title="@string/navBar_profile"
         app:showAsAction="always" />
 </menu>
-<!-- TODO("Make icon animations") https://medium.com/@naththeprince/delightful-animations-in-android-d6e9c62a23d3 -->

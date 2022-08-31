@@ -32,8 +32,8 @@
 
     <!-- Color of Dialog Buttons -->
     <style name="Widget.App.Button" parent="Widget.MaterialComponents.Button.TextButton.Dialog">
-        <item name="backgroundTint">?attr/btn_background_green</item>
-        <item name="android:textColor">?attr/btn_text_color_green</item>
+        <item name="backgroundTint">?attr/btn_background_blue</item>
+        <item name="android:textColor">?attr/btn_text_color_blue</item>
         <item name="fontFamily">@font/comfortaa</item>
         <item name="android:textStyle">bold</item>
         <!-- Eliminating Conversion to UpperCase -->

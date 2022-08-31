@@ -140,6 +140,29 @@
             app:popExitAnim="@anim/slide_exit_to_left"
             app:popUpTo="@+id/navbar_profile_fragment"
             app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_navBarProfile_to_navBarProfilePassword"
+            app:destination="@id/navbar_profile_password_fragment"
+            app:enterAnim="@anim/slide_from_left"
+            app:exitAnim="@anim/slide_exit_to_right"
+            app:popEnterAnim="@anim/slide_from_right"
+            app:popExitAnim="@anim/slide_exit_to_left" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navbar_profile_password_fragment"
+        android:name="com.example.skydelight.navbar.ProfilePasswordFragment"
+        android:label="fragment_navbar_profile_password"
+        tools:layout="@layout/fragment_navbar_profile_password">
+        <action
+            android:id="@+id/action_navBarProfilePassword_to_navBarProfile"
+            app:destination="@id/navbar_profile_fragment"
+            app:enterAnim="@anim/slide_from_right"
+            app:exitAnim="@anim/slide_exit_to_left"
+            app:popEnterAnim="@anim/slide_from_left"
+            app:popExitAnim="@anim/slide_exit_to_right"
+            app:popUpTo="@+id/navbar_profile_password_fragment"
+            app:popUpToInclusive="true" />
     </fragment>
 
 </navigation>

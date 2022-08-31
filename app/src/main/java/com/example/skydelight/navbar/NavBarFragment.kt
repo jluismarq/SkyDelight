@@ -36,53 +36,25 @@ class NavBarFragment : Fragment() {
 
         // Bottom navigation bar actions
         binding.navBar.setOnItemSelectedListener{
-            // Variable to change navigation bar fragments
-            val transaction = childFragmentManager.beginTransaction()
-
             when(it.itemId){
                 R.id.nav_home -> {
                     // Changing fragment if actual fragment is not the same
-                    // Fragment enters from right
-                    if(itemId != R.id.nav_home) {
-                        transaction.setCustomAnimations(
-                            R.anim.slide_from_left, R.anim.slide_exit_to_right,
-                            R.anim.slide_from_right, R.anim.slide_exit_to_left
-                        )
-                        transaction.replace(binding.navbarHostFragment.id, HomeFragment()).commit()
-                        itemId = R.id.nav_home
-                    }
+                    // Fragment enters from left
+                    if(itemId != R.id.nav_home)
+                        updateNavBarHost(HomeFragment(), R.id.nav_home, false)
                     true
                 }
                 R.id.nav_test -> {
                     // Changing fragment if actual fragment is not the same
                     when (itemId) {
                         // Fragment enters from right
-                        R.id.nav_home -> {
-                            transaction.setCustomAnimations(
-                                R.anim.slide_from_right, R.anim.slide_exit_to_left,
-                                R.anim.slide_from_left, R.anim.slide_exit_to_right
-                            )
-                            transaction.replace(binding.navbarHostFragment.id, TestFragment()).commit()
-                            itemId = R.id.nav_test
-                        }
+                        R.id.nav_home -> updateNavBarHost(TestFragment(), R.id.nav_test, true)
+
                         // Fragment enters from left
-                        R.id.nav_games -> {
-                            transaction.setCustomAnimations(
-                                R.anim.slide_from_left, R.anim.slide_exit_to_right,
-                                R.anim.slide_from_right, R.anim.slide_exit_to_left
-                            )
-                            transaction.replace(binding.navbarHostFragment.id, TestFragment()).commit()
-                            itemId = R.id.nav_test
-                        }
+                        R.id.nav_games -> updateNavBarHost(TestFragment(), R.id.nav_test, false)
+
                         // Fragment enters from left
-                        R.id.nav_profile -> {
-                            transaction.setCustomAnimations(
-                                R.anim.slide_from_left, R.anim.slide_exit_to_right,
-                                R.anim.slide_from_right, R.anim.slide_exit_to_left
-                            )
-                            transaction.replace(binding.navbarHostFragment.id, TestFragment()).commit()
-                            itemId = R.id.nav_test
-                        }
+                        R.id.nav_profile -> updateNavBarHost(TestFragment(), R.id.nav_test, false)
                     }
                     true
                 }
@@ -90,50 +62,47 @@ class NavBarFragment : Fragment() {
                     // Changing fragment if actual fragment is not the same
                     when (itemId) {
                         // Fragment enters from right
-                        R.id.nav_home -> {
-                            transaction.setCustomAnimations(
-                                R.anim.slide_from_right, R.anim.slide_exit_to_left,
-                                R.anim.slide_from_left, R.anim.slide_exit_to_right
-                            )
-                            transaction.replace(binding.navbarHostFragment.id, GamesFragment()).commit()
-                            itemId = R.id.nav_games
-                        }
+                        R.id.nav_home -> updateNavBarHost(GamesFragment(), R.id.nav_games, true)
+
                         // Fragment enters from right
-                        R.id.nav_test -> {
-                            transaction.setCustomAnimations(
-                                R.anim.slide_from_right, R.anim.slide_exit_to_left,
-                                R.anim.slide_from_left, R.anim.slide_exit_to_right
-                            )
-                            transaction.replace(binding.navbarHostFragment.id, GamesFragment()).commit()
-                            itemId = R.id.nav_games
-                        }
+                        R.id.nav_test -> updateNavBarHost(GamesFragment(), R.id.nav_games, true)
+
                         // Fragment enters from left
-                        R.id.nav_profile -> {
-                            transaction.setCustomAnimations(
-                                R.anim.slide_from_left, R.anim.slide_exit_to_right,
-                                R.anim.slide_from_right, R.anim.slide_exit_to_left
-                            )
-                            transaction.replace(binding.navbarHostFragment.id, GamesFragment()).commit()
-                            itemId = R.id.nav_games
-                        }
+                        R.id.nav_profile -> updateNavBarHost(GamesFragment(), R.id.nav_games, false)
                     }
                     true
                 }
                 R.id.nav_profile -> {
                     // Changing fragment if actual fragment is not the same
-                    // Fragment enters from left
-                    if(itemId != R.id.nav_profile) {
-                        transaction.setCustomAnimations(
-                            R.anim.slide_from_right, R.anim.slide_exit_to_left,
-                            R.anim.slide_from_left, R.anim.slide_exit_to_right
-                        )
-                        transaction.replace(binding.navbarHostFragment.id, ProfileFragment()).commit()
-                        itemId = R.id.nav_profile
-                    }
+                    // Fragment enters from right
+                    if(itemId != R.id.nav_profile)
+                        updateNavBarHost(ProfileFragment(), R.id.nav_profile, true)
                     true
                 }
                 else -> false
             }
         }
+    }
+
+    fun updateNavBarHost(fragment : Fragment, navId: Int, direction: Boolean){
+        // Variable to change navigation bar fragments
+        val transaction = childFragmentManager.beginTransaction()
+
+        // Fragment enters from right
+        if(direction)
+            transaction.setCustomAnimations(
+                R.anim.slide_from_right, R.anim.slide_exit_to_left,
+                R.anim.slide_from_left, R.anim.slide_exit_to_right
+            )
+        // Fragment enters from left
+        else
+            transaction.setCustomAnimations(
+                R.anim.slide_from_left, R.anim.slide_exit_to_right,
+                R.anim.slide_from_right, R.anim.slide_exit_to_left
+            )
+
+        // Changing fragment and actual fragment id
+        transaction.replace(binding.navbarHostFragment.id, fragment).commit()
+        itemId = navId
     }
 }

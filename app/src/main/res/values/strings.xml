@@ -5,6 +5,8 @@
     <!-- General Strings -->
     <string name="btn_login">Iniciar Sesión</string>
     <string name="btn_return">Regresar</string>
+    <string name="btn_update">Actualizar</string>
+    <string name="btn_cancel">Cancelar</string>
     <string name="email">Correo Electrónico:</string>
     <string name="email_hint">ejemplo@hotmail.com</string>
     <string name="password">Contraseña:</string>
@@ -82,5 +84,7 @@
     <string name="profile_change_password">Cambiar Contraseña</string>
     <string name="profile_delete_account">Eliminar Cuenta</string>
     <string name="profile_btn_close_session">Cerrar Sesión</string>
+    <string name="profile_update_password">¿Qué Contraseña Deseas?</string>
+    <string name="profile_number">00</string>
 
 </resources>
