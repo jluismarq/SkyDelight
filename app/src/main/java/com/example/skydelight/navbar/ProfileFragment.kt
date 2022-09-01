@@ -12,19 +12,15 @@ import com.example.skydelight.BuildConfig
 import com.example.skydelight.R
 import com.example.skydelight.custom.AppDatabase
 import com.example.skydelight.databinding.FragmentNavbarProfileBinding
-import com.example.skydelight.databinding.FragmentNavbarBinding
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
 import okhttp3.*
 import java.io.IOException
 
-// TODO("Screen design")
-// TODO("Connection to the api to update user profile")
 class ProfileFragment : Fragment() {
     // Binding variable to use elements in the xml layout
     private lateinit var binding : FragmentNavbarProfileBinding
-    private lateinit var bindingNavBar : FragmentNavbarBinding
 
     // Creating the fragment view
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
@@ -41,6 +37,12 @@ class ProfileFragment : Fragment() {
 
         // Showing user data in profile screen fragment
         showUserData()
+
+        // Changing to updating data fragment
+        binding.btnUpdateAccount.setOnClickListener {
+            // Fragment enters from right
+            (parentFragment as NavBarFragment).updateNavBarHost(ProfileDataFragment(), R.id.nav_profile, true)
+        }
 
         // Changing to updating password fragment
         binding.btnChangePassword.setOnClickListener {

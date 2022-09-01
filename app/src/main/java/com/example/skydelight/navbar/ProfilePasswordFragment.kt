@@ -44,32 +44,28 @@ class ProfilePasswordFragment : Fragment() {
             val confirmedPassword = binding.editTxtConfirmPassword.text.toString()
 
             // Showing alert dialog if password field is empty
-            if(password.isEmpty())
-                binding.FieldPassword.error = "Olvidaste colocar tu contraseña"
-            // Showing alert dialog if password has less than 8 characters
-            else if(password.length < 8)
-                binding.FieldPassword.error = "La longitud mínima es de 8 caracteres"
-            // Showing alert dialog if password has blank spaces
-            else if(password.contains(" "))
-                binding.FieldPassword.error = "No se permiten espacios en blanco"
-            // Showing alert dialog if password has more than 50 characters
-            else if(password.length > 50)
-                binding.FieldPassword.error = "La longitud máxima es de 50 caracteres"
-            // Showing alert dialog if confirm password field is empty
-            else if(confirmedPassword.isEmpty())
-                binding.FieldConfirmPassword.error = "Olvidaste confirmar tu contraseña"
-            // Showing alert dialog if password and confirmedPassword don't match
-            else if(password != confirmedPassword)
-                binding.FieldConfirmPassword.error = "Esta contraseña es distinta a la primera"
-            // Connection to the api and creation of the new user
-            else updatePassword()
+            when {
+                password.isEmpty() -> binding.FieldPassword.error = "Olvidaste colocar tu contraseña"
+                // Showing alert dialog if password has less than 8 characters
+                password.length < 8 -> binding.FieldPassword.error = "La longitud mínima es de 8 caracteres"
+                // Showing alert dialog if password has blank spaces
+                password.contains(" ") -> binding.FieldPassword.error = "No se permiten espacios en blanco"
+                // Showing alert dialog if password has more than 50 characters
+                password.length > 50 -> binding.FieldPassword.error = "La longitud máxima es de 50 caracteres"
+                // Showing alert dialog if confirm password field is empty
+                confirmedPassword.isEmpty() -> binding.FieldConfirmPassword.error = "Olvidaste confirmar tu contraseña"
+                // Showing alert dialog if password and confirmedPassword don't match
+                password != confirmedPassword -> binding.FieldConfirmPassword.error = "Esta contraseña es distinta a la primera"
+                // Connection to the api and creation of the new user
+                else -> updatePassword()
+            }
         }
     }
 
     // TODO("Connection to the api to update password")
     // TODO("Update local database")
     private fun updatePassword(){
-        // Starting previous fragment
-        findNavController().navigate(R.id.action_navBarProfilePassword_to_navBarProfile)
+        // Fragment enters from right
+        (parentFragment as NavBarFragment).updateNavBarHost(ProfileFragment(), R.id.nav_profile, false)
     }
 }

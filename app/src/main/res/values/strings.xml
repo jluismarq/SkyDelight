@@ -85,6 +85,7 @@
     <string name="profile_delete_account">Eliminar Cuenta</string>
     <string name="profile_btn_close_session">Cerrar Sesión</string>
     <string name="profile_update_password">¿Qué Contraseña Deseas?</string>
+    <string name="profile_update_data">Ingresa tus Datos</string>
     <string name="profile_number">00</string>
 
 </resources>

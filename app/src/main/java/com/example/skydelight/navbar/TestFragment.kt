@@ -22,9 +22,4 @@ class TestFragment : Fragment() {
 
         // return inflater.inflate(R.layout.fragment_navbar_test, container, false)
     }
-
-    // After the view is created we can do things
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-    }
 }

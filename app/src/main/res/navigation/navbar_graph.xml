@@ -165,4 +165,20 @@
             app:popUpToInclusive="true" />
     </fragment>
 
+    <fragment
+        android:id="@+id/navbar_profile_data_fragment"
+        android:name="com.example.skydelight.navbar.ProfileDataFragment"
+        android:label="fragment_navbar_profile_data"
+        tools:layout="@layout/fragment_navbar_profile_data">
+        <action
+            android:id="@+id/action_navBarProfileData_to_navBarProfile"
+            app:destination="@id/navbar_profile_fragment"
+            app:enterAnim="@anim/slide_from_right"
+            app:exitAnim="@anim/slide_exit_to_left"
+            app:popEnterAnim="@anim/slide_from_left"
+            app:popExitAnim="@anim/slide_exit_to_right"
+            app:popUpTo="@+id/navbar_profile_data_fragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+
 </navigation>

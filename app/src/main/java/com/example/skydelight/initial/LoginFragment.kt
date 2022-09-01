@@ -23,8 +23,6 @@ import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
 import okhttp3.*
 import org.json.JSONObject
-import java.io.File
-import java.io.FileWriter
 import java.io.IOException
 
 class LoginFragment : Fragment() {

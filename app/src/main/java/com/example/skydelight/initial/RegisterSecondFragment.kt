@@ -24,8 +24,6 @@ import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
 import okhttp3.*
 import org.json.JSONObject
-import java.io.File
-import java.io.FileWriter
 import java.io.IOException
 
 private const val NAME_PARAM = "name"

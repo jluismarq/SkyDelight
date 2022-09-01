@@ -13,11 +13,9 @@ import androidx.navigation.fragment.findNavController
 import androidx.room.Room
 import com.example.skydelight.R
 import com.example.skydelight.custom.AppDatabase
-import com.example.skydelight.custom.User
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
 import pl.bclogic.pulsator4droid.library.PulsatorLayout
-import java.io.File
 
 class LoadingScreenFragment : Fragment() {
     // Creating the fragment view
