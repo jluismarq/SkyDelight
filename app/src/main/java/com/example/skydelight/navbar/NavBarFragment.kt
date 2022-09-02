@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.forEach
 import androidx.fragment.app.Fragment
 import com.example.skydelight.R
 import com.example.skydelight.databinding.FragmentNavbarBinding
@@ -100,5 +101,10 @@ class NavBarFragment : Fragment() {
         // Changing fragment and actual fragment id
         transaction.replace(binding.navbarHostFragment.id, fragment).commit()
         itemId = navId
+    }
+
+    // Function to activate or deactivate navbar buttons
+    fun changeNavBarButtonsClickable(state: Boolean){
+        binding.navBar.menu.forEach { it.isEnabled = state }
     }
 }

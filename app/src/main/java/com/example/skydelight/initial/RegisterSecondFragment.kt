@@ -1,10 +1,6 @@
 package com.example.skydelight.initial
 
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
-import android.util.Log
-import android.util.Patterns
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,15 +12,13 @@ import androidx.room.Room
 import com.example.skydelight.BuildConfig
 import com.example.skydelight.R
 import com.example.skydelight.custom.AppDatabase
-import com.example.skydelight.custom.CustomLoadingDialog
 import com.example.skydelight.custom.User
+import com.example.skydelight.custom.ValidationsDialogsRequests
 import com.example.skydelight.databinding.FragmentRegisterSecondBinding
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
 import okhttp3.*
 import org.json.JSONObject
-import java.io.IOException
 
 private const val NAME_PARAM = "name"
 private const val AGE_PARAM = "age"
@@ -74,36 +68,14 @@ class RegisterSecondFragment : Fragment() {
             val password = binding.editTxtPassword.text.toString()
             val confirmedPassword = binding.editTxtConfirmPassword.text.toString()
 
-            // Showing alert dialog if email field is empty
-            if(email.isEmpty())
-                binding.FieldEmail.error = "Olvidaste colocar tu correo"
-            // Showing alert dialog if email field is not an email
-            else if(!Patterns.EMAIL_ADDRESS.matcher(email).matches())
-                binding.FieldEmail.error = "Formato de correo no válido"
-            // Showing alert dialog if email has more than 50 characters
-            else if(email.length > 50)
-                binding.FieldEmail.error = "La longitud máxima es de 50 caracteres"
-            // Showing alert dialog if password field is empty
-            else if(password.isEmpty())
-                binding.FieldPassword.error = "Olvidaste colocar tu contraseña"
-            // Showing alert dialog if password has less than 8 characters
-            else if(password.length < 8)
-                binding.FieldPassword.error = "La longitud mínima es de 8 caracteres"
-            // Showing alert dialog if password has blank spaces
-            else if(password.contains(" "))
-                binding.FieldPassword.error = "No se permiten espacios en blanco"
-            // Showing alert dialog if password has more than 50 characters
-            else if(password.length > 50)
-                binding.FieldPassword.error = "La longitud máxima es de 50 caracteres"
-            // Showing alert dialog if confirm password field is empty
-            else if(confirmedPassword.isEmpty())
-                binding.FieldConfirmPassword.error = "Olvidaste confirmar tu contraseña"
-            // Showing alert dialog if password and confirmedPassword don't match
-            else if(password != confirmedPassword)
-                binding.FieldConfirmPassword.error = "Esta contraseña es distinta a la primera"
-            // Connection to the api and creation of the new user
-            else
+            if(ValidationsDialogsRequests().validateEmail(email, binding.FieldEmail)
+                && ValidationsDialogsRequests().validatePassword(password, binding.FieldPassword)
+                && ValidationsDialogsRequests().validateConfirmedPassword(password, confirmedPassword, binding.FieldConfirmPassword)){
+                // Deactivating buttons
+                binding.btnCreateAccount.isClickable = false
+                binding.btnReturn.isClickable = false
                 createUser(email, password, name.toString(), sex.toString(), age.toString())
+            }
         }
 
         // Returning to the register first fragment
@@ -140,124 +112,54 @@ class RegisterSecondFragment : Fragment() {
             .header("KEY-CLIENT", BuildConfig.API_KEY)
             .build()
 
-        // Showing loading dialog
-        val customDialog = CustomLoadingDialog(findNavController().context, getString(R.string.loadingDialog_creating))
-        customDialog.show()
+        ValidationsDialogsRequests().httpPetition(request, findNavController().context, requireActivity(),
+            binding.btnCreateAccount, binding.btnReturn, null, null, getString(R.string.loadingDialog_creating), 400,
+            "¡Error! ¡Cuenta Existente!","¡Ya existe una cuenta con ese correo!",null)
+        {
+            // Arguments to Post Request
+            formBody = FormBody.Builder()
+                .add("email", email)
+                .add("password", password)
+                .build()
 
-        // Making HTTP request and getting response
-        OkHttpClient().newCall(request).enqueue(object : Callback {
-            // Changing to principal fragment if it's successful
-            override fun onResponse(call: Call, response: Response){
-                // Printing api answer
-                Log.d("OKHTTP3-CODE", response.code().toString())
-                Log.d("OKHTTP3-BODY", response.body()?.string().toString())
+            // Making http request
+            request = Request.Builder()
+                .url("https://apiskydelight.herokuapp.com/usuarios/token/obtener/")
+                .post(formBody)
+                .header("KEY-CLIENT", BuildConfig.API_KEY)
+                .build()
 
-                // Code 201 = account created
-                if(response.code() == 201) {
-                    // Arguments to Post Request
-                    formBody = FormBody.Builder()
-                        .add("email", email)
-                        .add("password", password)
-                        .build()
+            ValidationsDialogsRequests().httpPetition(request, findNavController().context, requireActivity(),
+                binding.btnCreateAccount, binding.btnReturn, null, null, null,null,
+                null, null, null)
+            { responseString: String ->
+                // Changing http body to json
+                val json = JSONObject(responseString)
 
-                    // Making http request
-                    request = Request.Builder()
-                        .url("https://apiskydelight.herokuapp.com/usuarios/token/obtener/")
-                        .post(formBody)
-                        .header("KEY-CLIENT", BuildConfig.API_KEY)
-                        .build()
+                // Launching room database connection
+                MainScope().launch {
+                    // Creating connection to database
+                    val userDao = Room.databaseBuilder(findNavController().context,
+                        AppDatabase::class.java,"user").fallbackToDestructiveMigration().build().userDao()
 
-                    // Making HTTP request and getting response
-                    OkHttpClient().newCall(request).enqueue(object : Callback {
-                        // Changing to principal fragment if it's successful
-                        override fun onResponse(call: Call, response: Response){
-                            // Closing loading dialog
-                            customDialog.dismiss()
+                    // If user exists, we have to delete it
+                    val user = userDao.getUser()
+                    if (user.isNotEmpty())
+                        userDao.deleteUser(user[0])
 
-                            // Changing http body to json
-                            val json = JSONObject(response.body()?.string().toString())
+                    // Adding the new user to the database
+                    userDao.insertUser(User(json.getString("user"),
+                        json.getString("name"), json.getString("sex"),
+                        json.getInt("age"), json.getString("access"),
+                        json.getString("refresh"),true))
 
-                            // Launching room database connection
-                            MainScope().launch {
-                                // Creating connection to database
-                                val userDao =
-                                    Room.databaseBuilder(findNavController().context, AppDatabase::class.java, "user")
-                                        .fallbackToDestructiveMigration().build().userDao()
-
-                                // If user exists, we have to delete it
-                                val user = userDao.getUser()
-                                if(user.isNotEmpty())
-                                    userDao.deleteUser(user[0])
-
-                                // Adding the new user to the database
-                                userDao.insertUser(User(json.getString("user"), json.getString("name"),
-                                    json.getString("sex"), json.getInt("age"), json.getString("access"),
-                                    json.getString("refresh"), true))
-
-                                // Success dialog for the user
-                                activity?.runOnUiThread {
-                                    val dialog = MaterialAlertDialogBuilder(findNavController().context)
-                                        .setTitle("¡Registro Exitoso!")
-                                        .setMessage("¡Tu cuenta ha sido creada correctamente!")
-                                        .setCancelable(false)
-                                        .show()
-
-                                    // Closing message and changing to third register fragment
-                                    Handler(Looper.getMainLooper()).postDelayed({
-                                        dialog.dismiss()
-                                        findNavController().navigate(R.id.action_registerSecond_to_registerThird)
-                                    }, 5000)
-                                }
-                            }
-                        }
-
-                        // Print dialog if it's error
-                        override fun onFailure(call: Call, e: IOException){
-                            // Showing message to the user
-                            activity?.runOnUiThread {
-                                val dialog = MaterialAlertDialogBuilder(findNavController().context)
-                                    .setTitle("¡Ups! ¡Hubo un Problema de Conexión!")
-                                    .setMessage(e.toString())
-                                    .show()
-
-                                // Closing message
-                                Handler(Looper.getMainLooper()).postDelayed({ dialog.dismiss() }, 5000)
-                            }
-                        }
-                    })
-                }
-                // Code 400 = account already exists
-                else if(response.code() == 400)
-                    activity?.runOnUiThread {
-                        val dialog = MaterialAlertDialogBuilder(findNavController().context)
-                            .setTitle("¡Error! ¡Cuenta Existente!")
-                            .setMessage("¡Ya existe una cuenta con ese correo!")
-                            .show()
-
-                        // Closing message
-                        Handler(Looper.getMainLooper()).postDelayed({ dialog.dismiss() }, 5000)
+                    ValidationsDialogsRequests().dialogOnUIThread("¡Registro Exitoso!",
+                        "¡Tu cuenta ha sido creada correctamente!", findNavController().context,
+                        requireActivity(), null, null, null, null, null) {
+                        findNavController().navigate(R.id.action_registerSecond_to_registerThird)
                     }
-            }
-
-            // Print dialog if it's error
-            override fun onFailure(call: Call, e: IOException){
-                // Closing loading dialog
-                customDialog.dismiss()
-
-                // Printing api answer
-                Log.d("OKHTTP3-ERROR", e.toString())
-
-                // Showing message to the user
-                activity?.runOnUiThread {
-                    val dialog = MaterialAlertDialogBuilder(findNavController().context)
-                        .setTitle("¡Ups! ¡Hubo un Problema de Conexión!")
-                        .setMessage(e.toString())
-                        .show()
-
-                    // Closing message
-                    Handler(Looper.getMainLooper()).postDelayed({ dialog.dismiss() }, 5000)
                 }
             }
-        })
+        }
     }
 }

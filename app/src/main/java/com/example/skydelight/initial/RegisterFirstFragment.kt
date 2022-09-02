@@ -1,8 +1,6 @@
 package com.example.skydelight.initial
 
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -12,9 +10,8 @@ import androidx.core.os.bundleOf
 import androidx.core.widget.doOnTextChanged
 import androidx.navigation.fragment.findNavController
 import com.example.skydelight.R
+import com.example.skydelight.custom.ValidationsDialogsRequests
 import com.example.skydelight.databinding.FragmentRegisterFirstBinding
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import java.util.regex.Pattern
 
 private const val NAME_PARAM = "name"
 private const val AGE_PARAM = "age"
@@ -81,27 +78,10 @@ class RegisterFirstFragment : Fragment() {
             age = binding.numberPickerAge.value.toString()
             sex = binding.radioGroupSex.findViewById<RadioButton>(sexId)?.text.toString()
 
-            // Showing alert dialog if name field is empty
-            if(name.isNullOrEmpty())
-                binding.FieldName.error = "Olvidaste colocar tu nombre"
-            // Showing alert dialog if name contains numbers or special characters
-            else if(!Pattern.matches("[a-zA-ZñÑ áéíóúÁÉÍÓÚ]+", name.toString()))
-                binding.FieldName.error = "No se permiten ese tipo de caracteres"
-            // Showing alert dialog if name has more than 50 characters
-            else if(name.toString().length > 50)
-                binding.FieldName.error = "La longitud máxima es de 50 caracteres"
-            // Showing alert dialog if user didn't choose a sex
-            else if(sexId == -1){
-                val dialog = MaterialAlertDialogBuilder(findNavController().context)
-                    .setTitle("¡Error! ¡Elemento Faltante!")
-                    .setMessage("¡Ups! ¡Parece que olvidaste elegir tu sexo!")
-                    .show()
-                Handler(Looper.getMainLooper()).postDelayed({
-                    dialog.dismiss()
-                }, 5000)
-            }
-            // Sending variables to the next register fragment
-            else {
+
+            if(ValidationsDialogsRequests().validateName(name.toString(), binding.FieldName)
+                && ValidationsDialogsRequests().validateSex(sexId, findNavController().context,
+                    "¡Error! ¡Elemento Faltante!", "¡Ups! ¡Parece que olvidaste elegir tu sexo!")){
                 // Setting parameters for the next fragment
                 val bundle = bundleOf(NAME_PARAM to name, SEX_PARAM to sex, AGE_PARAM to age)
 

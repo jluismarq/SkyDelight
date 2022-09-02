@@ -1,7 +1,6 @@
 package com.example.skydelight.navbar
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -11,12 +10,12 @@ import androidx.room.Room
 import com.example.skydelight.BuildConfig
 import com.example.skydelight.R
 import com.example.skydelight.custom.AppDatabase
+import com.example.skydelight.custom.ValidationsDialogsRequests
 import com.example.skydelight.databinding.FragmentNavbarProfileBinding
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
 import okhttp3.*
-import java.io.IOException
 
 class ProfileFragment : Fragment() {
     // Binding variable to use elements in the xml layout
@@ -71,6 +70,9 @@ class ProfileFragment : Fragment() {
                 .setPositiveButton("¡Sí!"){ dialog, _ ->
                     dialog.dismiss()
 
+                    // Deactivating clickable
+                    (parentFragment as NavBarFragment).changeNavBarButtonsClickable(false)
+
                     // Launching room database connection
                     MainScope().launch {
                         // Creating connection to database
@@ -87,29 +89,18 @@ class ProfileFragment : Fragment() {
                             .addHeader("KEY-CLIENT", BuildConfig.API_KEY)
                             .build()
 
-                        // Making HTTP request and getting response
-                        OkHttpClient().newCall(request).enqueue(object : Callback {
-                            // Changing to principal fragment if it's successful
-                            override fun onResponse(call: Call, response: Response){
-                                // Printing api answer
-                                val responseString = response.body()?.string().toString()
-                                Log.d("OKHTTP3-CODE", response.code().toString())
-                                Log.d("OKHTTP3-BODY", responseString)
-
-                                // Launching room database connection
-                                MainScope().launch {
-                                    // Cleaning database and changing to start screen fragment
-                                    userDao.deleteUsers()
-                                    findNavController().navigate(R.id.action_navBar_to_startScreen)
-                                }
+                        ValidationsDialogsRequests().httpPetition(request, findNavController().context, requireActivity(),
+                            binding.btnUpdateAccount, binding.btnChangePassword, binding.btnCloseSession,
+                            binding.btnDeleteAccount, getString(R.string.loadingDialog_updating), null,
+                            null, null, (parentFragment as NavBarFragment))
+                        {
+                            // Launching room database connection
+                            MainScope().launch {
+                                // Cleaning database and changing to start screen fragment
+                                userDao.deleteUsers()
+                                findNavController().navigate(R.id.action_navBar_to_startScreen)
                             }
-
-                            // Print dialog if it's error
-                            override fun onFailure(call: Call, e: IOException){
-                                // Printing api answer
-                                Log.d("OKHTTP3-ERROR", e.toString())
-                            }
-                        })
+                        }
                     }
                 }.show()
         }

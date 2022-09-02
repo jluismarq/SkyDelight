@@ -8,7 +8,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import androidx.room.Room
-import com.example.skydelight.BuildConfig
 import com.example.skydelight.R
 import com.example.skydelight.custom.AppDatabase
 import com.example.skydelight.databinding.FragmentNavbarHomeBinding
@@ -58,12 +57,7 @@ class HomeFragment : Fragment() {
 
             // TODO("Verify if token is valid, if not, change it")
             // Making http request
-            val request = Request.Builder()
-                .url("https://apiskydelight.herokuapp.com/api/consejo")
-                .post(formBody)
-                .addHeader("Authorization", "Bearer " + user.token)
-                .addHeader("KEY-CLIENT", BuildConfig.API_KEY)
-                .build()
+            val request = Request.Builder().url("https://apiskydelight.herokuapp.com/api/consejo").post(formBody).build()
 
             // Toggle advice boolean
             user.advice = !user.advice
@@ -78,9 +72,15 @@ class HomeFragment : Fragment() {
                     Log.d("OKHTTP3-CODE", response.code().toString())
                     Log.d("OKHTTP3-BODY", responseString)
 
-                    // Changing http body to json
-                    val json = JSONObject(responseString)
-                    binding.textView.text = json.getString("consejo")
+                    // Code 200 = advice generated
+                    if(response.code() in 200..202) {
+                        // Changing http body to json
+                        val json = JSONObject(responseString)
+                        binding.textView.text = json.getString("consejo")
+                    }
+                    // Connection or server errors
+                    else if(response.code() in 400..405 || response.code() == 500)
+                        binding.textView.text = getString(R.string.loadingDialog_error)
                 }
 
                 // Print dialog if it's error

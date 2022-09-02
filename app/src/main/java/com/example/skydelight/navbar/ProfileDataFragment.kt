@@ -3,7 +3,6 @@ package com.example.skydelight.navbar
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -15,15 +14,13 @@ import androidx.room.Room
 import com.example.skydelight.BuildConfig
 import com.example.skydelight.R
 import com.example.skydelight.custom.AppDatabase
-import com.example.skydelight.custom.CustomLoadingDialog
 import com.example.skydelight.custom.User
+import com.example.skydelight.custom.ValidationsDialogsRequests
 import com.example.skydelight.databinding.FragmentNavbarProfileDataBinding
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
 import okhttp3.*
-import java.io.IOException
-import java.util.regex.Pattern
 
 class ProfileDataFragment : Fragment() {
     // Binding variable to use elements in the xml layout
@@ -67,32 +64,19 @@ class ProfileDataFragment : Fragment() {
             val age = binding.numberPickerAge.value
             val sex = binding.radioGroupSex.findViewById<RadioButton>(sexId)?.text.toString()
 
-            // Showing alert dialog if name field is empty
-            if(name.isEmpty())
-                binding.FieldName.error = "Olvidaste colocar tu nombre"
-            // Showing alert dialog if name contains numbers or special characters
-            else if(!Pattern.matches("[a-zA-ZñÑ áéíóúÁÉÍÓÚ]+", name))
-                binding.FieldName.error = "No se permiten ese tipo de caracteres"
-            // Showing alert dialog if name has more than 50 characters
-            else if(name.length > 50)
-                binding.FieldName.error = "La longitud máxima es de 50 caracteres"
-            // Showing alert dialog if user didn't choose a sex
-            else if(sexId == -1){
-                val dialog = MaterialAlertDialogBuilder(findNavController().context)
-                    .setTitle("¡Error! ¡Elemento Faltante!")
-                    .setMessage("¡Ups! ¡Parece que olvidaste elegir tu sexo!")
-                    .show()
-                Handler(Looper.getMainLooper()).postDelayed({
-                    dialog.dismiss()
-                }, 5000)
-            }
             // Connection to the api and sending the password to the email
-            else updateData(name, sex, age)
+            if(ValidationsDialogsRequests().validateName(name, binding.FieldName)
+                && ValidationsDialogsRequests().validateSex(sexId, findNavController().context,
+                    "¡Error! ¡Elemento Faltante!", "¡Ups! ¡Parece que olvidaste elegir tu sexo!"))
+                updateData(name, sex, age)
         }
     }
 
     // Function to connect with the api
     private fun updateData(name: String, sex: String, age: Int){
+        // Deactivating clickable
+        (parentFragment as NavBarFragment).changeNavBarButtonsClickable(false)
+
         // Launching room database connection
         MainScope().launch {
             // Creating connection to database
@@ -116,51 +100,24 @@ class ProfileDataFragment : Fragment() {
                 .addHeader("KEY-CLIENT", BuildConfig.API_KEY)
                 .build()
 
-            // Showing loading dialog
-            val customDialog = CustomLoadingDialog(findNavController().context, getString(R.string.loadingDialog_updating))
-            customDialog.show()
+            ValidationsDialogsRequests().httpPetition(request, findNavController().context, requireActivity(), binding.btnUpdate,
+                binding.btnCancel, null, null, getString(R.string.loadingDialog_updating), null, null, null,
+                (parentFragment as NavBarFragment))
+            {
+                // Launching room database connection
+                MainScope().launch {
+                    // Updating user info in local database
+                    userDao.updateUser(User(user.email, name, sex, age, user.token, user.refresh, user.session, user.advice))
 
-            // Making HTTP request and getting response
-            OkHttpClient().newCall(request).enqueue(object : Callback {
-                // Changing to principal fragment if it's successful
-                override fun onResponse(call: Call, response: Response){
-                    // Closing loading dialog
-                    customDialog.dismiss()
-
-                    // Printing api answer
-                    val responseString = response.body()?.string().toString()
-                    Log.d("OKHTTP3-CODE", response.code().toString())
-                    Log.d("OKHTTP3-BODY", responseString)
-
-                    // Launching room database connection
-                    MainScope().launch {
-                        // Updating user info in local database
-                        userDao.updateUser(User(user.email, name, sex, age, user.token, user.refresh, user.session, user.advice))
-
-                        // Showing succesful dialog
-                        val dialog = MaterialAlertDialogBuilder(findNavController().context)
-                            .setTitle("¡Actualización Exitosa!")
-                            .setMessage("¡Tus Datos se Actualizaron Correctamente!")
-                            .setCancelable(false)
-                            .show()
-                        Handler(Looper.getMainLooper()).postDelayed({
-                            dialog.dismiss()
-
-                            // Fragment enters from right
-                            (parentFragment as NavBarFragment).updateNavBarHost(ProfileFragment(), R.id.nav_profile, false)
-                        }, 5000)
+                    // Showing succesful dialog
+                    ValidationsDialogsRequests().dialogOnUIThread("¡Actualización Exitosa!",
+                        "¡Tus Datos se Actualizaron Correctamente!", findNavController().context,
+                        requireActivity(), null, null, null, null, null) {
+                        // Fragment enters from right
+                        (parentFragment as NavBarFragment).updateNavBarHost(ProfileFragment(), R.id.nav_profile, false)
                     }
                 }
-
-                // Print dialog if it's error
-                override fun onFailure(call: Call, e: IOException){
-                    // Closing loading dialog
-                    customDialog.dismiss()
-
-                    // Printing api answer
-                    Log.d("OKHTTP3-ERROR", e.toString())
-                }
-            })
+            }
         }
     }
 

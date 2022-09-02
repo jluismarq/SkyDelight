@@ -22,7 +22,7 @@
     <string name="loadingDialog_recover">Enviando Contraseña…</string>
     <string name="loadingDialog_updating">Actualizando…</string>
     <string name="loadingDialog_loading">Cargando…</string>
-    <string name="loadingDialog_error">¡Ups! ¡Parece que Hubo un Error!</string>
+    <string name="loadingDialog_error">"¡Ups!\n\n¡Hubo un Problema de Conexión!\n\n¡Parece que Estamos Teniendo Algunas Dificultades!"</string>
 
     <!-- Other Strings -->
     <!-- Start Screen Fragment Strings -->
@@ -67,6 +67,7 @@
 
     <!-- Home Navbar Fragment Strings -->
     <string name="home_title">¡Qué Bueno que Volviste!</string>
+
 
     <!-- Test Navbar Fragment Strings -->
     <string name="test_title">Elige un Cuestionario</string>
