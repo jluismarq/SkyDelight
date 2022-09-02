@@ -3,7 +3,7 @@ package com.example.skydelight.navbar
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.util.Patterns
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -12,12 +12,17 @@ import android.widget.RadioButton
 import androidx.core.widget.doOnTextChanged
 import androidx.navigation.fragment.findNavController
 import androidx.room.Room
+import com.example.skydelight.BuildConfig
 import com.example.skydelight.R
 import com.example.skydelight.custom.AppDatabase
+import com.example.skydelight.custom.CustomLoadingDialog
+import com.example.skydelight.custom.User
 import com.example.skydelight.databinding.FragmentNavbarProfileDataBinding
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
+import okhttp3.*
+import java.io.IOException
 import java.util.regex.Pattern
 
 class ProfileDataFragment : Fragment() {
@@ -45,7 +50,6 @@ class ProfileDataFragment : Fragment() {
         showUserData()
 
         // Clearing errors when produced
-        binding.editTxtEmail.doOnTextChanged { _, _, _, _ -> if(binding.FieldEmail.error != null) binding.FieldEmail.error = null }
         binding.editTxtName.doOnTextChanged { _, _, _, _ -> if(binding.FieldName.error != null) binding.FieldName.error = null }
 
         // Changing to updating password fragment
@@ -60,8 +64,7 @@ class ProfileDataFragment : Fragment() {
 
             // Getting user answers
             val name = binding.editTxtName.text.toString()
-            val email = binding.editTxtEmail.text.toString()
-            val age = binding.numberPickerAge.value.toString()
+            val age = binding.numberPickerAge.value
             val sex = binding.radioGroupSex.findViewById<RadioButton>(sexId)?.text.toString()
 
             // Showing alert dialog if name field is empty
@@ -73,15 +76,6 @@ class ProfileDataFragment : Fragment() {
             // Showing alert dialog if name has more than 50 characters
             else if(name.length > 50)
                 binding.FieldName.error = "La longitud máxima es de 50 caracteres"
-            // Showing alert dialog if email field is empty
-            else if(email.isEmpty())
-                binding.FieldEmail.error = "Olvidaste colocar tu correo"
-            // Showing alert dialog if email field is not an email
-            else if(!Patterns.EMAIL_ADDRESS.matcher(email).matches())
-                binding.FieldEmail.error = "Formato de correo no válido"
-            // Showing alert dialog if email has more than 50 characters
-            else if(email.length > 50)
-                binding.FieldEmail.error = "La longitud máxima es de 50 caracteres"
             // Showing alert dialog if user didn't choose a sex
             else if(sexId == -1){
                 val dialog = MaterialAlertDialogBuilder(findNavController().context)
@@ -93,15 +87,81 @@ class ProfileDataFragment : Fragment() {
                 }, 5000)
             }
             // Connection to the api and sending the password to the email
-            else updateData(name, email, sex, age)
+            else updateData(name, sex, age)
         }
     }
 
-    // TODO("Connection to the api to update data")
-    // TODO("Update local database")
-    private fun updateData(name: String, email: String, sex: String, age: String){
-        // Fragment enters from right
-        (parentFragment as NavBarFragment).updateNavBarHost(ProfileFragment(), R.id.nav_profile, false)
+    // Function to connect with the api
+    private fun updateData(name: String, sex: String, age: Int){
+        // Launching room database connection
+        MainScope().launch {
+            // Creating connection to database
+            val userDao = Room.databaseBuilder(findNavController().context, AppDatabase::class.java, "user")
+                .fallbackToDestructiveMigration().build().userDao()
+            val user = userDao.getUser()[0]
+
+            // Arguments to Post Request
+            val formBody: RequestBody = FormBody.Builder()
+                .add("name", name)
+                .add("edad", age.toString())
+                .add("sex", sex)
+                .build()
+
+            // TODO("Verify if token is valid, if not, change it")
+            // Making http request
+            val request = Request.Builder()
+                .url("https://apiskydelight.herokuapp.com/usuarios/actualizar-informacion/")
+                .put(formBody)
+                .addHeader("Authorization", "Bearer " + user.token)
+                .addHeader("KEY-CLIENT", BuildConfig.API_KEY)
+                .build()
+
+            // Showing loading dialog
+            val customDialog = CustomLoadingDialog(findNavController().context, getString(R.string.loadingDialog_updating))
+            customDialog.show()
+
+            // Making HTTP request and getting response
+            OkHttpClient().newCall(request).enqueue(object : Callback {
+                // Changing to principal fragment if it's successful
+                override fun onResponse(call: Call, response: Response){
+                    // Closing loading dialog
+                    customDialog.dismiss()
+
+                    // Printing api answer
+                    val responseString = response.body()?.string().toString()
+                    Log.d("OKHTTP3-CODE", response.code().toString())
+                    Log.d("OKHTTP3-BODY", responseString)
+
+                    // Launching room database connection
+                    MainScope().launch {
+                        // Updating user info in local database
+                        userDao.updateUser(User(user.email, name, sex, age, user.token, user.refresh, user.session, user.advice))
+
+                        // Showing succesful dialog
+                        val dialog = MaterialAlertDialogBuilder(findNavController().context)
+                            .setTitle("¡Actualización Exitosa!")
+                            .setMessage("¡Tus Datos se Actualizaron Correctamente!")
+                            .setCancelable(false)
+                            .show()
+                        Handler(Looper.getMainLooper()).postDelayed({
+                            dialog.dismiss()
+
+                            // Fragment enters from right
+                            (parentFragment as NavBarFragment).updateNavBarHost(ProfileFragment(), R.id.nav_profile, false)
+                        }, 5000)
+                    }
+                }
+
+                // Print dialog if it's error
+                override fun onFailure(call: Call, e: IOException){
+                    // Closing loading dialog
+                    customDialog.dismiss()
+
+                    // Printing api answer
+                    Log.d("OKHTTP3-ERROR", e.toString())
+                }
+            })
+        }
     }
 
     // Function to connect with the database
@@ -114,7 +174,6 @@ class ProfileDataFragment : Fragment() {
 
             // Setting screen data
             binding.editTxtName.setText(user.name)
-            binding.editTxtEmail.setText(user.email)
             binding.numberPickerAge.value = user.age
 
             if (binding.btnMale.text.toString() == user.sex)

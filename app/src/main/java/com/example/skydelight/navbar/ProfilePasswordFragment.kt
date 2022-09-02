@@ -1,14 +1,27 @@
 package com.example.skydelight.navbar
 
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.widget.doOnTextChanged
 import androidx.navigation.fragment.findNavController
+import androidx.room.Room
+import com.example.skydelight.BuildConfig
 import com.example.skydelight.R
+import com.example.skydelight.custom.AppDatabase
+import com.example.skydelight.custom.CustomLoadingDialog
+import com.example.skydelight.custom.User
 import com.example.skydelight.databinding.FragmentNavbarProfilePasswordBinding
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import kotlinx.coroutines.MainScope
+import kotlinx.coroutines.launch
+import okhttp3.*
+import java.io.IOException
 
 class ProfilePasswordFragment : Fragment() {
 
@@ -57,15 +70,81 @@ class ProfilePasswordFragment : Fragment() {
                 // Showing alert dialog if password and confirmedPassword don't match
                 password != confirmedPassword -> binding.FieldConfirmPassword.error = "Esta contraseña es distinta a la primera"
                 // Connection to the api and creation of the new user
-                else -> updatePassword()
+                else -> updatePassword(password)
             }
         }
     }
 
-    // TODO("Connection to the api to update password")
-    // TODO("Update local database")
-    private fun updatePassword(){
-        // Fragment enters from right
-        (parentFragment as NavBarFragment).updateNavBarHost(ProfileFragment(), R.id.nav_profile, false)
+    // Function to connect with the api
+    private fun updatePassword(password: String){
+        // Launching room database connection
+        MainScope().launch {
+            // Creating connection to database
+            val userDao = Room.databaseBuilder(findNavController().context, AppDatabase::class.java, "user")
+                .fallbackToDestructiveMigration().build().userDao()
+            val user = userDao.getUser()[0]
+
+            // Arguments to Post Request
+            val formBody: RequestBody = FormBody.Builder()
+                .add("email", user.email)
+                .add("password", password)
+                .build()
+
+            // TODO("Verify if token is valid, if not, change it")
+            // Making http request
+            val request = Request.Builder()
+                .url("https://apiskydelight.herokuapp.com/usuarios/cambiar-contrasena/")
+                .put(formBody)
+                .addHeader("Authorization", "Bearer " + user.token)
+                .addHeader("KEY-CLIENT", BuildConfig.API_KEY)
+                .build()
+
+            // Showing loading dialog
+            val customDialog = CustomLoadingDialog(findNavController().context, getString(R.string.loadingDialog_updating))
+            customDialog.show()
+
+            // Making HTTP request and getting response
+            OkHttpClient().newCall(request).enqueue(object : Callback {
+                // Changing to principal fragment if it's successful
+                override fun onResponse(call: Call, response: Response){
+                    // Closing loading dialog
+                    customDialog.dismiss()
+
+                    // Printing api answer
+                    val responseString = response.body()?.string().toString()
+                    Log.d("OKHTTP3-CODE", response.code().toString())
+                    Log.d("OKHTTP3-BODY", responseString)
+
+                    // Showing succesful dialog
+                    activity?.runOnUiThread {
+                        val dialog = MaterialAlertDialogBuilder(findNavController().context)
+                            .setTitle("¡Actualización Exitosa!")
+                            .setMessage("¡Tu Contraseña se Actualizó Correctamente!")
+                            .setCancelable(false)
+                            .show()
+                        Handler(Looper.getMainLooper()).postDelayed({
+                            dialog.dismiss()
+
+                            // Fragment enters from right
+                            (parentFragment as NavBarFragment).updateNavBarHost(
+                                ProfileFragment(),
+                                R.id.nav_profile,
+                                false
+                            )
+                        }, 5000)
+                    }
+                }
+
+                // TODO("Verify all classes failures and add a dialog")
+                // Print dialog if it's error
+                override fun onFailure(call: Call, e: IOException){
+                    // Closing loading dialog
+                    customDialog.dismiss()
+
+                    // Printing api answer
+                    Log.d("OKHTTP3-ERROR", e.toString())
+                }
+            })
+        }
     }
 }

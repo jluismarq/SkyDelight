@@ -79,6 +79,7 @@ class NavBarFragment : Fragment() {
         }
     }
 
+    // Function to change fragment of navbar host
     fun updateNavBarHost(fragment : Fragment, navId: Int, direction: Boolean){
         // Variable to change navigation bar fragments
         val transaction = childFragmentManager.beginTransaction()

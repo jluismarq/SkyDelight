@@ -15,5 +15,5 @@
     <dimen name="button_text_size_2">17sp</dimen>
     <dimen name="text_size">20sp</dimen>
     <dimen name="text_input_size">17sp</dimen>
-    <dimen name="registerScreen_sex_group">15sp</dimen>
+    <dimen name="text_mini_size">15sp</dimen>
 </resources>

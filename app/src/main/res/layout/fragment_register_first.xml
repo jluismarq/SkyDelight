@@ -126,7 +126,7 @@
             android:fontFamily="@font/comfortaa"
             android:text="@string/registerScreen_male"
             android:textColor="?attr/text_color"
-            android:textSize="@dimen/registerScreen_sex_group"
+            android:textSize="@dimen/text_mini_size"
             tools:ignore="TextContrastCheck" />
 
         <RadioButton
@@ -139,7 +139,7 @@
             android:fontFamily="@font/comfortaa"
             android:text="@string/registerScreen_female"
             android:textColor="?attr/text_color"
-            android:textSize="@dimen/registerScreen_sex_group"
+            android:textSize="@dimen/text_mini_size"
             tools:ignore="TextContrastCheck" />
 
     </RadioGroup>

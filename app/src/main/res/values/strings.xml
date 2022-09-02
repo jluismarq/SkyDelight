@@ -20,6 +20,7 @@
     <string name="loadingDialog_creating">Creando Cuenta…</string>
     <string name="loadingDialog_login">Iniciando Sesión…</string>
     <string name="loadingDialog_recover">Enviando Contraseña…</string>
+    <string name="loadingDialog_updating">Actualizando…</string>
     <string name="loadingDialog_loading">Cargando…</string>
     <string name="loadingDialog_error">¡Ups! ¡Parece que Hubo un Error!</string>
 
@@ -87,5 +88,7 @@
     <string name="profile_update_password">¿Qué Contraseña Deseas?</string>
     <string name="profile_update_data">Ingresa tus Datos</string>
     <string name="profile_number">00</string>
+    <string name="profile_note">Nota: el correo no puede cambiarse</string>
+    <string name="profile_new_password">Nueva Contraseña:</string>
 
 </resources>
