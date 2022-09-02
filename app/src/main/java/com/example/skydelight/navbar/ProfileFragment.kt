@@ -91,7 +91,7 @@ class ProfileFragment : Fragment() {
 
                         ValidationsDialogsRequests().httpPetition(request, findNavController().context, requireActivity(),
                             binding.btnUpdateAccount, binding.btnChangePassword, binding.btnCloseSession,
-                            binding.btnDeleteAccount, getString(R.string.loadingDialog_updating), null,
+                            binding.btnDeleteAccount, null, null,
                             null, null, (parentFragment as NavBarFragment))
                         {
                             // Launching room database connection
